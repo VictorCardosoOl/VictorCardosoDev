@@ -26,7 +26,7 @@ interface GamificationContextType {
   rank: Rank;
   quests: Quest[];
   completeQuest: (id: string) => void;
-  unlockAchievement: (label: string) => void;
+  unlockAchievement: (label: string) => void; 
   notification: { message: string; visible: boolean; type?: Rank } | null;
   hideNotification: () => void;
   currentSection: string;
@@ -69,20 +69,19 @@ const INITIAL_QUESTS: Quest[] = [
  * Isso evita que o timer de sessão cause re-renderizações em toda a aplicação a cada segundo.
  */
 export const GamificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-
+  
   // --- STATE (Reativo - Atualiza a UI) ---
   const [quests, setQuests] = useState<Quest[]>(() => {
     if (typeof window === 'undefined') return INITIAL_QUESTS;
     const saved = localStorage.getItem('v_quests');
     return saved ? JSON.parse(saved) : INITIAL_QUESTS;
   });
-
+  
   // --- REFS (Não Reativo - Alta Performance) ---
   // Armazena dados que mudam frequentemente (timer) mas não precisam atualizar a UI instantaneamente.
   const trackingRef = useRef({
     totalTime: 0,
-    sectionTimes: {} as SectionTime,
-    currentSectionRef: 'hero'
+    sectionTimes: {} as SectionTime
   });
 
   const [currentSection, setCurrentSection] = useState('hero');
@@ -144,75 +143,47 @@ export const GamificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
    * Marca uma missão como completa e dispara notificação.
    * @param id ID único da missão
    */
-  const completeQuest = React.useCallback((id: string) => {
+  const completeQuest = (id: string) => {
     setQuests(prev => {
       const idx = prev.findIndex(q => q.id === id);
       if (idx === -1 || prev[idx].completed) return prev; // Já completada ou inexistente
 
       const newQuests = [...prev];
       newQuests[idx] = { ...newQuests[idx], completed: true };
-
+      
       const newXp = newQuests.reduce((acc, q) => acc + (q.completed ? q.xp : 0), 0);
       const newLevel = Math.floor(newXp / 25) + 1;
-      const newRank = getRank(newLevel); // getRank needs to be stable or inside
+      const newRank = getRank(newLevel);
 
       triggerNotification(`Conquista: ${newQuests[idx].label}`, newRank);
       return newQuests;
     });
-  }, [isHackerMode]); // getRank depends on isHackerMode
+  };
 
-  const triggerNotification = React.useCallback((message: string, rankType: Rank) => {
+  const unlockAchievement = (message: string) => {
+    triggerNotification(message, rank);
+  };
+
+  const triggerNotification = (message: string, rankType: Rank) => {
     setNotification({ message, visible: true, type: rankType });
     setTimeout(() => {
-      setNotification(prev => (prev?.message === message ? null : prev));
+        setNotification(prev => (prev?.message === message ? null : prev));
     }, 4500);
-  }, []);
+  };
 
-  const unlockAchievement = React.useCallback((message: string) => {
-    triggerNotification(message, rank);
-  }, [rank, triggerNotification]);
-
-  const hideNotification = React.useCallback(() => setNotification(null), []);
-  const openModal = React.useCallback(() => setIsModalOpen(true), []);
-  const closeModal = React.useCallback(() => setIsModalOpen(false), []);
-  const getSessionData = React.useCallback(() => trackingRef.current, []);
-
-  // Memoize the context value
-  const contextValue = React.useMemo(() => ({
-    xp,
-    level,
-    rank,
-    quests,
-    completeQuest,
-    unlockAchievement,
-    notification,
-    hideNotification,
-    currentSection,
-    isModalOpen,
-    openModal,
-    closeModal,
-    isHackerMode,
-    getSessionData
-  }), [
-    xp, level, rank, quests, completeQuest, unlockAchievement,
-    notification, hideNotification, currentSection,
-    isModalOpen, openModal, closeModal, isHackerMode, getSessionData
-  ]);
+  const hideNotification = () => setNotification(null);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  const getSessionData = () => trackingRef.current;
 
   // --- Timer Otimizado ---
-  // Sync ref with currentSection state whenever it changes
-  useEffect(() => {
-    trackingRef.current.currentSectionRef = currentSection;
-  }, [currentSection]);
-
   useEffect(() => {
     let intervalId: any;
 
     intervalId = setInterval(() => {
       // 1. Atualiza Refs (Sem re-render)
       trackingRef.current.totalTime += 1;
-      const section = trackingRef.current.currentSectionRef || 'hero';
-      trackingRef.current.sectionTimes[section] = (trackingRef.current.sectionTimes[section] || 0) + 1;
+      trackingRef.current.sectionTimes[currentSection] = (trackingRef.current.sectionTimes[currentSection] || 0) + 1;
 
       // 2. Verificação Silenciosa
       // Só dispara atualização de estado (completeQuest) se a condição for atingida
@@ -222,16 +193,7 @@ export const GamificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []); // Agora roda apenas uma vez na montagem
-
-  // Update ref type definition at the top of the file
-  /*
-  const trackingRef = useRef({
-      totalTime: 0,
-      sectionTimes: {} as SectionTime,
-      currentSectionRef: 'hero'
-  });
-  */
+  }, [currentSection]); // Reinicia intervalo se a seção mudar para garantir a captura correta
 
   // --- Intersection Observer (Rastreamento de Seção) ---
   useEffect(() => {
@@ -256,7 +218,22 @@ export const GamificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   }, []);
 
   return (
-    <GamificationContext.Provider value={contextValue}>
+    <GamificationContext.Provider value={{
+      xp,
+      level,
+      rank,
+      quests,
+      completeQuest,
+      unlockAchievement,
+      notification,
+      hideNotification,
+      currentSection,
+      isModalOpen,
+      openModal,
+      closeModal,
+      isHackerMode,
+      getSessionData
+    }}>
       {children}
     </GamificationContext.Provider>
   );

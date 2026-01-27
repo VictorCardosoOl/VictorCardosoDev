@@ -1,78 +1,178 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO & Open Graph -->
+    <title>Victor Cardoso | Engenharia de Software & Design</title>
+    <meta name="description" content="Engenharia de software de alta precisão e design de interface. Portfólio documental." />
+    <meta name="theme-color" content="#0B232E" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://api.fontshare.com/v2/css?f[]=zodiak@100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- SEO & Open Graph -->
-  <title>Victor Cardoso | Engenharia de Software & Design</title>
-  <meta name="description"
-    content="Engenharia de software de alta precisão e design de interface. Portfólio documental." />
-  <meta name="theme-color" content="#0B232E" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Zodiak', 'serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            colors: {
+              paper: '#F2F4F6', // Ice Grey / Paper White
+              petrol: {
+                base: '#0B232E', // Deep Petrol (Primary Dark)
+                mid: '#153A48',  // Mid tone
+                ink: '#1E3A45',  // Text Ink
+                accent: '#CBD5E1', // Cool Silver
+                electric: '#78909C', // Muted Blue Grey (Was Vibrant Teal)
+              },
+            },
+            backgroundImage: {
+              'petrol-gradient': 'linear-gradient(135deg, #0B232E 0%, #0F2A36 100%)',
+              'title-gradient': 'linear-gradient(to right, #0B232E, #153A48)', 
+            },
+            animation: {
+              'marquee': 'marquee 25s linear infinite',
+              'marquee-reverse': 'marquee-reverse 25s linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              'marquee-reverse': {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(0%)' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #F2F4F6;
+        color: #0B232E;
+        overflow-x: hidden;
+      }
 
-  <!-- Fonts -->
-  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@100,200,300,400,500,600,700,800,900&display=swap"
-    rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
+      /* Konami Code / Hacker Mode Theme Override */
+      body.hacker-mode {
+        background-color: #0d0208;
+        color: #00ff41;
+      }
+      body.hacker-mode .bg-paper { background-color: #0d0208 !important; }
+      body.hacker-mode .text-petrol-base { color: #00ff41 !important; }
+      body.hacker-mode .text-petrol-ink { color: #008F11 !important; }
+      body.hacker-mode border-petrol-base { border-color: #00ff41 !important; }
+      
+      .font-heading-tight {
+        letter-spacing: -0.04em;
+        line-height: 0.9;
+      }
+      
+      .text-micro {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+      }
 
-  <style>
-    /* Konami Code / Hacker Mode Theme Override - Keeping this for now if used by Easter Egg logic */
-    body.hacker-mode {
-      background-color: #0d0208;
-      color: #00ff41;
-    }
+      /* Archive/Technical Lines */
+      .border-doc {
+        border-color: rgba(11, 35, 46, 0.08);
+      }
+      
+      /* Custom scrollbar - Refined */
+      ::-webkit-scrollbar {
+        width: 4px; /* Thinner for elegance */
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(11, 35, 46, 0.2);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(11, 35, 46, 0.6);
+      }
 
-    body.hacker-mode .bg-paper {
-      background-color: #0d0208 !important;
-    }
+      :focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 1px #F2F4F6, 0 0 0 3px #0B232E;
+        border-radius: 2px;
+      }
+      
+      /* High Voltage Selection - Now Muted */
+      ::selection {
+        background: #CBD5E1; /* Muted Silver/Blue */
+        color: #0B232E;
+      }
 
-    body.hacker-mode .text-petrol-base {
-      color: #00ff41 !important;
-    }
+      /* Lenis */
+      html.lenis, html.lenis body { height: auto; }
+      .lenis.lenis-smooth { scroll-behavior: auto !important; }
+      .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+      .lenis.lenis-stopped { overflow: hidden; }
+      .lenis.lenis-scrolling iframe { pointer-events: none; }
 
-    body.hacker-mode .text-petrol-ink {
-      color: #008F11 !important;
-    }
+      .staggered-menu-wrapper { position: relative; z-index: 9990; }
+      .staggered-menu-wrapper.fixed-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
+      .staggered-menu-wrapper.fixed-wrapper.open { pointer-events: auto; }
 
-    body.hacker-mode border-petrol-base {
-      border-color: #00ff41 !important;
-    }
-
-    /* --- LIQUID DISTORTION EFFECTS --- */
-    .liquid-hover-target {
-      filter: url('#heat-haze');
-      transition: filter 0.4s ease;
-    }
-
-    .liquid-hover-parent:hover .liquid-hover-target {
-      filter: none;
-    }
-  </style>
-
+      /* --- LIQUID DISTORTION EFFECTS --- */
+      .liquid-hover-target {
+        filter: url('#heat-haze');
+        transition: filter 0.4s ease;
+      }
+      .liquid-hover-parent:hover .liquid-hover-target {
+        filter: none; /* Clear it or change it on hover */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "clsx": "https://cdn.jsdelivr.net/npm/clsx@2.1.0/+esm",
+    "tailwind-merge": "https://cdn.jsdelivr.net/npm/tailwind-merge@2.2.1/+esm",
+    "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.20/+esm",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.16.0",
+    "react-dom": "https://esm.sh/react-dom@^19.2.1"
+  }
+}
+</script>
 </head>
+  <body class="bg-paper text-petrol-base antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
 
-<body class="bg-paper text-petrol-base antialiased">
-  <div id="root"></div>
-
-  <!-- SVG FILTERS FOR ORGANIC DISTORTION -->
-  <!-- Invisible SVG providing filter definitions -->
-  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
-    xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="liquid-distort">
-        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="B" />
-      </filter>
-      <filter id="heat-haze">
-        <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence" />
-        <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-  <script type="module" src="/index.tsx"></script>
-</body>
-
+    <!-- SVG FILTERS FOR ORGANIC DISTORTION -->
+    <!-- Invisible SVG providing filter definitions -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="liquid-distort">
+          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="B" />
+        </filter>
+        <filter id="heat-haze">
+            <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence" />
+            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+  </body>
 </html>

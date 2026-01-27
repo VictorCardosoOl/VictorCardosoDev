@@ -1,171 +1,35 @@
-import { Monitor, Code, Layout, Database, Smartphone, Globe, Search, Rocket, MessageSquare, CheckCircle, Users, BarChart, BookOpen, Layers } from 'lucide-react';
-import type { Project, Service, Experience, Education, SkillItem } from './src/types';
+
+import { Monitor, Code, Layout, Database, Smartphone, Globe, Search, Rocket, Settings, MessageSquare, PenTool, CheckCircle, Users, BarChart } from 'lucide-react';
 
 export const NAV_LINKS = [
   { name: 'Obras', href: '#projects' },
-  { name: 'Serviços', href: '#services' },
+  { name: 'Expertise', href: '#services' },
   { name: 'Perfil', href: '#about' },
   { name: 'Lab', href: '#lab' },
   { name: 'Contato', href: '#contact' },
 ];
 
-// --- DADOS DO CURRÍCULO (Extraídos do PDF) ---
-export const WORK_EXPERIENCE: Experience[] = [
+export const SERVICES = [
   {
-    company: "Wise System",
-    role: "Supervisor de Operações",
-    period: "Out 2025 - Presente",
-    location: "São Paulo, Brasil",
-    // DICA: Textos mais estratégicos tirados do PDF para impressionar recrutadores
-    description: [
-      "Liderança de Equipes Multidisciplinares: Coordenação e desenvolvimento de talentos (Feedbacks, PDIs), garantindo alinhamento cultural e metas.",
-      "Interface Estratégica: Elo tático entre diretoria e operação, traduzindo metas corporativas em planos de ação executáveis.",
-      "Análise e Integração Sistêmica: Revisão estrutural de código e parametrização de regras de negócio complexas (SaaS).",
-      "Gestão de Performance: Monitoramento de KPIs/SLAs e otimização de fluxos para eficiência produtiva e redução de custos.",
-      "Infraestrutura e Sustentação N3: Gestão de hardware e suporte especializado aos ecossistemas SIGO WEB/W3."
-    ]
-  },
-  {
-    company: "Wise System",
-    role: "Analista de Suporte N2",
-    period: "Abr 2025 - Out 2025",
-    location: "São Paulo, Brasil",
-    description: [
-      "Engenharia de Requisitos: Análise estrutural de código para integração de contratos e regras de negócio.",
-      "Gestão do Conhecimento: Criação de documentação técnica (KB) e manuais para mitigar dúvidas e otimizar uso das ferramentas.",
-      "Implementação Sistêmica: Tradução de requisitos de clientes em soluções funcionais via parametrização.",
-      "Treinamento Corporativo: Capacitação técnica de stakeholders internos e clientes (Best Practices)."
-    ]
-  },
-  {
-    company: "Wise System",
-    role: "Analista de Suporte N1",
-    period: "Out 2024 - Abr 2025",
-    location: "São Paulo, Brasil",
-    description: [
-      "Análise de Código: Leitura de estrutura para introdução de regras de negócios, intermediando cliente e consumidor final.",
-      "Suporte Exclusivo (Key Accounts): Gestão de back office para grandes clientes da carteira.",
-      "Elaboração de Manuais: Criação de instruções detalhadas para colaboradores e clientes."
-    ]
-  },
-  {
-    company: "Wise System",
-    role: "Estagiário",
-    period: "Jul 2024 - Set 2024",
-    location: "São Paulo, Brasil",
-    description: [
-      "Configuração e instalação do software SIGO W3.",
-      "Resolução de problemas de software, banco de dados e servidores.",
-      "Gerenciamento de filas de atendimento e backlog (SLA)."
-    ]
-  },
-  {
-    company: "InHouse Contact Center",
-    role: "Back Office",
-    period: "Fev 2022 - Jan 2024",
-    location: "São Paulo, Brasil",
-    description: [
-      "Gestão administrativa e suporte operacional focado em eficiência.",
-      "Análise de processos internos."
-    ]
-  },
-  {
-    company: "Freelance / Comunidade",
-    role: "Instrutor de TI",
-    period: "2020 - Presente",
-    location: "São Paulo, Brasil",
-    description: [
-      "Capacitação de novos profissionais em lógica de programação e suporte técnico.",
-      "Facilitação de workshops sobre ferramentas de produtividade e sistemas operacionais."
-    ]
-  },
-  {
-    company: "Alta Performance Gestão",
-    role: "Auxiliar Contábil",
-    period: "Set 2019 - Mar 2020",
-    location: "São Paulo, Brasil",
-    description: [
-      "Auxílio nas rotinas contábeis e gestão empresarial."
-    ]
-  }
-];
-
-export const EDUCATION: Education[] = [
-  {
-    period: 'Jan 2022 - Dez 2026',
-    degree: 'Ciência da Computação (Bacharelado)',
-    institution: 'Universidade Anhembi Morumbi',
-    description: 'Foco em Engenharia de Software, Ciência de Dados e Algoritmos.'
-  }
-];
-
-export const SKILLS: SkillItem[] = [
-  {
-    title: 'Engenharia & Análise',
-    description: 'Capacidade de traduzir regras de negócio em código e arquitetura.',
-    icon: Code,
-    items: ['Análise de Sistemas', 'Integração Sistêmica', 'SQL / Banco de Dados', 'Regras de Negócio', 'Engenharia de Requisitos']
-  },
-  {
-    title: 'Gestão & Liderança',
-    description: 'Coordenação de times e otimização de processos baseada em dados.',
-    icon: Users,
-    items: ['Liderança de Equipes', 'Gestão de KPIs/SLAs', 'Key Account Management', 'Business Intelligence', 'PDIs & Feedbacks']
-  },
-  {
-    title: 'Educação & Suporte',
-    description: 'Transferência de conhecimento técnico e sustentação de infraestrutura.',
-    icon: BookOpen,
-    items: ['Treinamento Corporativo', 'Documentação Técnica', 'Suporte N2/N3', 'Gestão de Crises', 'Instalação de Hardware']
-  }
-];
-
-// --- SEÇÕES DO SITE (SERVIÇOS, PROJETOS, ETC) ---
-export const SERVICES: Service[] = [
-  {
-    title: 'Consultoria de Processos & Tech',
-    description: 'Unificação entre operação e tecnologia. Mapeamento de fluxos e automação para reduzir custos e erros.',
-    benefit: 'Visão 360º. Eu entendo o código, mas também entendo a dor da operação e o impacto no financeiro.',
-    analogy: 'Como um arquiteto que também é engenheiro civil: desenho a solução bonita, mas garanto que ela fica em pé e funciona no dia a dia.',
-    icon: Layers,
-    techStack: ['BPMN', 'Automation', 'Data Analysis', 'Process Mapping'],
-    tags: ['Gestão', 'Processos', 'Eficiência'],
-    deliverables: [
-      'Mapeamento de Processos (As-Is / To-Be)',
-      'Definição de KPIs e SLAs',
-      'Documentação Técnica de Regras de Negócio',
-      'Treinamento de Equipes'
-    ]
-  },
-  {
-    title: 'Sistemas Web (SaaS) sob Medida',
-    description: 'Soluções complexas para resolver problemas de negócio específicos. Dashboards, CRMs e Portais.',
-    benefit: 'Eficiência operacional. Automatize processos manuais, reduza erros humanos e tenha dados na palma da mão.',
-    analogy: 'Como construir uma fábrica automatizada: você aperta um botão e o sistema faz o trabalho pesado de organização e processamento.',
+    title: 'Engenharia de Software',
+    description: 'Desenvolvimento de aplicações web robustas e escaláveis. Transformo processos manuais e planilhas em software de gestão eficiente, com foco total em estabilidade e segurança.',
     icon: Database,
-    techStack: ['Next.js', 'Node.js', 'PostgreSQL', 'Auth', 'API Rest'],
-    tags: ['Gestão', 'SaaS', 'Automação'],
-    deliverables: [
-      'Dashboard Administrativo',
-      'Banco de Dados Seguro',
-      'Autenticação de Usuários',
-      'Relatórios e Gráficos'
-    ]
+    techStack: ['React / Next.js', 'Node.js', 'PostgreSQL', 'TypeScript', 'Docker', 'AWS'],
+    tags: ['SaaS', 'Automação', 'Gestão']
   },
   {
-    title: 'Landing Page de Alta Conversão',
-    description: 'Páginas estratégicas desenhadas para transformar visitantes em leads ou compradores. Ideal para lançamentos e produtos únicos.',
-    benefit: 'Aumente o retorno sobre seu investimento em anúncios (ROAS). Uma LP bem feita guia o usuário sem distrações até o botão de compra.',
-    analogy: 'Imagine sua Landing Page como um vendedor de elite que trabalha 24h por dia, apresentando seu produto perfeitamente para cada cliente que entra na loja.',
+    title: 'Análise de Sistemas',
+    description: 'Mapeamento de regras de negócio complexas e integração sistêmica. Atuo na tradução de necessidades corporativas em requisitos técnicos precisos.',
     icon: Layout,
-    techStack: ['React', 'Tailwind CSS', 'Framer Motion', 'SEO Técnico', 'Analytics'],
-    tags: ['Vendas', 'Marketing', 'Performance'],
-    deliverables: [
-      'Site de página única (SPA) ultra-rápido',
-      'Design persuasivo (Copywriting + UI)',
-      'Integração com Pixel (Meta/Google)',
-      'Formulários de captura de Lead'
-    ]
+    techStack: ['UML', 'SQL', 'Business Intelligence', 'Process Mapping'],
+    tags: ['Análise', 'Arquitetura', 'Dados']
+  },
+  {
+    title: 'Treinamento & Suporte',
+    description: 'Capacitação de equipes e stakeholders. Criação de documentação técnica (KB) e gestão de conhecimento para garantir a sustentabilidade do software.',
+    icon: Users,
+    techStack: ['Onboarding', 'Documentação Técnica', 'Gestão de Crise', 'SLA Management'],
+    tags: ['Educação', 'Suporte N3', 'Liderança']
   }
 ];
 
@@ -192,7 +56,9 @@ export const PROCESS_STEPS = [
   }
 ];
 
-export const PROJECTS: Project[] = [
+// Mantenho os projetos fictícios por enquanto, pois o CV foca em experiência corporativa.
+// Você pode substituir isso por projetos reais do GitHub posteriormente.
+export const PROJECTS = [
   {
     title: 'Lumina Architecture',
     category: 'SaaS / Plataforma',
@@ -248,9 +114,104 @@ export const PROJECTS: Project[] = [
   }
 ];
 
+export const SKILLS = [
+  {
+    title: 'Engenharia de Software',
+    description: 'Análise estrutural de código e integração sistêmica. Foco em fidelidade contratual e regras de negócio.',
+    icon: Monitor,
+    items: ['Análise de Código', 'Integração Sistêmica', 'SQL / Banco de Dados', 'Web Development', 'Hardware & Redes']
+  },
+  {
+    title: 'Gestão & Liderança',
+    description: 'Coordenação de equipes multidisciplinares e gestão de KPIs para otimização de processos.',
+    icon: Users,
+    techStack: [],
+    items: ['Gestão de Equipes', 'PDIs & Feedbacks', 'Análise de Performance', 'Mapeamento de Processos', 'Gestão de Crises']
+  },
+  {
+    title: 'Suporte & Treinamento',
+    description: 'Educação corporativa e suporte técnico especializado (N1/N2/N3) para grandes contas.',
+    icon: MessageSquare,
+    items: ['Educação Corporativa', 'Documentação Técnica (KB)', 'Suporte Remoto', 'Customer Success', 'Gestão de SLA']
+  }
+];
+
+export const EDUCATION = [
+  {
+    period: 'Jan 2022 - Dez 2026',
+    degree: 'Ciência da Computação (Bacharelado)',
+    institution: 'Universidade Anhembi Morumbi',
+    description: 'Foco em Engenharia de Software, Ciência de Dados e Algoritmos.'
+  }
+];
+
+export const WORK_EXPERIENCE = [
+  {
+    company: "Wise System",
+    role: "Supervisor de Operações",
+    period: "Out 2025 - Presente", // Mantendo datas do CV
+    location: "São Paulo, Brasil",
+    description: [
+      "Liderança de Equipes Multidisciplinares: Coordenação e desenvolvimento de talentos (Feedbacks, PDIs).",
+      "Interface Estratégica: Elo tático entre diretoria e operação, traduzindo metas em planos de ação.",
+      "Gestão de Performance: Monitoramento de KPIs/SLAs e otimização de fluxos para redução de custos."
+    ]
+  },
+  {
+    company: "Wise System",
+    role: "Analista de Suporte N2",
+    period: "Abr 2025 - Out 2025",
+    location: "São Paulo, Brasil",
+    description: [
+      "Treinamento Corporativo: Capacitação técnica de clientes e stakeholders internos.",
+      "Gestão do Conhecimento: Transferência eficaz de best practices e criação de KB."
+    ]
+  },
+  {
+    company: "Wise System",
+    role: "Analista de Suporte N1",
+    period: "Out 2024 - Abr 2025",
+    location: "São Paulo, Brasil",
+    description: [
+      "Análise de Código e Integração: Revisão estrutural para inserção de regras de negócio.",
+      "Implementação Sistêmica: Tradução de requisitos de clientes em soluções funcionais.",
+      "Suporte Técnico Especializado: Atuação nos ecossistemas SIGO WEB e W3."
+    ]
+  },
+  {
+    company: "Wise System",
+    role: "Estagiário",
+    period: "Jul 2024 - Set 2024",
+    location: "São Paulo, Brasil",
+    description: [
+      "Configuração e instalação do software SIGO W3.",
+      "Resolução de problemas relacionados a erros de software, banco de dados e servidores.",
+      "Gerenciamento de filas de atendimento e backlog."
+    ]
+  },
+  {
+    company: "InHouse Contact Center",
+    role: "Back Office",
+    period: "Fev 2022 - Jan 2024",
+    location: "São Paulo, Brasil",
+    description: [
+      "Gestão administrativa e suporte operacional."
+    ]
+  },
+  {
+    company: "Alta Performance Gestão",
+    role: "Auxiliar Contábil",
+    period: "Set 2019 - Mar 2020",
+    location: "São Paulo, Brasil",
+    description: [
+      "Auxílio nas rotinas contábeis e gestão empresarial."
+    ]
+  }
+];
+
 export const WRITING = [
   {
-    title: "Documentação Técnica: Manual ou KB?",
+    title: "A importância da Documentação Técnica",
     category: "Processos",
     link: "#",
     date: "12 Mar, 2024",
@@ -279,7 +240,7 @@ export const CONTACT_INFO = {
   whatsapp: 'https://wa.me/5511977440146',
   socials: [
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/victorccunha' },
-    { name: 'GitHub', url: 'https://github.com/VictorCardosoOl' },
+    { name: 'GitHub', url: '#' },
     { name: 'Instagram', url: '#' },
   ]
 };
