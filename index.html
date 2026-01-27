@@ -3,7 +3,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
     <!-- SEO & Open Graph -->
     <title>Victor Cardoso | Engenharia de Software & Design</title>
@@ -32,38 +32,38 @@
                 mid: '#153A48',  // Mid tone
                 ink: '#1E3A45',  // Text Ink
                 accent: '#CBD5E1', // Cool Silver
-                electric: '#78909C', // Muted Blue Grey (Was Vibrant Teal)
+                electric: '#78909C', // Muted Blue Grey
               },
             },
             backgroundImage: {
               'petrol-gradient': 'linear-gradient(135deg, #0B232E 0%, #0F2A36 100%)',
               'title-gradient': 'linear-gradient(to right, #0B232E, #153A48)', 
             },
-            animation: {
-              'marquee': 'marquee 25s linear infinite',
-              'marquee-reverse': 'marquee-reverse 25s linear infinite',
+            screens: {
+              'xs': '475px',
+              '3xl': '1920px',
             },
-            keyframes: {
-              marquee: {
-                '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-100%)' },
-              },
-              'marquee-reverse': {
-                '0%': { transform: 'translateX(-100%)' },
-                '100%': { transform: 'translateX(0%)' },
-              },
+            // Container queries config simulation for spacing
+            spacing: {
+              'section-mobile': '4rem',
+              'section-desktop': '8rem',
             }
           }
         }
       }
     </script>
     <style>
+      :root {
+        --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+      }
+      
       body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: #F2F4F6;
         color: #0B232E;
         overflow-x: hidden;
+        width: 100%;
       }
 
       /* Konami Code / Hacker Mode Theme Override */
@@ -76,26 +76,15 @@
       body.hacker-mode .text-petrol-ink { color: #008F11 !important; }
       body.hacker-mode border-petrol-base { border-color: #00ff41 !important; }
       
-      .font-heading-tight {
-        letter-spacing: -0.04em;
+      /* Typography Utils */
+      .font-heading-fluid {
+        font-size: clamp(3rem, 10vw, 9rem);
         line-height: 0.9;
       }
-      
-      .text-micro {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-      }
 
-      /* Archive/Technical Lines */
-      .border-doc {
-        border-color: rgba(11, 35, 46, 0.08);
-      }
-      
       /* Custom scrollbar - Refined */
       ::-webkit-scrollbar {
-        width: 4px; /* Thinner for elegance */
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
         background: transparent;
@@ -108,37 +97,13 @@
         background: rgba(11, 35, 46, 0.6);
       }
 
-      :focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 1px #F2F4F6, 0 0 0 3px #0B232E;
-        border-radius: 2px;
-      }
-      
-      /* High Voltage Selection - Now Muted */
-      ::selection {
-        background: #CBD5E1; /* Muted Silver/Blue */
-        color: #0B232E;
-      }
-
-      /* Lenis */
+      /* Lenis & Layout Fixes */
       html.lenis, html.lenis body { height: auto; }
       .lenis.lenis-smooth { scroll-behavior: auto !important; }
       .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
       .lenis.lenis-stopped { overflow: hidden; }
-      .lenis.lenis-scrolling iframe { pointer-events: none; }
 
       .staggered-menu-wrapper { position: relative; z-index: 9990; }
-      .staggered-menu-wrapper.fixed-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
-      .staggered-menu-wrapper.fixed-wrapper.open { pointer-events: auto; }
-
-      /* --- LIQUID DISTORTION EFFECTS --- */
-      .liquid-hover-target {
-        filter: url('#heat-haze');
-        transition: filter 0.4s ease;
-      }
-      .liquid-hover-parent:hover .liquid-hover-target {
-        filter: none; /* Clear it or change it on hover */
-      }
     </style>
   <script type="importmap">
 {
@@ -158,21 +123,8 @@
 </head>
   <body class="bg-paper text-petrol-base antialiased">
     <div id="root"></div>
+    <!-- CRITICAL FIX: Ensure the src points exactly to where your index.tsx is located.
+         In many Vite setups this is /src/index.tsx, but per your prompt file structure it is /index.tsx -->
     <script type="module" src="/index.tsx"></script>
-
-    <!-- SVG FILTERS FOR ORGANIC DISTORTION -->
-    <!-- Invisible SVG providing filter definitions -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="liquid-distort">
-          <feTurbulence type="fractalNoise" baseFrequency="0.01 0.003" numOctaves="5" seed="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="B" />
-        </filter>
-        <filter id="heat-haze">
-            <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence" />
-            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-      </defs>
-    </svg>
   </body>
 </html>

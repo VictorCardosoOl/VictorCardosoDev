@@ -12,13 +12,13 @@ const Hero: React.FC = () => {
   const { scrollY } = useScroll();
   const { transitionTo } = usePageTransition();
 
-  // --- PHYSICS & PARALLAX ---
   const physicsConfig = { damping: 20, stiffness: 60, mass: 1.0 };
   const smoothY = useSpring(scrollY, physicsConfig);
   
+  // Adjusted transforms for better mobile performance
   const textY = useTransform(smoothY, [0, 1000], [0, -120]); 
-  const imageY = useTransform(smoothY, [0, 1000], [0, -250]);
-  const opacity = useTransform(smoothY, [0, 400], [1, 0]);
+  const imageY = useTransform(smoothY, [0, 1000], [0, -200]);
+  const opacity = useTransform(smoothY, [0, 300], [1, 0]);
 
   const scrollVelocity = useVelocity(scrollY);
   const rawSkew = useTransform(scrollVelocity, [-2000, 2000], [-3, 3]); 
@@ -29,26 +29,25 @@ const Hero: React.FC = () => {
     transitionTo(href);
   };
 
-  // Curva Bezier "Cinematic" (Awwwards Standard)
   const cinematicEase = [0.76, 0, 0.24, 1];
 
   return (
     <section 
       id="hero" 
       ref={containerRef}
-      className="min-h-screen relative bg-paper text-petrol-base pt-32 pb-12 flex flex-col justify-end md:justify-center overflow-hidden"
+      className="min-h-[100dvh] relative bg-paper text-petrol-base flex flex-col justify-center overflow-hidden py-24 md:py-0"
     >
       
       {/* Grid Lines */}
-      <div className="absolute top-0 left-6 md:left-24 w-px h-full bg-petrol-base/[0.03] z-0" />
-      <div className="absolute top-0 right-12 w-px h-full bg-petrol-base/[0.03] z-0 hidden md:block" />
+      <div className="absolute top-0 left-6 md:left-24 xl:left-32 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none" />
+      <div className="absolute top-0 right-6 md:right-12 w-px h-full bg-petrol-base/[0.03] z-0 hidden md:block pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10 h-full flex flex-col justify-center">
         
-        {/* Meta Header */}
-        <div className="absolute top-32 left-6 md:left-24 right-6 md:right-12 flex justify-between items-start pointer-events-none z-20">
+        {/* Meta Header - Absolute positioning only on Desktop to prevent overlapping on Mobile */}
+        <div className="md:absolute md:top-32 md:left-24 md:right-12 flex justify-between items-start pointer-events-none z-20 mb-12 md:mb-0 w-full md:w-auto">
            <Reveal width="100%">
-             <div className="flex flex-col gap-1 pl-4 md:pl-8">
+             <div className="flex flex-col gap-1 md:pl-8">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-petrol-base/40">Victor Cardoso</span>
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-petrol-base">Engenharia de Software</span>
              </div>
@@ -63,38 +62,40 @@ const Hero: React.FC = () => {
            </Reveal>
         </div>
 
-        {/* ASYMMETRIC COMPOSITION */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative mt-20 md:mt-0">
+        {/* COMPOSITION */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative md:mt-0 items-center">
             
             {/* TEXT MASS */}
-            <div className="lg:col-span-8 flex flex-col justify-center relative z-20 pl-2 md:pl-24">
+            <div className="lg:col-span-8 flex flex-col justify-center relative z-20 md:pl-16 lg:pl-24">
                 <motion.div style={{ y: textY }} className="relative">
                    
-                   {/* Main Title Block - Masked Reveal */}
-                   <div className="relative mb-16 md:mb-24">
+                   {/* Main Title Block */}
+                   <div className="relative mb-12 md:mb-20">
                        
-                       {/* Linha 1: MASKED */}
+                       {/* Linha 1 */}
                        <div className="overflow-hidden py-2">
                            <motion.h1 
-                             initial={{ y: "110%" }} // Começa totalmente escondido em baixo
-                             animate={{ y: "0%" }}   // Sobe para a posição original
+                             initial={{ y: "110%" }}
+                             animate={{ y: "0%" }}
                              transition={{ duration: 1.4, ease: cinematicEase }}
                              style={{ skewX: skewVelocity, transformOrigin: "bottom left" }}
-                             className="text-[16vw] md:text-[9rem] lg:text-[11rem] leading-[0.75] font-serif font-light text-petrol-base tracking-tighter mix-blend-darken block"
+                             // FLUID TYPOGRAPHY FIX: Using clamp() instead of 16vw
+                             className="text-[clamp(4.5rem,14vw,11rem)] leading-[0.8] font-serif font-light text-petrol-base tracking-tighter mix-blend-darken block"
                            >
                              Lógica
                            </motion.h1>
                        </div>
                        
-                       {/* Linha 2: MASKED & INDENTED */}
-                       <div className="flex flex-col items-start ml-[15%] md:ml-[25%] mt-2 md:mt-4">
+                       {/* Linha 2 */}
+                       <div className="flex flex-col items-start ml-[10%] md:ml-[20%] -mt-2 md:-mt-6">
                           <div className="overflow-hidden py-2">
                             <motion.h1 
                                 initial={{ y: "110%" }}
                                 animate={{ y: "0%" }}
                                 transition={{ duration: 1.4, delay: 0.15, ease: cinematicEase }}
                                 style={{ skewX: skewVelocity, transformOrigin: "bottom left" }}
-                                className="text-[16vw] md:text-[9rem] lg:text-[11rem] leading-[0.75] font-serif font-light text-petrol-base tracking-tighter italic opacity-80 block"
+                                // FLUID TYPOGRAPHY FIX
+                                className="text-[clamp(4.5rem,14vw,11rem)] leading-[0.8] font-serif font-light text-petrol-base tracking-tighter italic opacity-80 block"
                             >
                                 Estética
                             </motion.h1>
@@ -109,7 +110,7 @@ const Hero: React.FC = () => {
                    </div>
 
                    {/* Description */}
-                   <div className="max-w-md flex flex-col gap-8 ml-2 md:ml-0">
+                   <div className="max-w-md flex flex-col gap-8 md:ml-6">
                       <Reveal delay={500} variant="translate">
                         <p className="text-sm md:text-base font-light text-petrol-ink leading-[1.6] border-l border-petrol-base/20 pl-6">
                            Arquitetura de software de alta precisão fundida com design editorial. 
@@ -151,7 +152,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* IMAGE ANCHOR */}
-            <div className="lg:col-span-4 relative flex flex-col justify-end items-end z-10 mt-12 lg:mt-0">
+            <div className="lg:col-span-4 relative flex flex-col justify-end items-end z-10 mt-12 lg:mt-0 hidden md:flex">
                <motion.div 
                   style={{ y: imageY }}
                   className="relative w-full max-w-[280px] md:max-w-[320px] mr-0 md:mr-12"

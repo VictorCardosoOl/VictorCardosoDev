@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { CONTACT_INFO } from '../constants';
 import { ArrowUpRight } from 'lucide-react';
@@ -23,7 +24,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer id="site-footer" className="relative bg-[#0B232E] text-paper w-full flex flex-col justify-between overflow-hidden">
+    <footer id="site-footer" className="relative bg-[#0B232E] text-paper w-full h-full flex flex-col justify-between overflow-hidden">
       
       {/* Background Image Reveal on Hover (Mask Effect) */}
       <AnimatePresence>
@@ -44,11 +45,11 @@ const Footer: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Main Container - Flexible height with generous padding */}
-      <div className="container mx-auto px-6 md:px-12 xl:px-20 relative z-10 flex-1 flex flex-col py-16 md:py-24 gap-12">
+      {/* Main Container */}
+      <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10 flex-1 flex flex-col py-12 md:py-24 gap-8 md:gap-12">
          
          {/* Live Status Widget */}
-         <div className="flex justify-between items-start border-b border-white/10 pb-6 shrink-0">
+         <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-6 shrink-0 gap-6">
              <div className="flex flex-col">
                  <span className="text-micro text-white/40 mb-1">Status em Tempo Real</span>
                  <div className="flex items-center gap-3">
@@ -59,13 +60,13 @@ const Footer: React.FC = () => {
                      <span className="text-sm font-bold text-white">São Paulo, BR &mdash; {time}</span>
                  </div>
              </div>
-             <div className="text-right hidden md:block">
+             <div className="text-left md:text-right">
                  <span className="text-micro text-white/40 mb-1">Disponibilidade</span>
                  <span className="text-sm font-light text-white block">Agenda Q3/Q4 Aberta</span>
              </div>
          </div>
 
-         {/* Massive CTA Section */}
+         {/* Massive CTA Section - Fluid Typography Fix */}
          <div className="flex-1 flex flex-col justify-center items-center text-center">
             <Magnetic strength={0.2}>
                 <a 
@@ -77,8 +78,8 @@ const Footer: React.FC = () => {
                     <span className="text-micro text-white/60 mb-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
                         [ INICIAR PROTOCOLO ]
                     </span>
-                    {/* Clamped Font Size to ensure it fits any screen */}
-                    <h2 className="text-[clamp(3rem,9vw,7rem)] leading-[0.9] font-serif font-medium tracking-tighter text-paper mix-blend-difference z-20 relative transition-all duration-700 group-hover:tracking-normal pb-2">
+                    {/* FLUID TYPOGRAPHY FIX: Using clamp to ensure it stays in bounds */}
+                    <h2 className="text-[clamp(3.5rem,11vw,8rem)] leading-[0.9] font-serif font-medium tracking-tighter text-paper mix-blend-difference z-20 relative transition-all duration-700 group-hover:tracking-normal pb-2">
                         Vamos <br/>
                         <span className="italic text-white/20 group-hover:text-white transition-colors duration-700">Trabalhar?</span>
                     </h2>
@@ -87,7 +88,7 @@ const Footer: React.FC = () => {
          </div>
 
          {/* Bottom Bar & Colophon */}
-         <div className="w-full border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-end gap-6 shrink-0">
+         <div className="w-full border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 shrink-0 pb-safe">
              
              {/* Left: Colophon */}
              <div className="flex flex-col gap-2 max-w-md">

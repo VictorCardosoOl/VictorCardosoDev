@@ -1,56 +1,45 @@
+
 import React, { useState, useEffect, Suspense, lazy } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import GrainBackground from './components/GrainBackground';
-import Gamification from './components/Gamification';
-import ScrollProgress from './components/ui/ScrollProgress';
-import BackToTop from './components/ui/BackToTop';
-import { ScrollProvider } from './components/ScrollContext';
-import { GamificationProvider } from './components/GamificationContext'; 
-import { PageTransitionProvider } from './components/ui/PageTransition';
+import Navbar from './Navbar';
+import Hero from './Hero';
+import GrainBackground from './GrainBackground';
+import Gamification from './Gamification';
+import ScrollProgress from './ui/ScrollProgress';
+import BackToTop from './ui/BackToTop';
+import { ScrollProvider } from './ScrollContext';
+import { GamificationProvider } from './GamificationContext'; 
+import { PageTransitionProvider } from './ui/PageTransition';
 import { MessageCircle } from 'lucide-react';
-import Magnetic from './components/ui/Magnetic';
+import Magnetic from './ui/Magnetic';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/**
- * COMPONENTE: App (Root)
- * ----------------------
- * ARQUITETURA DE PERFORMANCE (Code Splitting):
- * Para garantir um LCP (Largest Contentful Paint) rápido, o Hero e Navbar são importados estaticamente.
- * Todas as seções abaixo da dobra (Projects, Services, Lab, etc.) são carregadas via React.lazy.
- * Isso divide o bundle JS, permitindo que o navegador renderize a primeira tela quase instantaneamente.
- */
-
 // Lazy Loaded Components
-const Services = lazy(() => import('./components/Services'));
-const Projects = lazy(() => import('./components/Projects'));
-const Lab = lazy(() => import('./components/Lab'));
-const About = lazy(() => import('./components/About'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
-const Reviews = lazy(() => import('./components/Reviews')); // Novo Componente
+const Services = lazy(() => import('./Services'));
+const Projects = lazy(() => import('./Projects'));
+const Lab = lazy(() => import('./Lab'));
+const About = lazy(() => import('./About'));
+const Contact = lazy(() => import('./Contact'));
+const Footer = lazy(() => import('./Footer'));
+const Reviews = lazy(() => import('./Reviews'));
 
-/**
- * COMPONENTE: Preloader
- * ---------------------
- * Uma tela de introdução narrativa que mascara o carregamento inicial dos assets.
- * Usa um array de palavras para criar uma micro-narrativa técnica ("INICIALIZANDO", etc).
- */
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [textIndex, setTextIndex] = useState(0);
   const words = ["INICIALIZANDO", "ESTRATÉGIA", "DESIGN", "SISTEMA PRONTO"];
 
   useEffect(() => {
+    // Force top scroll on mount
+    window.scrollTo(0, 0);
+    
     const interval = setInterval(() => {
       setTextIndex((prev) => {
         if (prev >= words.length - 1) {
           clearInterval(interval);
-          setTimeout(onComplete, 800); // Small delay after last word
+          setTimeout(onComplete, 800);
           return prev;
         }
         return prev + 1;
       });
-    }, 600); // Speed of word switching
+    }, 600);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -95,53 +84,39 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
 };
 
 const App: React.FC = () => {
-  // Initialize loading state based on Session Storage
-  const [loading, setLoading] = useState(() => {
-    // If running in browser and key exists, skip loading
-    if (typeof window !== 'undefined') {
-      return !sessionStorage.getItem('hasSeenIntro');
-    }
-    return true;
-  });
-  
+  const [loading, setLoading] = useState(true);
   const [isWhatsappHovered, setIsWhatsappHovered] = useState(false);
 
   const handlePreloaderComplete = () => {
     setLoading(false);
-    sessionStorage.setItem('hasSeenIntro', 'true');
   };
 
   return (
     <GamificationProvider>
       <ScrollProvider>
         <PageTransitionProvider>
-          <div className="flex flex-col min-h-screen relative overflow-x-hidden bg-paper selection:bg-petrol-base selection:text-white">
+          <div className="flex flex-col min-h-screen relative bg-paper selection:bg-petrol-base selection:text-white">
             
-            {/* Preloader Phase */}
             <AnimatePresence mode="wait">
               {loading && <Preloader onComplete={handlePreloaderComplete} />}
             </AnimatePresence>
             
-            {/* Global Visual Effects & Scroll Aware Tools */}
             <GrainBackground />
             <ScrollProgress />
             <Gamification />
             <BackToTop />
-
-            {/* Navigation (Always Visible) */}
             <Navbar />
             
-            {/* Main Content with Sticky Footer Logic */}
-            <main className="relative z-10 bg-paper mb-[90vh] shadow-[0_20px_50px_-12px_rgba(11,35,46,0.3)] rounded-b-[3rem] border-b border-doc">
-              
-              {/* Eager Loaded Hero for LCP */}
+            {/* 
+                LAYOUT ARCHITECTURE FIX:
+                Main Content: Z-Index 10, Background Paper. It slides OVER the footer.
+                Footer: Z-Index 0, Fixed at bottom.
+                Spacer: Ensures user can scroll enough to reveal the footer.
+            */}
+            <main className="relative z-10 bg-paper shadow-2xl rounded-b-[2.5rem] md:rounded-b-[3.5rem] border-b border-doc overflow-hidden">
               <Hero />
-
-              {/* Lazy Loaded Sections wrapped in Suspense
-                  O fallback é nulo aqui porque o Preloader cobre o tempo inicial,
-                  e o carregamento subsequente geralmente é rápido o suficiente.
-               */}
-              <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs font-mono text-petrol-base/30">Carregando módulos...</div>}>
+              
+              <Suspense fallback={<div className="h-32 flex items-center justify-center text-xs font-mono opacity-30">Carregando...</div>}>
                 <Projects />
                 <Services />
                 <Reviews />
@@ -150,25 +125,25 @@ const App: React.FC = () => {
                 <Contact />
               </Suspense>
             </main>
+
+            {/* SPACER: Allow scroll to go beyond main content to reveal fixed footer */}
+            <div className="relative z-0 h-[100vh] w-full pointer-events-none" aria-hidden="true" />
             
-            {/* Sticky Footer - Fullscreen Reveal Effect */}
-            <div className="fixed bottom-0 left-0 w-full z-0 min-h-[90vh]">
+            {/* STICKY FOOTER */}
+            <div className="fixed bottom-0 left-0 w-full h-[100vh] z-0 flex flex-col justify-end">
                <Suspense fallback={null}>
                   <Footer />
                </Suspense>
             </div>
             
-            {/* WhatsApp Floating Action Button */}
-            <div className="fixed bottom-8 right-8 z-40 flex items-center gap-4 pointer-events-none">
-              
-              {/* Tooltip */}
+            {/* WhatsApp FAB */}
+            <div className="fixed bottom-8 right-8 z-50 flex items-center gap-4 pointer-events-none mix-blend-normal">
               <AnimatePresence>
                 {isWhatsappHovered && (
                   <motion.div
                     initial={{ opacity: 0, x: 10, scale: 0.95 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, x: 10, scale: 0.95 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
                     className="pointer-events-auto bg-white text-petrol-base px-4 py-2 rounded-lg shadow-xl border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap hidden md:block"
                   >
                     Fale pelo WhatsApp
@@ -176,7 +151,6 @@ const App: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              {/* Button Wrapper */}
               <div 
                 className="pointer-events-auto"
                 onMouseEnter={() => setIsWhatsappHovered(true)}
@@ -184,7 +158,7 @@ const App: React.FC = () => {
               >
                 <Magnetic strength={0.3}>
                   <a 
-                    href="https://wa.me/5511999999999" 
+                    href="https://wa.me/5511977440146" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-14 h-14 bg-petrol-base text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
