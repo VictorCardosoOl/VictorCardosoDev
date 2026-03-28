@@ -44,15 +44,15 @@ const Hero: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Main Central Image with Multiply Blend Mode */}
+      {/* Main Central Image */}
       <motion.div 
         style={{ y: mainImgY }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 mix-blend-multiply"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
       >
         <img 
           src={portraitUrl} 
           alt="Victor Cardoso" 
-          className="h-[65vh] md:h-[75vh] w-auto object-cover grayscale contrast-125 opacity-90"
+          className="h-[65vh] md:h-[75vh] w-auto object-cover grayscale contrast-125 shadow-2xl"
         />
       </motion.div>
 
