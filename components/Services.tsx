@@ -8,6 +8,16 @@ import ContentModal from './ui/ContentModal';
 const Services: React.FC = () => {
   const { transitionTo } = usePageTransition();
   const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
+  const [activeService, setActiveService] = useState<typeof SERVICES[0] | null>(null);
+
+  const handleOpen = (service: typeof SERVICES[0]) => {
+    setActiveService(service);
+    setSelectedService(service);
+  };
+
+  const handleClose = () => {
+    setSelectedService(null);
+  };
 
   // NOTA DE PERFORMANCE:
   // Removemos o useState para 'hoveredIndex'. O efeito "Spotlight" agora é feito via CSS puro
@@ -15,12 +25,12 @@ const Services: React.FC = () => {
   // Isso evita re-renders do React enquanto o mouse se move, eliminando o lag de scroll.
 
   return (
-    <section id="services" className="py-32 md:py-48 bg-paper text-petrol-base relative z-10 overflow-hidden">
+    <section id="services" className="py-24 md:py-32 bg-paper text-petrol-base relative z-10 overflow-hidden">
       
       <div className="container mx-auto px-6 md:px-12 xl:px-20 relative z-10">
         
         {/* Header Minimalista */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 pb-6 border-b border-petrol-base/10">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 pb-6 border-b border-petrol-base/10">
             <Reveal>
               <h2 className="text-5xl md:text-7xl font-serif font-medium text-petrol-base tracking-tighter leading-[0.9]">
                 Expertise
@@ -46,7 +56,7 @@ const Services: React.FC = () => {
                         hover:!opacity-100 hover:!scale-100 
                         group-hover/list:opacity-30 group-hover/list:scale-[0.99] group-hover/list:grayscale
                     "
-                    onClick={() => setSelectedService(service)}
+                    onClick={() => handleOpen(service)}
                  >
                     <div className="py-12 md:py-16 flex flex-col md:flex-row gap-8 md:gap-0 items-baseline relative z-10">
                         
@@ -98,7 +108,7 @@ const Services: React.FC = () => {
         </div>
 
         {/* Footer / CTA */}
-        <div className="mt-24 text-center">
+        <div className="mt-16 text-center">
             <Reveal variant="scale">
                 <a 
                   href="#contact" 
@@ -113,17 +123,18 @@ const Services: React.FC = () => {
         {/* Modal Logic */}
         <ContentModal
           isOpen={!!selectedService}
-          onClose={() => setSelectedService(null)}
-          title={selectedService?.title}
+          onClose={handleClose}
+          title={activeService?.title}
           category="Expertise"
+          theme="light"
         >
           <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 md:py-20">
               <div className="mb-12">
                  <h3 className="text-3xl md:text-5xl font-serif font-medium text-petrol-base mb-6 leading-tight">
-                    {selectedService?.title}
+                    {activeService?.title}
                  </h3>
                  <p className="text-lg md:text-xl text-petrol-ink font-light leading-relaxed border-l border-petrol-base/10 pl-6">
-                   {selectedService?.description}
+                   {activeService?.description}
                  </p>
               </div>
 
@@ -131,7 +142,7 @@ const Services: React.FC = () => {
                  <div>
                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-petrol-base/40 mb-4">Stack Tecnológico</h4>
                     <ul className="space-y-2">
-                        {selectedService?.techStack?.map((tech, i) => (
+                        {activeService?.techStack?.map((tech, i) => (
                             <li key={i} className="flex items-center gap-2 text-petrol-base font-medium text-sm">
                                 <span className="w-1 h-1 rounded-full bg-petrol-electric"></span> {tech}
                             </li>

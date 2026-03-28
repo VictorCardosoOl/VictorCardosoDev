@@ -13,6 +13,7 @@ interface ContentModalProps {
   title?: string;
   category?: string;
   layoutId?: string;
+  theme?: 'light' | 'dark';
   children: React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
   title, 
   category, 
   layoutId,
+  theme = 'dark',
   children 
 }) => {
   const mainLenis = useLenis();
@@ -154,7 +156,11 @@ const ContentModal: React.FC<ContentModalProps> = ({
                 <Magnetic strength={0.3}>
                     <button 
                     onClick={onClose}
-                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-[#0B232E] flex items-center justify-center transition-all duration-300 shadow-lg group"
+                    className={`w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-lg group ${
+                      theme === 'light' 
+                        ? 'bg-petrol-base/10 border border-petrol-base/20 text-petrol-base hover:bg-petrol-base hover:text-white' 
+                        : 'bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#0B232E]'
+                    }`}
                     >
                     <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
                     </button>

@@ -58,23 +58,23 @@ const Navbar: React.FC = () => {
   const navVariants = {
     top: {
         y: 0,
-        backgroundColor: 'rgba(242, 244, 246, 0)', // Transparente no topo
+        backgroundColor: 'rgba(242, 244, 246, 0)',
         backdropFilter: 'blur(0px)',
         borderBottom: '1px solid transparent',
         boxShadow: '0 0 0 rgba(0,0,0,0)'
     },
     scrolled: {
         y: 0,
-        backgroundColor: 'rgba(242, 244, 246, 0.8)', // Efeito Glass ao rolar
-        backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(11, 35, 46, 0.05)',
-        boxShadow: '0 4px 20px -5px rgba(0,0,0,0.05)'
+        backgroundColor: 'rgba(242, 244, 246, 0)',
+        backdropFilter: 'blur(0px)',
+        borderBottom: '1px solid transparent',
+        boxShadow: '0 0 0 rgba(0,0,0,0)'
     },
     hidden: {
-        y: "-100%", // Move para fora da tela (acima)
-        backgroundColor: 'rgba(242, 244, 246, 0.8)',
-        backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(11, 35, 46, 0.05)',
+        y: "-100%",
+        backgroundColor: 'rgba(242, 244, 246, 0)',
+        backdropFilter: 'blur(0px)',
+        borderBottom: '1px solid transparent',
         boxShadow: '0 0 0 rgba(0,0,0,0)'
     }
   };

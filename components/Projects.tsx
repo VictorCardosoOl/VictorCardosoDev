@@ -133,9 +133,19 @@ const ProjectCard: React.FC<{
 
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
+  const [activeProject, setActiveProject] = useState<typeof PROJECTS[0] | null>(null);
+
+  const handleOpen = (project: typeof PROJECTS[0]) => {
+    setActiveProject(project);
+    setSelectedProject(project);
+  };
+
+  const handleClose = () => {
+    setSelectedProject(null);
+  };
 
   return (
-    <section id="projects" className="relative bg-paper py-24 md:py-48 z-10 overflow-hidden">
+    <section id="projects" className="relative bg-paper py-24 md:py-32 z-10 overflow-hidden">
       
       {/* Decorative Lines */}
       <div className="absolute top-0 left-6 md:left-24 xl:left-32 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none" />
@@ -143,7 +153,7 @@ const Projects: React.FC = () => {
 
       <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10">
         
-        <div className="flex flex-col items-start mb-24 md:mb-32 pl-0 md:pl-16 lg:pl-24">
+        <div className="flex flex-col items-start mb-16 md:mb-24 pl-0 md:pl-16 lg:pl-24">
            <Reveal>
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-petrol-base/40 mb-4 block">
                  Arquivo Selecionado
@@ -162,12 +172,12 @@ const Projects: React.FC = () => {
                 key={index}
                 project={project} 
                 index={index} 
-                onClick={() => setSelectedProject(project)}
+                onClick={() => handleOpen(project)}
              />
           ))}
         </div>
 
-        <div className="mt-24 md:mt-32 text-center">
+        <div className="mt-16 md:mt-24 text-center">
             <Reveal variant="scale">
                 <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 border border-petrol-base/10 hover:bg-petrol-base hover:text-white rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 group">
                     Iniciar um projeto <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -179,15 +189,15 @@ const Projects: React.FC = () => {
 
       <ContentModal 
         isOpen={!!selectedProject} 
-        onClose={() => setSelectedProject(null)}
-        title={selectedProject?.title}
-        category={selectedProject?.category}
-        layoutId={selectedProject ? `project-image-${selectedProject.title}` : undefined}
+        onClose={handleClose}
+        title={activeProject?.title}
+        category={activeProject?.category}
+        layoutId={activeProject ? `project-image-${activeProject.title}` : undefined}
       >
-        {selectedProject && (
+        {activeProject && (
             <ProjectDetailContent 
-                project={selectedProject} 
-                layoutId={`project-image-${selectedProject.title}`}
+                project={activeProject} 
+                layoutId={`project-image-${activeProject.title}`}
             />
         )}
       </ContentModal>

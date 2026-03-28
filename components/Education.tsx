@@ -6,12 +6,12 @@ import { GraduationCap, Calendar } from 'lucide-react';
 
 const Education: React.FC = () => {
   return (
-    <section id="education" className="py-24 md:py-40 bg-paper relative overflow-hidden">
+    <section id="education" className="py-24 md:py-32 bg-paper relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white to-transparent opacity-50 pointer-events-none"></div>
       
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <Reveal width="100%">
-            <div className="mb-24 text-center max-w-2xl mx-auto">
+            <div className="mb-16 text-center max-w-2xl mx-auto">
                 <span className="text-xs font-bold uppercase tracking-widest text-petrol-base/40 mb-3 block">Background</span>
                 <h2 className="text-4xl md:text-5xl font-serif font-medium text-petrol-base mb-6">
                 Formação & Certificações
