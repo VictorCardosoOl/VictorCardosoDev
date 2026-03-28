@@ -46,6 +46,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
   }, []);
 
   useEffect(() => {
+    let rafId: number;
     if (isOpen) {
       mainLenis?.stop();
       document.body.style.overflow = 'hidden';
@@ -68,14 +69,15 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
             function raf(time: number) {
                 scopedLenis.raf(time);
-                requestAnimationFrame(raf);
+                rafId = requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf);
+            rafId = requestAnimationFrame(raf);
         }
       }, 300);
 
       return () => {
         clearTimeout(timer);
+        if (rafId) cancelAnimationFrame(rafId);
         scopedLenisRef.current?.destroy();
       };
 
@@ -87,6 +89,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
     return () => {
       mainLenis?.start();
       document.body.style.overflow = '';
+      if (rafId) cancelAnimationFrame(rafId);
       scopedLenisRef.current?.destroy();
     };
   }, [isOpen, mainLenis]);
@@ -109,23 +112,19 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
   return createPortal(
     <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
+      {isOpen && <motion.div
+            key="backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // Saída mais rápida que o modal para "limpar" a tela logo
             transition={{ duration: 0.3 }}
             onClick={onClose}
             className="fixed inset-0 z-[9998] bg-[#0B232E]/95 cursor-pointer"
             aria-hidden="true"
             style={{ willChange: "opacity" }}
-          />
-
-          {/* Modal Container */}
-          <motion.div
+          />}
+      {isOpen && <motion.div
+            key="modal-container"
             layoutId={layoutId ? `modal-container-${layoutId}` : undefined}
             initial={{ y: "100%" }}
             animate={{ 
@@ -158,7 +157,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                     onClick={onClose}
                     className={`w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-lg group ${
                       theme === 'light' 
-                        ? 'bg-petrol-base/10 border border-petrol-base/20 text-petrol-base hover:bg-petrol-base hover:text-white' 
+                        ? 'bg-petrol-base border border-petrol-base text-white hover:bg-petrol-ink hover:border-petrol-ink' 
                         : 'bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#0B232E]'
                     }`}
                     >
@@ -182,9 +181,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                    })}
                </div>
             </div>
-          </motion.div>
-        </>
-      )}
+          </motion.div>}
     </AnimatePresence>,
     document.body
   );

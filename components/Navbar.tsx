@@ -58,24 +58,24 @@ const Navbar: React.FC = () => {
   const navVariants = {
     top: {
         y: 0,
-        backgroundColor: 'rgba(242, 244, 246, 0)',
-        backdropFilter: 'blur(0px)',
-        borderBottom: '1px solid transparent',
-        boxShadow: '0 0 0 rgba(0,0,0,0)'
+        backgroundColor: 'transparent',
+        backdropFilter: 'none',
+        borderBottom: 'none',
+        boxShadow: 'none'
     },
     scrolled: {
         y: 0,
-        backgroundColor: 'rgba(242, 244, 246, 0)',
-        backdropFilter: 'blur(0px)',
-        borderBottom: '1px solid transparent',
-        boxShadow: '0 0 0 rgba(0,0,0,0)'
+        backgroundColor: 'transparent',
+        backdropFilter: 'none',
+        borderBottom: 'none',
+        boxShadow: 'none'
     },
     hidden: {
         y: "-100%",
-        backgroundColor: 'rgba(242, 244, 246, 0)',
-        backdropFilter: 'blur(0px)',
-        borderBottom: '1px solid transparent',
-        boxShadow: '0 0 0 rgba(0,0,0,0)'
+        backgroundColor: 'transparent',
+        backdropFilter: 'none',
+        borderBottom: 'none',
+        boxShadow: 'none'
     }
   };
 
