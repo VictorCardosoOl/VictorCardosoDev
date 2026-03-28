@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
-  // Using a striking portrait to match the reference
-  const portraitUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200";
+  // Using the local image uploaded by the user
+  const portraitUrl = "/perfil.jpg";
 
   return (
     <section id="hero" className="w-full h-[100dvh] flex flex-col md:flex-row bg-white overflow-hidden">
