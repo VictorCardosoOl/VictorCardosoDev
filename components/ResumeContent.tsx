@@ -7,9 +7,7 @@ import { EDUCATION, WORK_EXPERIENCE, CONTACT_INFO } from '../constants';
 
 const MotionImg = motion.img as any;
 
-interface ResumeContentProps {
-  layoutId?: string;
-}
+interface ResumeContentProps {}
 
 // --- HARD SKILLS DO CV ---
 const HARD_SKILLS = {
@@ -41,7 +39,7 @@ const SOFT_SKILLS = [
     "Ensino & Mentoria"
 ];
 
-export const ResumeContent: React.FC<ResumeContentProps> = ({ layoutId }) => {
+export const ResumeContent: React.FC<ResumeContentProps> = () => {
   return (
     <div className="bg-[#F2F4F6] min-h-screen pb-24">
       
@@ -54,7 +52,6 @@ export const ResumeContent: React.FC<ResumeContentProps> = ({ layoutId }) => {
             {/* Foto */}
             <div className="w-32 h-40 md:w-56 md:h-72 flex-shrink-0 relative rounded-sm overflow-hidden border border-white/20 shadow-2xl">
                <MotionImg 
-                 layoutId={layoutId}
                  src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" 
                  alt="Victor Cardoso Profile"
                  className="w-full h-full object-cover grayscale"

@@ -61,7 +61,6 @@ const About: React.FC = () => {
                 onClick={() => setIsResumeOpen(true)}
               >
                 <motion.img 
-                  layoutId="profile-photo-main"
                   src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" 
                   alt="Victor Cardoso"
                   className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105"
@@ -94,11 +93,10 @@ const About: React.FC = () => {
       <ContentModal 
         isOpen={isResumeOpen} 
         onClose={() => setIsResumeOpen(false)}
-        layoutId="profile-photo-main"
         title="Currículo Profissional"
         category="Sobre"
       >
-         <ResumeContent layoutId="profile-photo-main" />
+         <ResumeContent />
       </ContentModal>
 
     </section>

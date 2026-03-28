@@ -10,7 +10,6 @@ const MotionH1 = motion.h1 as any;
 
 interface ProjectDetailContentProps {
   project: typeof PROJECTS[0];
-  layoutId?: string;
 }
 
 // Variantes de animação para o slide da galeria
@@ -43,7 +42,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ project, layoutId }) => {
+export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ project }) => {
   // page: índice absoluto (cresce indefinidamente)
   // direction: 1 para direita, -1 para esquerda
   const [[page, direction], setPage] = useState([0, 0]);
@@ -64,7 +63,6 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
       {/* 1. CINEMATIC HERO */}
       <div className="w-full h-[60vh] md:h-[75vh] relative overflow-hidden bg-[#0B232E]">
         <MotionImg 
-          layoutId={layoutId}
           src={project.image} 
           alt={project.title} 
           className="w-full h-full object-cover opacity-80"
@@ -79,7 +77,6 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 lg:p-20 z-10">
             <Reveal>
                 <MotionH1 
-                    layoutId={`project-title-${project.title}`}
                     className="text-5xl md:text-7xl lg:text-9xl font-serif font-medium text-[#F2F4F6] tracking-tighter leading-[0.9] mb-8"
                 >
                   {project.title}

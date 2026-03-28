@@ -74,7 +74,6 @@ const ProjectCard: React.FC<{
                  <motion.div className="w-full h-full relative overflow-hidden">
                      {/* IMAGE WITH PARALLAX */}
                      <motion.img 
-                        layoutId={`project-image-${project.title}`}
                         src={project.image} 
                         alt={project.title}
                         style={{ 
@@ -102,7 +101,6 @@ const ProjectCard: React.FC<{
                   <div className="max-w-2xl">
                       <Reveal>
                         <motion.h3 
-                            layoutId={`project-title-${project.title}`}
                             className="text-3xl md:text-5xl lg:text-6xl font-serif font-medium text-petrol-base mb-4 leading-tight group-hover:text-petrol-mid transition-colors"
                         >
                             {project.title}
@@ -192,12 +190,10 @@ const Projects: React.FC = () => {
         onClose={handleClose}
         title={activeProject?.title}
         category={activeProject?.category}
-        layoutId={activeProject ? `project-image-${activeProject.title}` : undefined}
       >
         {activeProject && (
             <ProjectDetailContent 
                 project={activeProject} 
-                layoutId={`project-image-${activeProject.title}`}
             />
         )}
       </ContentModal>

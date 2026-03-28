@@ -12,7 +12,6 @@ interface ContentModalProps {
   onClose: () => void;
   title?: string;
   category?: string;
-  layoutId?: string;
   theme?: 'light' | 'dark';
   children: React.ReactNode;
 }
@@ -22,7 +21,6 @@ const ContentModal: React.FC<ContentModalProps> = ({
   onClose, 
   title, 
   category, 
-  layoutId,
   theme = 'dark',
   children 
 }) => {
@@ -47,11 +45,13 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
   useEffect(() => {
     let rafId: number;
+    let timer: NodeJS.Timeout;
+
     if (isOpen) {
       mainLenis?.stop();
       document.body.style.overflow = 'hidden';
 
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         if (modalContainerRef.current && modalContentRef.current) {
             const scopedLenis = new Lenis({
                 wrapper: modalContainerRef.current,
@@ -74,23 +74,22 @@ const ContentModal: React.FC<ContentModalProps> = ({
             rafId = requestAnimationFrame(raf);
         }
       }, 300);
-
-      return () => {
-        clearTimeout(timer);
-        if (rafId) cancelAnimationFrame(rafId);
-        scopedLenisRef.current?.destroy();
-      };
-
     } else {
       mainLenis?.start();
       document.body.style.overflow = '';
     }
 
     return () => {
-      mainLenis?.start();
-      document.body.style.overflow = '';
+      clearTimeout(timer);
       if (rafId) cancelAnimationFrame(rafId);
-      scopedLenisRef.current?.destroy();
+      if (scopedLenisRef.current) {
+        scopedLenisRef.current.destroy();
+        scopedLenisRef.current = null;
+      }
+      if (isOpen) {
+        mainLenis?.start();
+        document.body.style.overflow = '';
+      }
     };
   }, [isOpen, mainLenis]);
 
@@ -125,7 +124,6 @@ const ContentModal: React.FC<ContentModalProps> = ({
           />}
       {isOpen && <motion.div
             key="modal-container"
-            layoutId={layoutId ? `modal-container-${layoutId}` : undefined}
             initial={{ y: "100%" }}
             animate={{ 
                 y: isMobile ? "0%" : "2%",
@@ -173,12 +171,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
               data-lenis-prevent 
             >
                <div ref={modalContentRef} className="will-change-transform">
-                   {React.Children.map(children, child => {
-                      if (React.isValidElement(child)) {
-                          return React.cloneElement(child as any, { layoutId });
-                      }
-                      return child;
-                   })}
+                   {children}
                </div>
             </div>
           </motion.div>}
