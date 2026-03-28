@@ -1,87 +1,59 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { usePageTransition } from './ui/PageTransition';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
-  const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  const { transitionTo } = usePageTransition();
-
-  const physicsConfig = { damping: 20, stiffness: 60, mass: 1.0 };
-  const smoothY = useSpring(scrollY, physicsConfig);
-  
-  // Parallax effects
-  const mainImgY = useTransform(smoothY, [0, 1000], [0, 60]);
-  const textY = useTransform(smoothY, [0, 1000], [0, -40]);
-
-  // Using an image with a light background to make mix-blend-multiply work well
+  // Using a striking portrait to match the reference
   const portraitUrl = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200";
 
   return (
-    <section 
-      id="hero" 
-      ref={containerRef}
-      className="relative w-full h-[100dvh] bg-[#EAE8E3] overflow-hidden flex items-center justify-center"
-    >
-      {/* Subtle Noise Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-multiply z-0"
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
-      ></div>
+    <section id="hero" className="w-full h-[100dvh] flex flex-col md:flex-row bg-white overflow-hidden">
+      {/* Left Pane */}
+      <div className="w-full md:w-1/2 h-[50vh] md:h-full relative flex flex-col justify-between p-6 md:p-12 lg:p-16">
+        {/* Top Text */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[25vw] md:text-[13vw] font-bold leading-[0.75] tracking-tighter text-[#111]"
+        >
+          Work
+        </motion.h1>
 
-      {/* Crisp, Elegant Typography Behind Image */}
-      <motion.div 
-        style={{ y: textY }}
-        className="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none w-full"
-      >
-        <div className="flex flex-col items-start">
-          <h1 className="text-[18vw] font-sans font-medium text-[#1a1a1a] leading-[0.8] tracking-[-0.04em] uppercase">
-            Victor
-          </h1>
-          <h1 className="text-[18vw] font-sans font-medium text-[#1a1a1a] leading-[0.8] tracking-[-0.04em] uppercase ml-[12vw]">
-            Cardoso
-          </h1>
-        </div>
-      </motion.div>
+        {/* Middle Text */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-start"
+        >
+          <p className="text-[10px] md:text-xs font-semibold text-[#111] tracking-tight">Victor Cardoso</p>
+          <p className="text-[10px] md:text-xs font-semibold text-[#111] max-w-[180px] md:max-w-[220px] leading-relaxed tracking-tight">
+            Software Engineer working within the fields of frontend and architecture
+          </p>
+        </motion.div>
 
-      {/* Main Central Image */}
-      <motion.div 
-        style={{ y: mainImgY }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
-      >
-        <img 
+        {/* Bottom Text */}
+        <motion.h1 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[25vw] md:text-[13vw] font-bold leading-[0.75] tracking-tighter text-[#111]"
+        >
+          Studio
+        </motion.h1>
+      </div>
+
+      {/* Right Pane */}
+      <div className="w-full md:w-1/2 h-[50vh] md:h-full relative">
+        <motion.img 
+          initial={{ scale: 1.05, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           src={portraitUrl} 
           alt="Victor Cardoso" 
-          className="h-[65vh] md:h-[75vh] w-auto object-cover grayscale contrast-125 shadow-2xl"
+          className="w-full h-full object-cover grayscale"
         />
-      </motion.div>
-
-      {/* Top Header / Nav items (Optional, adds to the editorial feel) */}
-      <div className="absolute top-8 left-6 right-6 md:left-12 md:right-12 z-30 flex justify-between items-start">
-        <span className="text-[10px] font-mono font-medium tracking-[0.2em] text-[#1a1a1a] uppercase">Portfolio '26</span>
-        <span className="text-[10px] font-mono font-medium tracking-[0.2em] text-[#1a1a1a] uppercase">Available for work</span>
       </div>
-
-      {/* Bottom Labels */}
-      <div className="absolute bottom-8 left-6 right-6 md:left-12 md:right-12 z-30 flex justify-between items-end">
-        <div className="flex flex-col gap-1">
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-[#1a1a1a] uppercase opacity-50">Role</span>
-          <span className="text-[11px] font-mono font-medium tracking-[0.1em] text-[#1a1a1a] uppercase">Software Engineer</span>
-        </div>
-        <div className="flex flex-col gap-1 items-end md:items-start hidden md:flex">
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-[#1a1a1a] uppercase opacity-50">Focus</span>
-          <span className="text-[11px] font-mono font-medium tracking-[0.1em] text-[#1a1a1a] uppercase">Frontend Arch</span>
-        </div>
-        <div className="flex flex-col gap-1 items-end hidden sm:flex">
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-[#1a1a1a] uppercase opacity-50">Design</span>
-          <span className="text-[11px] font-mono font-medium tracking-[0.1em] text-[#1a1a1a] uppercase">UI/UX & Motion</span>
-        </div>
-        <div className="flex flex-col gap-1 items-end">
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-[#1a1a1a] uppercase opacity-50">Location</span>
-          <span className="text-[11px] font-mono font-medium tracking-[0.1em] text-[#1a1a1a] uppercase">Global</span>
-        </div>
-      </div>
-
     </section>
   );
 };
