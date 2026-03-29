@@ -12,6 +12,7 @@ const Gamification: React.FC = () => {
 
   const [showManifest, setShowManifest] = useState(false);
   const [hasShownManifest, setHasShownManifest] = useState(false);
+  const [userClosedManifest, setUserClosedManifest] = useState(false);
   
   // Local state for UI display only (when manifest is open)
   const [displayStats, setDisplayStats] = useState({ totalTime: 0, topSection: 'Geral' });
@@ -49,15 +50,19 @@ const Gamification: React.FC = () => {
   }, [completeQuest]);
 
   // --- Strict Footer Trigger for "Manifest" ---
+  const lastScrollY = React.useRef(0);
+
   useEffect(() => {
     const handleScrollCheck = () => {
-        if (hasShownManifest) return;
+        if (userClosedManifest) return;
 
         const windowHeight = window.innerHeight;
         const scrollY = Math.ceil(window.scrollY);
         const totalHeight = document.documentElement.scrollHeight;
         
-        const isAtBottom = (windowHeight + scrollY) >= (totalHeight - 100);
+        const isAtBottom = (windowHeight + scrollY) >= (totalHeight - 150);
+        const isScrollingUp = scrollY < lastScrollY.current;
+        lastScrollY.current = scrollY;
 
         if (isAtBottom) {
              const { totalTime } = getSessionData();
@@ -66,12 +71,15 @@ const Gamification: React.FC = () => {
                  setShowManifest(true);
                  setHasShownManifest(true);
              }
+        } else if (showManifest && isScrollingUp && (windowHeight + scrollY) < (totalHeight - 250)) {
+             // Hide the manifest if the user scrolls up to see the pending sections
+             setShowManifest(false);
         }
     };
 
     window.addEventListener('scroll', handleScrollCheck);
     return () => window.removeEventListener('scroll', handleScrollCheck);
-  }, [hasShownManifest, getSessionData]);
+  }, [showManifest, getSessionData, userClosedManifest]);
 
   // --- Local Timer for Manifest UI ---
   // This ensures the "Clock" ticks when the modal is open, without re-rendering the whole app globally.
@@ -124,7 +132,10 @@ const Gamification: React.FC = () => {
                     <span className="text-lg font-bold mt-1">Manifesto de Visita</span>
                 </div>
                 <button 
-                    onClick={() => setShowManifest(false)}
+                    onClick={() => {
+                        setShowManifest(false);
+                        setUserClosedManifest(true);
+                    }}
                     className="w-6 h-6 flex items-center justify-center hover:bg-petrol-base/5 rounded-full transition-colors"
                 >
                     <X size={14} />
