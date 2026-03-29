@@ -144,8 +144,8 @@ const App: React.FC = () => {
             {/* Navigation (Always Visible) */}
             <Navbar />
             
-            {/* Main Content with Sticky Footer Logic */}
-            <main className="relative z-10 bg-[#FFFFFF] mb-[90vh] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] rounded-b-[3rem] border-b border-black/10">
+            {/* Main Content */}
+            <main className="relative z-10 bg-[#FFFFFF]">
               
               {/* Eager Loaded Hero for LCP */}
               <Hero />
@@ -162,12 +162,10 @@ const App: React.FC = () => {
               </Suspense>
             </main>
             
-            {/* Sticky Footer - Fullscreen Reveal Effect */}
-            <div className="fixed bottom-0 left-0 w-full z-0 min-h-[90vh]">
-               <Suspense fallback={null}>
-                  <Footer />
-               </Suspense>
-            </div>
+            {/* Footer */}
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
             
             {/* WhatsApp Floating Action Button */}
             <div className="fixed bottom-8 right-8 z-40 flex items-center gap-4 pointer-events-none">

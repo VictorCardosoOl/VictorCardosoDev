@@ -8,89 +8,63 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="relative bg-[#F6F4EE] text-[#2A2A2A] w-full flex flex-col overflow-hidden z-20">
+    <footer id="site-footer" className="relative bg-[#F4EFEA] text-[#8A151B] w-full flex flex-col overflow-hidden z-20 pt-24">
       
-      {/* Huge Text */}
-      <div className="w-full flex justify-center items-center pt-16 pb-12 md:pt-24 md:pb-16 px-6">
-        <h1 className="text-[26vw] leading-[0.7] font-sans font-normal tracking-[-0.06em] text-[#2A2A2A] uppercase transform scale-y-[1.8] origin-bottom select-none">
-          VICTOR
-        </h1>
+      <div className="px-6 md:px-12 lg:px-16 w-full max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4 mb-24">
+        
+        {/* Left Column: Social & Contact */}
+        <div className="flex flex-col gap-2 text-xs md:text-sm font-mono tracking-tight">
+          <div className="flex gap-4">
+            <span className="w-24 opacity-80">social media:</span>
+            <div className="flex gap-4">
+              {CONTACT_INFO.socials.map((social, idx) => (
+                <a key={idx} href={social.url} target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+                  {social.name}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="flex gap-4">
+            <span className="w-24 opacity-80">say hello:</span>
+            <a href={`mailto:${CONTACT_INFO.email}`} className="hover:opacity-60 transition-opacity">
+              {CONTACT_INFO.email}
+            </a>
+          </div>
+        </div>
+
+        {/* Center Column: Policies & Copyright */}
+        <div className="flex flex-col items-center text-center text-xs md:text-sm font-mono tracking-tight gap-6">
+          <div className="flex flex-col gap-1">
+            <a href="#" className="hover:opacity-60 transition-opacity">Refund policy</a>
+            <a href="#" className="hover:opacity-60 transition-opacity">Terms of service</a>
+            <a href="#" className="hover:opacity-60 transition-opacity">Privacy notice</a>
+          </div>
+          <div className="flex flex-col gap-1 text-[9px] md:text-[10px] opacity-80">
+            <span>Copyright © {year} Victor Cardoso</span>
+            <span>All rights reserved.</span>
+          </div>
+        </div>
+
+        {/* Right Column: Navigation */}
+        <div className="flex justify-start md:justify-end text-xs md:text-sm font-mono tracking-tight">
+          <div className="flex gap-4 md:gap-6 flex-wrap md:justify-end">
+            <button onClick={() => transitionTo('#home')} className="hover:opacity-60 transition-opacity">home</button>
+            <button onClick={() => transitionTo('#projects')} className="hover:opacity-60 transition-opacity">projects</button>
+            <button onClick={() => transitionTo('#about')} className="hover:opacity-60 transition-opacity">about</button>
+            <button onClick={() => transitionTo('#services')} className="hover:opacity-60 transition-opacity">services</button>
+            <button onClick={() => transitionTo('#faq')} className="hover:opacity-60 transition-opacity">FAQ</button>
+          </div>
+        </div>
+
       </div>
 
-      <div className="px-6 md:px-12 lg:px-16 w-full max-w-[1920px] mx-auto">
-        {/* Top Divider */}
-        <div className="w-full h-px bg-[#2A2A2A] opacity-20"></div>
-
-        {/* 4 Columns Section */}
-        <div className="w-full pt-8 pb-20 md:pb-32 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-4">
-          
-          {/* Col 1 */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Index</span>
-            <ul className="flex flex-col gap-1.5">
-              <li className="flex items-center gap-2 -ml-3">
-                <span className="text-lg md:text-xl font-medium text-[#2A2A2A]">•</span>
-                <button onClick={() => transitionTo('#home')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">
-                  Home
-                </button>
-              </li>
-              <li><button onClick={() => transitionTo('#about')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Sobre</button></li>
-              <li><button onClick={() => transitionTo('#projects')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Projetos</button></li>
-              <li><button onClick={() => transitionTo('#contact')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Contato</button></li>
-            </ul>
-          </div>
-
-          {/* Col 2 */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Serviços</span>
-            <ul className="flex flex-col gap-1.5">
-              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Análise de Sistemas</span></li>
-              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Liderança Operacional</span></li>
-              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Treinamento Corporativo</span></li>
-              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Gestão de KPIs</span></li>
-            </ul>
-          </div>
-
-          {/* Col 3 */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Info</span>
-            <ul className="flex flex-col gap-1.5">
-              <li><button onClick={() => transitionTo('#faq')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">FAQ</button></li>
-              <li><a href="/assets/cv_victor_cardoso.pdf" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Currículo</a></li>
-            </ul>
-          </div>
-
-          {/* Col 4 */}
-          <div className="flex flex-col">
-            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Social</span>
-            <ul className="flex flex-col gap-1.5">
-              {CONTACT_INFO.socials.map((social, idx) => (
-                <li key={idx}>
-                  <a href={social.url} target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">
-                    {social.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Bottom Divider */}
-        <div className="w-full h-px bg-[#2A2A2A] opacity-20"></div>
-
-        {/* Bottom Bar */}
-        <div className="w-full py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="text-[9px] md:text-[10px] font-sans text-[#2A2A2A] opacity-80">
-            &copy; {year} VICTOR CARDOSO - {CONTACT_INFO.location} . Brasil
-          </div>
-          <div className="flex items-center gap-4 md:gap-6 text-[9px] md:text-[10px] font-sans text-[#2A2A2A] opacity-80">
-            <div className="w-2 h-2 rounded-full bg-[#E5E0D8] hidden md:block"></div>
-            <a href="#" className="hover:opacity-60 transition-opacity">Termos e Condições</a>
-            <a href="#" className="hover:opacity-60 transition-opacity">Privacy Policy</a>
-            <a href="#" className="hover:opacity-60 transition-opacity">Política de Cookies</a>
-          </div>
-        </div>
+      {/* Huge Text at the bottom */}
+      <div className="relative w-full flex justify-center items-end overflow-hidden mt-auto pt-10">
+        <h1 className="text-[28vw] leading-[0.75] font-serif font-normal text-[#8A151B] tracking-tight -mb-[2vw] select-none">
+          Victor
+        </h1>
+        {/* Fade overlay at the bottom */}
+        <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-[#F4EFEA] to-transparent pointer-events-none"></div>
       </div>
 
     </footer>
