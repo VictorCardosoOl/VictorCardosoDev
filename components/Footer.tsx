@@ -1,123 +1,98 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { CONTACT_INFO } from '../constants';
-import { ArrowUpRight } from 'lucide-react';
-import Magnetic from './ui/Magnetic';
 import { usePageTransition } from './ui/PageTransition';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Footer: React.FC = () => {
   const { transitionTo } = usePageTransition();
   const year = new Date().getFullYear();
-  const [isHovered, setIsHovered] = useState(false);
-  const [time, setTime] = useState('');
-
-  // Live Time Logic
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <footer id="site-footer" className="relative bg-[#000000] text-paper w-full h-full flex flex-col justify-between overflow-hidden">
+    <footer id="site-footer" className="relative bg-[#F6F4EE] text-[#2A2A2A] w-full flex flex-col overflow-hidden z-20">
       
-      {/* Background Image Reveal on Hover (Mask Effect) */}
-      <AnimatePresence>
-        {isHovered && (
-            <motion.div 
-                initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ opacity: 0.2, clipPath: 'inset(0% 0 0 0)' }}
-                exit={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-                transition={{ duration: 0.8, ease: "circOut" }}
-                className="absolute inset-0 z-0 pointer-events-none"
-            >
-                <img 
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1600&h=900" 
-                    alt="Office Atmosphere" 
-                    className="w-full h-full object-cover grayscale"
-                />
-            </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Main Container */}
-      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10 flex-1 flex flex-col py-12 md:py-24 gap-8 md:gap-12">
-         
-         {/* Live Status Widget */}
-         <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-6 shrink-0 gap-6">
-             <div className="flex flex-col">
-                 <span className="text-micro text-white/40 mb-1">Status em Tempo Real</span>
-                 <div className="flex items-center gap-3">
-                     <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-20"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                     </span>
-                     <span className="text-sm font-bold text-white">São Paulo, BR &mdash; {time}</span>
-                 </div>
-             </div>
-             <div className="text-left md:text-right">
-                 <span className="text-micro text-white/40 mb-1">Disponibilidade</span>
-                 <span className="text-sm font-light text-white block">Agenda Q3/Q4 Aberta</span>
-             </div>
-         </div>
-
-         {/* Massive CTA Section - Fluid Typography Fix */}
-         <div className="flex-1 flex flex-col justify-center items-center text-center">
-            <Magnetic strength={0.2}>
-                <a 
-                   href="mailto:contato@seudominio.com" 
-                   onMouseEnter={() => setIsHovered(true)}
-                   onMouseLeave={() => setIsHovered(false)}
-                   className="group relative block"
-                >
-                    <span className="text-micro text-white/60 mb-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
-                        [ INICIAR PROTOCOLO ]
-                    </span>
-                    {/* FLUID TYPOGRAPHY FIX: Using clamp to ensure it stays in bounds */}
-                    <h2 className="text-[clamp(3.5rem,11vw,8rem)] leading-[0.9] font-serif font-medium tracking-tighter text-paper mix-blend-difference z-20 relative transition-all duration-700 group-hover:tracking-normal pb-2">
-                        Vamos <br/>
-                        <span className="italic text-white/20 group-hover:text-white transition-colors duration-700">Trabalhar?</span>
-                    </h2>
-                </a>
-            </Magnetic>
-         </div>
-
-         {/* Bottom Bar & Colophon */}
-         <div className="w-full border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 shrink-0 pb-safe">
-             
-             {/* Left: Colophon */}
-             <div className="flex flex-col gap-2 max-w-md">
-                 <span className="text-micro text-white/40">Ficha Técnica</span>
-                 <p className="text-[10px] text-white/60 font-mono leading-relaxed">
-                    Tipografia: Zodiak & JetBrains Mono. <br/>
-                    Stack: React, TailwindCSS & Framer Motion. <br/>
-                    &copy; {year} Victor Cardoso.
-                 </p>
-             </div>
-
-             {/* Right: Socials */}
-             <div className="flex flex-wrap gap-6 md:gap-8">
-                 {CONTACT_INFO.socials.map((social, idx) => (
-                    <a 
-                        key={idx}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-micro text-white hover:text-white/70 transition-colors flex items-center gap-1 group"
-                    >
-                        {social.name} <ArrowUpRight size={10} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                    </a>
-                 ))}
-             </div>
-
-         </div>
-
+      {/* Huge Text */}
+      <div className="w-full flex justify-center items-center pt-16 pb-12 md:pt-24 md:pb-16 px-6">
+        <h1 className="text-[26vw] leading-[0.7] font-sans font-normal tracking-[-0.06em] text-[#2A2A2A] uppercase transform scale-y-[1.8] origin-bottom select-none">
+          VICTOR
+        </h1>
       </div>
+
+      <div className="px-6 md:px-12 lg:px-16 w-full max-w-[1920px] mx-auto">
+        {/* Top Divider */}
+        <div className="w-full h-px bg-[#2A2A2A] opacity-20"></div>
+
+        {/* 4 Columns Section */}
+        <div className="w-full pt-8 pb-20 md:pb-32 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 md:gap-4">
+          
+          {/* Col 1 */}
+          <div className="flex flex-col">
+            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Index</span>
+            <ul className="flex flex-col gap-1.5">
+              <li className="flex items-center gap-2 -ml-3">
+                <span className="text-lg md:text-xl font-medium text-[#2A2A2A]">•</span>
+                <button onClick={() => transitionTo('#home')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">
+                  Home
+                </button>
+              </li>
+              <li><button onClick={() => transitionTo('#about')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Sobre</button></li>
+              <li><button onClick={() => transitionTo('#projects')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Projetos</button></li>
+              <li><button onClick={() => transitionTo('#contact')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Contato</button></li>
+            </ul>
+          </div>
+
+          {/* Col 2 */}
+          <div className="flex flex-col">
+            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Serviços</span>
+            <ul className="flex flex-col gap-1.5">
+              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Análise de Sistemas</span></li>
+              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Liderança Operacional</span></li>
+              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Treinamento Corporativo</span></li>
+              <li><span className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A]">Gestão de KPIs</span></li>
+            </ul>
+          </div>
+
+          {/* Col 3 */}
+          <div className="flex flex-col">
+            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Info</span>
+            <ul className="flex flex-col gap-1.5">
+              <li><button onClick={() => transitionTo('#faq')} className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">FAQ</button></li>
+              <li><a href="/assets/cv_victor_cardoso.pdf" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">Currículo</a></li>
+            </ul>
+          </div>
+
+          {/* Col 4 */}
+          <div className="flex flex-col">
+            <span className="text-[10px] font-sans mb-6 text-[#2A2A2A] opacity-80">Social</span>
+            <ul className="flex flex-col gap-1.5">
+              {CONTACT_INFO.socials.map((social, idx) => (
+                <li key={idx}>
+                  <a href={social.url} target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-sans font-medium text-[#2A2A2A] hover:opacity-60 transition-opacity">
+                    {social.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Bottom Divider */}
+        <div className="w-full h-px bg-[#2A2A2A] opacity-20"></div>
+
+        {/* Bottom Bar */}
+        <div className="w-full py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div className="text-[9px] md:text-[10px] font-sans text-[#2A2A2A] opacity-80">
+            &copy; {year} VICTOR CARDOSO - {CONTACT_INFO.location} . Brasil
+          </div>
+          <div className="flex items-center gap-4 md:gap-6 text-[9px] md:text-[10px] font-sans text-[#2A2A2A] opacity-80">
+            <div className="w-2 h-2 rounded-full bg-[#E5E0D8] hidden md:block"></div>
+            <a href="#" className="hover:opacity-60 transition-opacity">Termos e Condições</a>
+            <a href="#" className="hover:opacity-60 transition-opacity">Privacy Policy</a>
+            <a href="#" className="hover:opacity-60 transition-opacity">Política de Cookies</a>
+          </div>
+        </div>
+      </div>
+
     </footer>
   );
 };
