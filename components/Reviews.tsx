@@ -44,7 +44,7 @@ const GoogleIcon = () => (
 const Reviews: React.FC = () => {
   return (
     <section className="py-24 bg-paper relative z-10 border-t border-petrol-base/5 overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 xl:px-20">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">

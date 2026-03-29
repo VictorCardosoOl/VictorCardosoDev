@@ -9,7 +9,7 @@ const Writing: React.FC = () => {
 
   return (
     <section id="writing" className="py-32 md:py-48 bg-paper relative z-10">
-      <div className="container mx-auto px-6 md:px-12 xl:px-20">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">

@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-24 md:py-32 relative z-10 overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 xl:px-20">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16">
         
         {/* Header Section */}
         <div className="text-center mb-16 md:mb-24 max-w-2xl mx-auto">

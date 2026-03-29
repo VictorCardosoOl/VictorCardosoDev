@@ -93,13 +93,15 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
              </AnimatePresence>
          </div>
 
-         <div className="mt-8 flex justify-center items-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <div className="mt-12 flex justify-center items-center">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
               <motion.path
-                d="M20 2L38 20L20 38L2 20L20 2Z"
+                d="M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z M5 20 L30 35 L55 20 M30 35 L30 55"
                 stroke="white"
-                strokeWidth="1"
-                initial={{ pathLength: 0, opacity: 0.2 }}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 2.4, ease: "easeInOut" }}
               />

@@ -149,7 +149,7 @@ const Projects: React.FC = () => {
       <div className="absolute top-0 left-6 md:left-24 xl:left-32 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none" />
       <div className="absolute top-0 right-6 md:right-12 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none hidden md:block" />
 
-      <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
         <div className="flex flex-col items-start mb-16 md:mb-24 pl-0 md:pl-16 lg:pl-24">
            <Reveal>

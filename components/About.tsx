@@ -10,7 +10,7 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="min-h-screen bg-white py-24 md:py-32 flex flex-col justify-center relative z-10">
-      <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
         {/* Top Section: Text */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24 md:mb-32">

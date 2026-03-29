@@ -41,10 +41,10 @@ const GrainBackground = () => {
            - Cores do tema: Petrol Dark (#064E5E) e Muted Grey/Silver (#78909C).
            - Animação "pulse" lenta para parecer que o ambiente está respirando.
       */}
-      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#064E5E] rounded-full blur-[120px] md:blur-[180px] opacity-[0.06] animate-pulse" style={{ animationDuration: '8s' }} /> 
+      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#000000] rounded-full blur-[120px] md:blur-[180px] opacity-[0.06] animate-pulse" style={{ animationDuration: '8s' }} /> 
       
       {/* Replaced Vibrant Teal with Muted Blue Grey */}
-      <div className="absolute bottom-[10%] right-[-10%] w-[50vw] h-[50vw] bg-[#78909C] rounded-full blur-[120px] md:blur-[180px] opacity-[0.04] animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
+      <div className="absolute bottom-[10%] right-[-10%] w-[50vw] h-[50vw] bg-[#666666] rounded-full blur-[120px] md:blur-[180px] opacity-[0.04] animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }} />
 
       {/* Styles for Noise Animation defined inline for portability */}
       <style>{`

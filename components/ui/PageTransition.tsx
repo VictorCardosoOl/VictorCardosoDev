@@ -79,7 +79,7 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
                 duration: 0.8, 
                 ease: [0.22, 1, 0.36, 1] 
             }}
-            className="fixed inset-0 z-[99999] bg-[#0F2A36] flex items-center justify-center pointer-events-none"
+            className="fixed inset-0 z-[99999] bg-[#000000] flex items-center justify-center pointer-events-none"
           >
              {/* Optional Logo during transition */}
              <motion.div 

@@ -75,7 +75,7 @@ const Lab: React.FC = () => {
         <div 
           className="w-full bg-petrol-base text-paper py-24 relative overflow-hidden rounded-t-[2rem] md:rounded-[3rem]"
         >
-            <div className="container mx-auto px-6 md:px-12 xl:px-20 relative z-10">
+            <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
                 
                 {/* Header Control Panel Style */}
                 <div className="flex justify-between items-end border-b border-white/10 pb-6 mb-12">

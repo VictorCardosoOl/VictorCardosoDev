@@ -164,7 +164,7 @@ const Contact: React.FC = () => {
     <section id="contact" className="min-h-screen flex items-center py-16 md:py-20 bg-paper relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-white/40 skew-x-12 translate-x-32 z-0 hidden lg:block" />
 
-      <div className="container relative z-10 mx-auto px-5 md:px-12 xl:px-20 h-full flex flex-col justify-center">
+      <div className="w-full max-w-[1920px] relative z-10 mx-auto px-6 md:px-12 lg:px-16 h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           
           {/* Left Column */}

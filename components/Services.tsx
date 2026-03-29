@@ -27,7 +27,7 @@ const Services: React.FC = () => {
   return (
     <section id="services" className="py-24 md:py-32 bg-paper text-petrol-base relative z-10 overflow-hidden">
       
-      <div className="container mx-auto px-6 md:px-12 xl:px-20 relative z-10">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
         {/* Header Minimalista */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 pb-6 border-b border-petrol-base/10">

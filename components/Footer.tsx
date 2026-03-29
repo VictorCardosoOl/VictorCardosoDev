@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
       </AnimatePresence>
 
       {/* Main Container */}
-      <div className="container mx-auto px-6 md:px-12 xl:px-24 relative z-10 flex-1 flex flex-col py-12 md:py-24 gap-8 md:gap-12">
+      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10 flex-1 flex flex-col py-12 md:py-24 gap-8 md:gap-12">
          
          {/* Live Status Widget */}
          <div className="flex flex-col md:flex-row justify-between items-start border-b border-white/10 pb-6 shrink-0 gap-6">

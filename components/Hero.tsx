@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[25vw] md:text-[13vw] font-bold leading-[0.75] tracking-tighter text-[#111]"
+          className="text-[25vw] md:text-[13vw] font-serif font-medium leading-[0.75] tracking-tighter text-[#000000]"
         >
           Work
         </motion.h1>
@@ -24,11 +24,11 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-start"
+          className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-start z-10"
         >
-          <p className="text-[10px] md:text-xs font-semibold text-[#111] tracking-tight">Victor Cardoso</p>
-          <p className="text-[10px] md:text-xs font-semibold text-[#111] max-w-[180px] md:max-w-[220px] leading-relaxed tracking-tight">
-            Software Engineer working within the fields of frontend and architecture
+          <p className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#000000]/60">Victor Cardoso</p>
+          <p className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#000000]/60 max-w-[180px] md:max-w-[220px] leading-relaxed text-right">
+            Software Engineer & Design
           </p>
         </motion.div>
 
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[25vw] md:text-[13vw] font-bold leading-[0.75] tracking-tighter text-[#111]"
+          className="text-[25vw] md:text-[13vw] font-serif font-medium leading-[0.75] tracking-tighter text-[#000000] italic"
         >
           Studio
         </motion.h1>
