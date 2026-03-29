@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer id="site-footer" className="relative bg-[#0B232E] text-paper w-full h-full flex flex-col justify-between overflow-hidden">
+    <footer id="site-footer" className="relative bg-[#000000] text-paper w-full h-full flex flex-col justify-between overflow-hidden">
       
       {/* Background Image Reveal on Hover (Mask Effect) */}
       <AnimatePresence>

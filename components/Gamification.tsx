@@ -121,7 +121,7 @@ const Gamification: React.FC = () => {
         >
           {/* Manifest Card */}
           <div 
-            className="pointer-events-auto bg-[#F2F4F6] text-[#0B232E] rounded-t-xl md:rounded-t-xl border-t border-x border-petrol-base/10 shadow-[-10px_-10px_30px_rgba(11,35,46,0.15)] p-6 md:p-8 font-mono text-xs relative before:content-[''] before:absolute before:top-[-6px] before:left-0 before:w-full before:h-[6px] before:bg-[image:var(--sawtooth-url)] before:repeat-x"
+            className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-t-xl md:rounded-t-xl border-t border-x border-petrol-base/10 shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] p-6 md:p-8 font-mono text-xs relative before:content-[''] before:absolute before:top-[-6px] before:left-0 before:w-full before:h-[6px] before:bg-[image:var(--sawtooth-url)] before:repeat-x"
             style={{ '--sawtooth-url': `url('${sawtoothUrl}')` } as React.CSSProperties}
           >
             
@@ -182,7 +182,7 @@ const Gamification: React.FC = () => {
                 <p className="italic text-petrol-base/50 mb-4">"O design é a inteligência tornada visível."</p>
                 <a 
                     href="#contact" 
-                    className="block w-full py-3 bg-[#0B232E] text-[#F2F4F6] text-center font-bold uppercase tracking-widest hover:bg-[#153A48] transition-colors"
+                    className="block w-full py-3 bg-[#000000] text-[#FFFFFF] text-center font-bold uppercase tracking-widest hover:bg-[#111111] transition-colors"
                 >
                     Iniciar Conversa
                 </a>
@@ -191,7 +191,7 @@ const Gamification: React.FC = () => {
                        {/* Fake Barcode */}
                        <svg className="w-full h-full" preserveAspectRatio="none">
                            <pattern id="barcode" width="4" height="100%" patternUnits="userSpaceOnUse">
-                               <rect width="2" height="100%" fill="#0B232E" />
+                               <rect width="2" height="100%" fill="#000000" />
                            </pattern>
                            <rect width="100%" height="100%" fill="url(#barcode)" />
                        </svg>

@@ -85,7 +85,7 @@ const ProjectCard: React.FC<{
                      
                      <motion.div 
                         style={{ opacity: overlayOpacity }}
-                        className="absolute inset-0 bg-[#0B232E] pointer-events-none"
+                        className="absolute inset-0 bg-[#000000] pointer-events-none"
                      />
                  </motion.div>
                  

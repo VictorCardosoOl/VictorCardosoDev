@@ -60,7 +60,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onClick={onClose}
-            className="fixed inset-0 bg-[#0B232E]/40 backdrop-blur-sm z-30 cursor-pointer"
+            className="fixed inset-0 bg-[#000000]/40 backdrop-blur-sm z-30 cursor-pointer"
           />
         )}
       </AnimatePresence>
@@ -75,7 +75,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 animate={{ x: "0%" }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#153A48] z-35 pointer-events-none"
+                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#111111] z-35 pointer-events-none"
              />
 
              {/* Content Panel */}
@@ -84,7 +84,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 animate={{ x: "0%" }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
-                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#0B232E] flex flex-col z-40 shadow-2xl border-l border-white/5"
+                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#000000] flex flex-col z-40 shadow-2xl border-l border-white/5"
              >
                 {/* 
                     LAYOUT ARCHITECTURE:
@@ -105,7 +105,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                  <MotionA 
                                    href={item.link}
                                    onClick={(e: any) => { e.preventDefault(); handleLinkClick(item.link); }}
-                                   className={`block relative font-serif font-light leading-[1.0] transition-colors duration-300 no-underline select-none ${activeSection === item.link.replace('#', '') ? 'text-white' : 'text-[#F2F4F6]/40 hover:text-[#F2F4F6]'}`}
+                                   className={`block relative font-serif font-light leading-[1.0] transition-colors duration-300 no-underline select-none ${activeSection === item.link.replace('#', '') ? 'text-white' : 'text-[#FFFFFF]/40 hover:text-[#FFFFFF]'}`}
                                    // Responsive Giant Fonts: Clamped to avoid cutoff on short screens
                                    style={{ fontSize: 'clamp(2.5rem, 8vh, 5.5rem)' }}
                                    initial={{ y: "100%" }}
@@ -150,7 +150,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
                           <div className="text-right hidden md:block">
                              <span className="text-[10px] font-mono uppercase tracking-widest text-white/30">
-                                © 2024 Victor Cardoso
+                                © {new Date().getFullYear()} Victor Cardoso
                              </span>
                           </div>
                       </div>

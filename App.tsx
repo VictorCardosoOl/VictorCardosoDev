@@ -27,6 +27,7 @@ const Services = lazy(() => import('./components/Services'));
 const Projects = lazy(() => import('./components/Projects'));
 const Lab = lazy(() => import('./components/Lab'));
 const About = lazy(() => import('./components/About'));
+const FAQ = lazy(() => import('./components/FAQ'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const Reviews = lazy(() => import('./components/Reviews')); 
@@ -70,7 +71,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ y: "-100%", transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[99999] bg-[#0B232E] flex items-center justify-center text-[#F2F4F6]"
+      className="fixed inset-0 z-[99999] bg-[#000000] flex items-center justify-center text-[#FFFFFF]"
     >
       <div className="flex flex-col items-center relative z-10">
          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-6 animate-pulse">
@@ -92,13 +93,17 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
              </AnimatePresence>
          </div>
 
-         <div className="mt-8 w-48 h-[1px] bg-white/10 relative overflow-hidden">
-            <motion.div 
-               className="absolute top-0 left-0 h-full bg-white"
-               initial={{ width: "0%" }}
-               animate={{ width: "100%" }}
-               transition={{ duration: 2.4, ease: "easeInOut" }}
-            />
+         <div className="mt-8 flex justify-center items-center">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <motion.path
+                d="M20 2L38 20L20 38L2 20L20 2Z"
+                stroke="white"
+                strokeWidth="1"
+                initial={{ pathLength: 0, opacity: 0.2 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ duration: 2.4, ease: "easeInOut" }}
+              />
+            </svg>
          </div>
       </div>
     </motion.div>
@@ -121,7 +126,7 @@ const App: React.FC = () => {
     <GamificationProvider>
       <ScrollProvider>
         <PageTransitionProvider>
-          <div className="flex flex-col min-h-screen relative overflow-x-hidden bg-paper selection:bg-petrol-base selection:text-white">
+          <div className="flex flex-col min-h-screen relative overflow-x-hidden bg-[#FFFFFF] selection:bg-[#000000] selection:text-white">
             
             {/* Preloader Phase */}
             <AnimatePresence mode="wait">
@@ -138,18 +143,19 @@ const App: React.FC = () => {
             <Navbar />
             
             {/* Main Content with Sticky Footer Logic */}
-            <main className="relative z-10 bg-paper mb-[90vh] shadow-[0_20px_50px_-12px_rgba(11,35,46,0.3)] rounded-b-[3rem] border-b border-doc">
+            <main className="relative z-10 bg-[#FFFFFF] mb-[90vh] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] rounded-b-[3rem] border-b border-black/10">
               
               {/* Eager Loaded Hero for LCP */}
               <Hero />
 
               {/* Lazy Loaded Sections wrapped in Suspense */}
-              <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs font-mono text-petrol-base/30">Carregando módulos...</div>}>
+              <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs font-mono text-[#000000]/30">Carregando módulos...</div>}>
                 <Projects />
                 <Services />
                 <Reviews />
                 <Lab />
                 <About />    
+                <FAQ />
                 <Contact />
               </Suspense>
             </main>
@@ -172,7 +178,7 @@ const App: React.FC = () => {
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, x: 10, scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="pointer-events-auto bg-white text-petrol-base px-4 py-2 rounded-lg shadow-xl border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap hidden md:block"
+                    className="pointer-events-auto bg-white text-[#000000] px-4 py-2 rounded-lg shadow-xl border border-[#000000]/5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap hidden md:block"
                   >
                     Fale pelo WhatsApp
                   </motion.div>
@@ -190,7 +196,7 @@ const App: React.FC = () => {
                     href="https://wa.me/5511999999999" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-14 h-14 bg-petrol-base text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
+                    className="flex items-center justify-center w-14 h-14 bg-[#000000] text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
                     aria-label="Contato via WhatsApp"
                   >
                     <MessageCircle size={24} />

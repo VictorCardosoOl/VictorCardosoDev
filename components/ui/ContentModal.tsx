@@ -118,7 +118,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="fixed inset-0 z-[9998] bg-[#0B232E]/95 cursor-pointer"
+            className="fixed inset-0 z-[9998] bg-[#000000]/95 cursor-pointer"
             aria-hidden="true"
             style={{ willChange: "opacity" }}
           />}
@@ -142,7 +142,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
             onDragEnd={handleDragEnd}
             className={`
               fixed left-0 right-0 bottom-0 z-[9999] 
-              w-full bg-[#F2F4F6] shadow-2xl overflow-hidden flex flex-col
+              w-full bg-[#FFFFFF] shadow-2xl overflow-hidden flex flex-col
               ${isMobile ? 'h-[100dvh] rounded-none' : 'h-[98vh] rounded-t-[2rem] max-w-[96vw] mx-auto'}
             `}
             style={{ willChange: "transform", transform: "translate3d(0,0,0)" }} 
@@ -155,8 +155,8 @@ const ContentModal: React.FC<ContentModalProps> = ({
                     onClick={onClose}
                     className={`w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-lg group ${
                       theme === 'light' 
-                        ? 'bg-petrol-base border border-petrol-base text-white hover:bg-petrol-ink hover:border-petrol-ink' 
-                        : 'bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#0B232E]'
+                        ? 'bg-[#000000] border border-[#000000] text-white hover:bg-[#111111] hover:border-[#111111]' 
+                        : 'bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#000000]'
                     }`}
                     >
                     <X size={20} className="group-hover:rotate-90 transition-transform duration-300" />
@@ -167,7 +167,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
             <div 
               ref={modalContainerRef}
-              className="flex-grow h-full w-full overflow-y-auto relative bg-[#F2F4F6]"
+              className="flex-grow h-full w-full overflow-y-auto relative bg-[#FFFFFF]"
               data-lenis-prevent 
             >
                <div ref={modalContentRef} className="will-change-transform">

@@ -8,7 +8,7 @@
     <!-- SEO & Open Graph -->
     <title>Victor Cardoso | Engenharia de Software & Design</title>
     <meta name="description" content="Engenharia de software de alta precisão e design de interface. Portfólio documental." />
-    <meta name="theme-color" content="#0B232E" />
+    <meta name="theme-color" content="#000000" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -26,18 +26,18 @@
               mono: ['JetBrains Mono', 'monospace'],
             },
             colors: {
-              paper: '#F2F4F6', // Ice Grey / Paper White
+              paper: '#FFFFFF', // Pure White
               petrol: {
-                base: '#0B232E', // Deep Petrol (Primary Dark)
-                mid: '#153A48',  // Mid tone
-                ink: '#1E3A45',  // Text Ink
-                accent: '#CBD5E1', // Cool Silver
-                electric: '#78909C', // Muted Blue Grey
+                base: '#000000', // Pure Black
+                mid: '#1A1A1A',  // Very Dark Gray
+                ink: '#333333',  // Dark Gray
+                accent: '#E5E5E5', // Light Gray
+                electric: '#999999', // Mid Gray
               },
             },
             backgroundImage: {
-              'petrol-gradient': 'linear-gradient(135deg, #0B232E 0%, #0F2A36 100%)',
-              'title-gradient': 'linear-gradient(to right, #0B232E, #153A48)', 
+              'petrol-gradient': 'linear-gradient(135deg, #000000 0%, #111111 100%)',
+              'title-gradient': 'linear-gradient(to right, #000000, #333333)', 
             },
             screens: {
               'xs': '475px',
@@ -60,21 +60,21 @@
       body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: #F2F4F6;
-        color: #0B232E;
+        background-color: #FFFFFF;
+        color: #000000;
         overflow-x: hidden;
         width: 100%;
       }
 
       /* Konami Code / Hacker Mode Theme Override */
       body.hacker-mode {
-        background-color: #0d0208;
-        color: #00ff41;
+        background-color: #000000;
+        color: #FFFFFF;
       }
-      body.hacker-mode .bg-paper { background-color: #0d0208 !important; }
-      body.hacker-mode .text-petrol-base { color: #00ff41 !important; }
-      body.hacker-mode .text-petrol-ink { color: #008F11 !important; }
-      body.hacker-mode border-petrol-base { border-color: #00ff41 !important; }
+      body.hacker-mode .bg-paper { background-color: #000000 !important; }
+      body.hacker-mode .text-petrol-base { color: #FFFFFF !important; }
+      body.hacker-mode .text-petrol-ink { color: #CCCCCC !important; }
+      body.hacker-mode border-petrol-base { border-color: #FFFFFF !important; }
       
       /* Typography Utils */
       .font-heading-fluid {
@@ -90,11 +90,11 @@
         background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background: rgba(11, 35, 46, 0.2);
+        background: rgba(0, 0, 0, 0.2);
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: rgba(11, 35, 46, 0.6);
+        background: rgba(0, 0, 0, 0.6);
       }
 
       /* Lenis & Layout Fixes */
