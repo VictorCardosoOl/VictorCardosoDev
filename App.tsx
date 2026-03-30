@@ -157,8 +157,8 @@ const App: React.FC = () => {
                 <Projects />
                 <Services />
                 <Reviews />
-                <Lab />
                 <About />    
+                <Lab />
                 <FAQ />
                 <Contact />
               </Suspense>

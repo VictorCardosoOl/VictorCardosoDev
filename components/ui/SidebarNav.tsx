@@ -9,6 +9,15 @@ const links = [
 
 const SidebarNav: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('#hero');
+  const [showLabel, setShowLabel] = useState<boolean>(true);
+
+  useEffect(() => {
+    setShowLabel(true);
+    const timer = setTimeout(() => {
+      setShowLabel(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [activeSection]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,9 +47,14 @@ const SidebarNav: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="fixed left-6 top-1/2 -translate-y-1/2 z-[9990] hidden md:flex flex-col gap-6 mix-blend-difference text-white">
+    <div 
+      className="fixed left-6 top-1/2 -translate-y-1/2 z-[9990] hidden md:flex flex-col gap-6 mix-blend-difference text-white"
+      onMouseEnter={() => setShowLabel(true)}
+      onMouseLeave={() => setShowLabel(false)}
+    >
       {links.map((link, index) => {
         const isActive = activeSection === link.href;
+        const isLabelVisible = isActive && showLabel;
         const num = String(index + 1).padStart(2, '0');
         
         return (
@@ -55,9 +69,9 @@ const SidebarNav: React.FC = () => {
             <motion.div
               initial={false}
               animate={{
-                width: isActive ? 'auto' : 0,
-                opacity: isActive ? 1 : 0,
-                marginLeft: isActive ? '1rem' : '0rem'
+                width: isLabelVisible ? 'auto' : 0,
+                opacity: isLabelVisible ? 1 : 0,
+                marginLeft: isLabelVisible ? '1rem' : '0rem'
               }}
               className="overflow-hidden whitespace-nowrap font-sans font-bold uppercase"
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
