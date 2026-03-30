@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-[25vw] md:text-[13vw] font-serif font-medium leading-[0.75] tracking-tighter text-[#000000]"
         >
-          Work
+          Trabalho
         </motion.h1>
 
         {/* Middle Text */}
@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
         >
           <p className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#000000]/60">Victor Cardoso</p>
           <p className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#000000]/60 max-w-[180px] md:max-w-[220px] leading-relaxed text-right">
-            Software Engineer & Design
+            Engenheiro de Software & Design
           </p>
         </motion.div>
 
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-[25vw] md:text-[13vw] font-serif font-medium leading-[0.75] tracking-tighter text-[#000000] italic"
         >
-          Studio
+          Estúdio
         </motion.h1>
       </div>
 

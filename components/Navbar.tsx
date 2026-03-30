@@ -12,7 +12,12 @@ const Navbar: React.FC = () => {
   
   // Scroll States
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.scrollY < window.innerHeight * 0.8;
+    }
+    return true;
+  });
 
   // Hook do Framer Motion para ler a posição Y do scroll
   const { scrollY } = useScroll();
@@ -34,13 +39,16 @@ const Navbar: React.FC = () => {
     // Se o menu estiver aberto, não mexemos na visibilidade.
     if (isMenuOpen) return;
 
-    if (latest > previous && latest > 150) {
-      // Rolando para BAIXO & Passou do Header -> ESCONDER
-      // Isso foca a atenção do usuário no conteúdo sendo lido.
+    const heroThreshold = typeof window !== 'undefined' ? window.innerHeight * 0.8 : 500;
+
+    if (latest < heroThreshold) {
+      // Oculta na seção home
+      setIsHidden(true);
+    } else if (latest > previous) {
+      // Rolando para BAIXO -> ESCONDER
       setIsHidden(true);
     } else {
-      // Rolando para CIMA ou no Topo -> MOSTRAR
-      // Isso sugere que o usuário quer navegar.
+      // Rolando para CIMA (e fora da home) -> MOSTRAR
       setIsHidden(false);
     }
   });
