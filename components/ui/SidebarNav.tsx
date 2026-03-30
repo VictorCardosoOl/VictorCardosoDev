@@ -48,7 +48,9 @@ const SidebarNav: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="fixed left-6 top-1/2 -translate-y-1/2 z-[9990] hidden md:flex flex-col gap-5 mix-blend-difference text-white">
+    <div className={`fixed left-6 top-1/2 -translate-y-1/2 z-[9990] hidden md:flex flex-col gap-5 mix-blend-difference text-white transition-all duration-700 ${
+      activeSection === '#hero' ? 'opacity-0 pointer-events-none -translate-x-8' : 'opacity-100 translate-x-0'
+    }`}>
       {links.map((link, index) => {
         const isActive = activeSection === link.href;
         const isHovered = hoveredLink === link.href;
