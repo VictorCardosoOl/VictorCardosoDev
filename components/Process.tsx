@@ -4,16 +4,13 @@ import { Reveal } from './ui/Reveal';
 
 const Process: React.FC = () => {
   return (
-    <section id="process" className="py-24 md:py-32 bg-white text-[#111] relative overflow-hidden z-10 border-t border-[#000000]/5">
+    <section id="process" className="py-12 md:py-16 bg-white text-[#111] relative overflow-hidden z-10 border-t border-[#000000]/5 min-h-[50vh] flex flex-col justify-center">
       <div className="max-w-[1920px] mx-auto px-6 lg:px-12 md:px-16">
         
         {/* Titulo da Seção */}
-        <div className="mb-20 md:mb-32 max-w-2xl">
+        <div className="mb-12 md:mb-16 max-w-2xl">
            <Reveal>
-              <span className="text-xs font-bold tracking-widest uppercase mb-4 block text-[#999]">
-                 Metodologia
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-light text-[#111] leading-[0.9] tracking-tighter uppercase">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif font-light text-[#111] leading-[0.9] tracking-tighter uppercase mt-4">
                  COMO EU <br/>
                  <span className="text-[#999] italic lowercase">construo</span>
               </h2>
@@ -30,7 +27,7 @@ const Process: React.FC = () => {
                  </span>
                  
                  {/* Title: Serif, lightly italic */}
-                 <h3 className="text-2xl md:text-3xl font-serif text-[#111] mb-6 tracking-tight">
+                 <h3 className="text-xl md:text-2xl font-serif text-[#111] mb-4 tracking-tight">
                    {step.title}
                  </h3>
                  

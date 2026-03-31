@@ -1,171 +1,143 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { SERVICES } from '../constants';
-import { ArrowRight } from 'lucide-react';
-import { Reveal } from './ui/Reveal';
-import { usePageTransition } from './ui/PageTransition';
-import ContentModal from './ui/ContentModal';
+import { Plus, Minus } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Services: React.FC = () => {
-  const { transitionTo } = usePageTransition();
-  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
-  const [activeService, setActiveService] = useState<typeof SERVICES[0] | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0); // Abre o primeiro serviço por default
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
-  const handleOpen = (service: typeof SERVICES[0]) => {
-    setActiveService(service);
-    setSelectedService(service);
+  const toggleItem = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
-  const handleClose = () => {
-    setSelectedService(null);
-  };
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Animar a Esquerda
+      if (leftRef.current) {
+        gsap.fromTo(leftRef.current, 
+          { y: 60, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+            }
+          }
+        );
+      }
 
-  // NOTA DE PERFORMANCE:
-  // Removemos o useState para 'hoveredIndex'. O efeito "Spotlight" agora é feito via CSS puro
-  // usando as classes 'group/list' e 'group-hover/list'.
-  // Isso evita re-renders do React enquanto o mouse se move, eliminando o lag de scroll.
+      // 2. Animar a Direita (Itens)
+      if (rightRef.current) {
+        const items = rightRef.current.querySelectorAll('.service-item');
+        gsap.fromTo(items,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: rightRef.current,
+              start: "top 85%",
+            }
+          }
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="services" className="pt-24 md:pt-32 pb-12 md:pb-16 bg-paper text-petrol-base relative z-10 overflow-hidden">
-      
-      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+    <section id="services" ref={containerRef} className="py-16 md:py-24 px-6 bg-[#FFFFFF] text-[#111] relative z-10 border-t border-[#000000]/5">
+      <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        {/* Header Minimalista */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 pb-6 border-b border-petrol-base/10">
-            <Reveal>
-              <h2 className="text-5xl md:text-7xl font-serif font-light text-petrol-base tracking-tighter leading-[0.9]">
-                Expertise
-              </h2>
-            </Reveal>
-            <Reveal delay={100}>
-              <span className="text-[10px] font-mono text-petrol-base/40 uppercase tracking-widest block mt-4 md:mt-0">
-                Estratégia & Engenharia
-              </span>
-            </Reveal>
+        {/* COLUNA ESQUERDA (Foco Narrativo/Sticky) */}
+        <div className="lg:col-span-4 relative h-full">
+           <div className="lg:sticky lg:top-32">
+             <div ref={leftRef}>
+               {/* Título sem label superior */}
+               <h2 className="text-3xl md:text-4xl font-sans tracking-tight mb-6 text-[#111]">
+                 Expertise
+               </h2>
+               
+               {/* Parágrafo de Missão estético ao Print de Referência */}
+               <p className="text-sm md:text-base text-[#999] leading-relaxed font-sans max-w-sm mb-12">
+                 Desde a descoberta até a entrega de um sistema maduro, minha missão é ajudar lideranças técnicas a desenhar arquiteturas incríveis por meio de um código de primeira classe. Apesar da minha principal especialização ser Engenharia Front-end e UX dinâmico, uma ampla gama de habilidades backend fazem parte do tecido fundamental do meu trabalho.
+               </p>
+
+               {/* Ponto Preto (Indicador Iconográfico flutuante isolado na esquerda como na imagem) */}
+               <div className="w-[6px] h-[6px] bg-[#111] rounded-full mx-auto md:mx-0 lg:ml-24 mt-16 md:mt-24"></div>
+             </div>
+           </div>
         </div>
 
-        {/* --- PERFORMANCE OPTIMIZED LIST --- */}
-        {/* 'group/list' permite controlar o estado dos filhos baseado no hover do pai */}
-        <div 
-            className="flex flex-col group/list"
-        >
-          {SERVICES.map((service, index) => {
-             return (
-               <Reveal key={index} width="100%" delay={index * 50}>
-                 <div 
-                    className="group/item relative border-b border-petrol-base/10 transition-all duration-500 ease-out cursor-pointer
-                        hover:!opacity-100 hover:!scale-100 
-                        group-hover/list:opacity-30 group-hover/list:scale-[0.99] group-hover/list:grayscale
-                    "
-                    onClick={() => handleOpen(service)}
-                 >
-                    <div className="py-12 md:py-16 flex flex-col md:flex-row gap-8 md:gap-0 items-baseline relative z-10">
-                        
-                        {/* 01. Index */}
-                        <div className="md:w-1/12">
-                            <span className="text-[10px] font-mono text-petrol-base/30 group-hover/item:text-petrol-electric transition-colors">
-                                0{index + 1}
-                            </span>
-                        </div>
+        {/* Espaço Negativo Funcional reduzido em pro do layout apertado */}
+        <div className="hidden lg:block lg:col-span-1"></div>
 
-                        {/* 02. Title */}
-                        <div className="md:w-4/12">
-                            <h3 className="text-3xl md:text-5xl font-serif font-light text-petrol-base transition-all duration-500 group-hover/item:translate-x-4 tracking-tight group-hover/item:font-normal">
-                               {service.title}
-                            </h3>
-                        </div>
-
-                        {/* 03. Description & Static Tech Stack */}
-                        <div className="md:w-5/12 pr-8 relative">
-                            <p className="text-sm md:text-base font-light leading-relaxed text-petrol-ink/60 group-hover/item:text-petrol-ink transition-colors max-w-sm mb-6">
-                               {service.description}
-                            </p>
-                            
-                            {/* Tech Stack - Static Display (No Height Animation) 
-                                Mostra as tags sempre, mas com opacidade reduzida que acende no hover.
-                                Isso remove o "layout shift" que causava o engasgo.
-                            */}
-                            <div className="hidden md:flex flex-wrap gap-2 opacity-50 group-hover/item:opacity-100 transition-opacity duration-500">
-                                {service.techStack?.slice(0, 4).map((tech, i) => (
-                                    <span key={i} className="text-[9px] font-mono border border-petrol-base/10 px-2 py-0.5 rounded-sm text-petrol-base/60 bg-white">
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* 04. Action Icon */}
-                        <div className="md:w-2/12 flex justify-end items-center">
-                           <div className="w-10 h-10 rounded-full border border-petrol-base/10 flex items-center justify-center transition-all duration-500 group-hover/item:bg-petrol-base group-hover/item:text-white group-hover/item:rotate-[-45deg] group-hover/item:scale-110 text-petrol-base/30">
-                               <ArrowRight size={14} />
-                           </div>
-                        </div>
-
+        {/* COLUNA DIREITA (Acordeão) */}
+        <div className="lg:col-span-7">
+          <div ref={rightRef} className="border-t-[1px] border-[#111]/10">
+            {SERVICES.map((service, idx) => {
+              const isOpen = openIndex === idx;
+              return (
+                <div key={idx} className="service-item border-b-[1px] border-[#111]/10">
+                  <button 
+                    onClick={() => toggleItem(idx)}
+                    className="w-full py-6 md:py-8 flex justify-between items-center text-left group focus:outline-none"
+                  >
+                    {/* Título - Mantido em sans-serif acompanhando o design do print */}
+                    <h3 className={`text-2xl md:text-[2.25rem] font-sans font-normal tracking-tight transition-transform duration-500 ease-out ${isOpen ? 'translate-x-2 text-[#111]' : 'text-[#111]/80 group-hover:text-[#111]'}`}>
+                      {service.title}
+                    </h3>
+                    
+                    {/* Indicadores Visuais Limpos (Plus/Minus sem Circle) */}
+                    <div className="shrink-0 ml-4 text-[#111] group-hover:scale-110 transition-transform duration-300">
+                      {isOpen ? <Minus size={22} strokeWidth={1} /> : <Plus size={22} strokeWidth={1} />}
                     </div>
-                 </div>
-               </Reveal>
-             );
-          })}
+                  </button>
+                  
+                  {/* Área de Resposta Expandível */}
+                  <div 
+                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                    style={{ 
+                      maxHeight: isOpen ? '900px' : '0px',
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                  >
+                    <div className="pb-8 pt-2">
+                       {/* Descrição Principal (Escura e Destaque) */}
+                       <p className="text-sm md:text-[15px] text-[#111] max-w-2xl leading-relaxed font-sans mb-8 pr-4">
+                         {service.description}
+                       </p>
+                       
+                       {/* Lista Vertical de Sub-tópicos Simulando os links secundários ('Painel de Inspiração...') */}
+                       {service.techStack && service.techStack.length > 0 && (
+                          <ul className="space-y-4">
+                            {service.techStack.map((tech, i) => (
+                              <li key={i} className="text-[13px] md:text-sm text-[#999] font-sans tracking-wide">
+                                {tech}
+                              </li>
+                            ))}
+                          </ul>
+                       )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-
-        {/* Footer / CTA Removido a pedido */}
-
-        {/* Modal Logic */}
-        <ContentModal
-          isOpen={!!selectedService}
-          onClose={handleClose}
-          title={activeService?.title}
-          category="Expertise"
-          theme="light"
-        >
-          <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 md:py-20">
-              <div className="mb-12">
-                 <h3 className="text-3xl md:text-5xl font-serif font-light text-petrol-base mb-6 leading-tight">
-                    {activeService?.title}
-                 </h3>
-                 <p className="text-lg md:text-xl text-petrol-ink font-light leading-relaxed border-l border-petrol-base/10 pl-6">
-                   {activeService?.description}
-                 </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                 <div>
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-petrol-base/40 mb-4">Stack Tecnológico</h4>
-                    <ul className="space-y-2">
-                        {activeService?.techStack?.map((tech, i) => (
-                            <li key={i} className="flex items-center gap-2 text-petrol-base font-medium text-sm">
-                                <span className="w-1 h-1 rounded-full bg-petrol-electric"></span> {tech}
-                            </li>
-                        ))}
-                    </ul>
-                 </div>
-                 
-                 <div>
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-petrol-base/40 mb-4">Metodologia</h4>
-                     <p className="text-sm text-petrol-ink/80 font-light leading-relaxed">
-                        Abordagem modular focada em desacoplamento e escalabilidade. Cada componente é desenhado para sobreviver a mudanças de requisitos.
-                     </p>
-                 </div>
-              </div>
-              
-              <div className="bg-petrol-base text-white p-8 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-                 <div>
-                     <h4 className="text-xl font-serif font-light">Precisa desta expertise?</h4>
-                     <p className="text-white/60 text-sm font-light">Vamos aplicar esta tecnologia no seu próximo projeto.</p>
-                 </div>
-                 <a 
-                   href="#contact" 
-                   onClick={(e) => { 
-                      e.preventDefault(); 
-                      setSelectedService(null);
-                      setTimeout(() => transitionTo('#contact'), 300);
-                   }}
-                   className="px-6 py-3 bg-white text-petrol-base rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-paper transition-colors"
-                 >
-                   Conversar
-                 </a>
-              </div>
-            </div>
-        </ContentModal>
 
       </div>
     </section>
