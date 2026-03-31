@@ -174,7 +174,7 @@ const App: React.FC = () => {
                 <About />    
                 <Lab />
                 <FAQ />
-                <Contact />
+                {/* <Contact /> */}
               </Suspense>
             </main>
             
