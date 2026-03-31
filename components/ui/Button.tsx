@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props 
 }) => {
   
-  const baseStyles = "inline-flex items-center justify-center font-bold uppercase tracking-widest rounded-full transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+  const baseStyles = "inline-flex items-center justify-center font-bold uppercase tracking-widest rounded-sm transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
   
   const variants = {
     primary: "bg-slate-900 text-white hover:bg-slate-800 shadow-[0_8px_30px_rgb(15,23,42,0.12)] hover:shadow-[0_8px_30px_rgb(15,23,42,0.2)] hover:-translate-y-0.5",

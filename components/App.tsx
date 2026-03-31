@@ -113,7 +113,7 @@ const App: React.FC = () => {
                 Footer: Z-Index 0, Fixed at bottom.
                 Spacer: Ensures user can scroll enough to reveal the footer.
             */}
-            <main className="relative z-10 bg-paper shadow-2xl rounded-b-[2.5rem] md:rounded-b-[3.5rem] border-b border-doc overflow-hidden">
+            <main className="relative z-10 bg-paper shadow-2xl rounded-b-sm border-b border-doc overflow-hidden">
               <Hero />
               
               <Suspense fallback={<div className="h-32 flex items-center justify-center text-xs font-mono opacity-30">Carregando...</div>}>
@@ -144,7 +144,7 @@ const App: React.FC = () => {
                     initial={{ opacity: 0, x: 10, scale: 0.95 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     exit={{ opacity: 0, x: 10, scale: 0.95 }}
-                    className="pointer-events-auto bg-white text-petrol-base px-4 py-2 rounded-lg shadow-xl border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap hidden md:block"
+                    className="pointer-events-auto bg-white text-petrol-base px-4 py-2 rounded-sm shadow-xl border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap hidden md:block"
                   >
                     Fale pelo WhatsApp
                   </motion.div>
@@ -161,7 +161,7 @@ const App: React.FC = () => {
                     href="https://wa.me/5511977440146" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-14 h-14 bg-petrol-base text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
+                    className="flex items-center justify-center w-14 h-14 bg-petrol-base text-white rounded-sm shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
                     aria-label="Contato via WhatsApp"
                   >
                     <MessageCircle size={24} />

@@ -86,7 +86,7 @@ const Services: React.FC = () => {
                             */}
                             <div className="hidden md:flex flex-wrap gap-2 opacity-50 group-hover/item:opacity-100 transition-opacity duration-500">
                                 {service.techStack?.slice(0, 4).map((tech, i) => (
-                                    <span key={i} className="text-[9px] font-mono border border-petrol-base/10 px-2 py-0.5 rounded-full text-petrol-base/60 bg-white">
+                                    <span key={i} className="text-[9px] font-mono border border-petrol-base/10 px-2 py-0.5 rounded-sm text-petrol-base/60 bg-white">
                                         {tech}
                                     </span>
                                 ))}
@@ -95,7 +95,7 @@ const Services: React.FC = () => {
 
                         {/* 04. Action Icon */}
                         <div className="md:w-2/12 flex justify-end items-center">
-                           <div className="w-10 h-10 rounded-full border border-petrol-base/10 flex items-center justify-center transition-all duration-500 group-hover/item:bg-petrol-base group-hover/item:text-white group-hover/item:rotate-[-45deg] group-hover/item:scale-110 text-petrol-base/30">
+                           <div className="w-10 h-10 rounded-sm border border-petrol-base/10 flex items-center justify-center transition-all duration-500 group-hover/item:bg-petrol-base group-hover/item:text-white group-hover/item:rotate-[-45deg] group-hover/item:scale-110 text-petrol-base/30">
                                <ArrowRight size={14} />
                            </div>
                         </div>
@@ -158,7 +158,7 @@ const Services: React.FC = () => {
                  </div>
               </div>
               
-              <div className="bg-petrol-base text-white p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+              <div className="bg-petrol-base text-white p-8 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                  <div>
                      <h4 className="text-xl font-serif font-light">Precisa desta expertise?</h4>
                      <p className="text-white/60 text-sm font-light">Vamos aplicar esta tecnologia no seu próximo projeto.</p>
@@ -170,7 +170,7 @@ const Services: React.FC = () => {
                       setSelectedService(null);
                       setTimeout(() => transitionTo('#contact'), 300);
                    }}
-                   className="px-6 py-3 bg-white text-petrol-base rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-paper transition-colors"
+                   className="px-6 py-3 bg-white text-petrol-base rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-paper transition-colors"
                  >
                    Conversar
                  </a>

@@ -49,7 +49,7 @@ const Writing: React.FC = () => {
                      <span className="text-xs font-mono text-petrol-base/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {post.readTime} leitura
                      </span>
-                     <div className="w-10 h-10 rounded-full border border-petrol-base/10 flex items-center justify-center text-petrol-base/30 group-hover:border-petrol-base group-hover:text-white group-hover:bg-petrol-base transition-all duration-300">
+                     <div className="w-10 h-10 rounded-sm border border-petrol-base/10 flex items-center justify-center text-petrol-base/30 group-hover:border-petrol-base group-hover:text-white group-hover:bg-petrol-base transition-all duration-300">
                         <ArrowUpRight size={16} />
                      </div>
                  </div>
@@ -68,7 +68,7 @@ const Writing: React.FC = () => {
            {selectedArticle && (
              <div className="max-w-3xl mx-auto px-6 md:px-12 py-16 md:py-24">
                 <div className="flex flex-wrap items-center gap-6 text-xs font-bold uppercase tracking-widest text-petrol-base/40 mb-12 pb-8 border-b border-petrol-base/10">
-                   <span className="px-3 py-1 bg-paper text-petrol-base rounded-full">{selectedArticle.category}</span>
+                   <span className="px-3 py-1 bg-paper text-petrol-base rounded-sm">{selectedArticle.category}</span>
                    <span className="flex items-center gap-2"><Calendar size={14}/> {selectedArticle.date}</span>
                    <span className="flex items-center gap-2"><Clock size={14}/> {selectedArticle.readTime}</span>
                 </div>

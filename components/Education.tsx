@@ -26,15 +26,15 @@ const Education: React.FC = () => {
           {EDUCATION.map((edu, index) => (
             <Reveal key={index} delay={index * 150} width="100%" variant="scale">
                 <Tilt strength={5} className="h-full">
-                    <div className="h-full p-10 md:p-12 rounded-[2.5rem] bg-white border border-petrol-base/5 hover:border-petrol-base/20 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col group relative overflow-hidden">
+                    <div className="h-full p-10 md:p-12 rounded-sm bg-white border border-petrol-base/5 hover:border-petrol-base/20 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col group relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-petrol-base/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                         
                         <div className="relative z-10">
                             <div className="flex justify-between items-start mb-8">
-                                <div className="p-4 bg-paper rounded-2xl text-petrol-base border border-petrol-base/5 group-hover:scale-110 transition-transform duration-500">
+                                <div className="p-4 bg-paper rounded-sm text-petrol-base border border-petrol-base/5 group-hover:scale-110 transition-transform duration-500">
                                     <GraduationCap size={28} strokeWidth={1.5} />
                                 </div>
-                                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-paper border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest text-petrol-base/60">
+                                <div className="flex items-center gap-2 px-4 py-1.5 rounded-sm bg-paper border border-petrol-base/5 text-[10px] font-bold uppercase tracking-widest text-petrol-base/60">
                                     <Calendar size={14} />
                                     {edu.period}
                                 </div>

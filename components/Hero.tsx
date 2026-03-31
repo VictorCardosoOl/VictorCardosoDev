@@ -24,9 +24,10 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-start z-10"
+          className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-center z-10"
         >
-          <p className="text-[10px] md:text-xs font-sans font-medium uppercase tracking-[0.2em] text-[#000000]/60">Victor Cardoso</p>
+          <p className="text-[10px] md:text-xs font-sans font-medium uppercase tracking-[0.2em] text-[#000000]/60 whitespace-nowrap">Victor Cardoso</p>
+          <div className="h-[1px] bg-[#000000]/10 flex-grow mx-4 md:mx-8 hidden sm:block"></div>
           <p className="text-[10px] md:text-xs font-sans font-medium uppercase tracking-[0.2em] text-[#000000]/60 max-w-[180px] md:max-w-[220px] leading-relaxed text-right">
             Engenheiro de Software & Design
           </p>

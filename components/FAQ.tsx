@@ -98,7 +98,7 @@ const FAQ = () => {
               href="https://wa.me/5511999999999" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#000000] text-[#FFFFFF] rounded-full font-mono text-xs uppercase tracking-widest hover:bg-[#222222] transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#000000] text-[#FFFFFF] rounded-sm font-mono text-xs uppercase tracking-widest hover:bg-[#222222] transition-colors"
             >
               Falar com Especialista
             </a>
@@ -120,7 +120,7 @@ const FAQ = () => {
                   <h3 className={`text-2xl md:text-3xl font-serif font-light transition-transform duration-500 ${openIndex === idx ? 'translate-x-4 text-[#000000]' : 'text-[#000000]/70 group-hover:text-[#000000]'}`}>
                     {item.question}
                   </h3>
-                  <div className={`w-10 h-10 rounded-full border border-[#000000]/10 flex items-center justify-center shrink-0 ml-4 transition-all duration-500 ${openIndex === idx ? 'bg-[#000000] text-[#FFFFFF] rotate-45' : 'bg-transparent text-[#000000]'}`}>
+                  <div className={`w-10 h-10 rounded-sm border border-[#000000]/10 flex items-center justify-center shrink-0 ml-4 transition-all duration-500 ${openIndex === idx ? 'bg-[#000000] text-[#FFFFFF] rotate-45' : 'bg-transparent text-[#000000]'}`}>
                     <Plus size={20} />
                   </div>
                 </button>

@@ -216,13 +216,13 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
                       {/* Nav Buttons (Hidden on mobile usually, distinct on desktop) */}
                       <button 
                         onClick={() => paginate(-1)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 p-4 bg-[#000000]/80 backdrop-blur-md text-white rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-[#000000] hover:scale-110 z-10"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 p-4 bg-[#000000]/80 backdrop-blur-md text-white rounded-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-[#000000] hover:scale-110 z-10"
                       >
                          <ChevronLeft size={20} />
                       </button>
                       <button 
                         onClick={() => paginate(1)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 p-4 bg-[#000000]/80 backdrop-blur-md text-white rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-[#000000] hover:scale-110 z-10"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-4 bg-[#000000]/80 backdrop-blur-md text-white rounded-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-[#000000] hover:scale-110 z-10"
                       >
                          <ChevronRight size={20} />
                       </button>

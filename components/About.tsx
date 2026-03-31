@@ -42,10 +42,10 @@ const About: React.FC = () => {
           {/* The black dot from the template */}
           <div className="absolute -left-6 md:-left-10 top-[25%] w-2 h-2 bg-black rounded-full hidden md:block"></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 items-start">
             {/* Image 1: Industrial/Abstract */}
             <Reveal delay={200}>
-              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100 mt-0 md:mt-12 rounded-sm">
                 <img 
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800" 
                   alt="Industrial"
@@ -57,7 +57,7 @@ const About: React.FC = () => {
             {/* Image 2: Profile Photo + CV Interaction */}
             <Reveal delay={300}>
               <div 
-                className="aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer group relative"
+                className="aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer group relative mt-0 md:-mt-12 rounded-sm"
                 onClick={() => setIsResumeOpen(true)}
               >
                 <motion.img 
@@ -76,7 +76,7 @@ const About: React.FC = () => {
 
             {/* Image 3: Nature/Minimal */}
             <Reveal delay={400}>
-              <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+              <div className="aspect-[3/4] overflow-hidden bg-gray-100 mt-0 md:mt-24 rounded-sm">
                 <img 
                   src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800" 
                   alt="Nature"

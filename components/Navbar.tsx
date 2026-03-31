@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
         {/* Hamburger Trigger - Refined Pill Shape */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`relative z-[9999] group flex items-center gap-3 pl-5 pr-2 py-2 rounded-full border transition-all duration-500 backdrop-blur-md ${
+          className={`relative z-[9999] group flex items-center gap-3 pl-5 pr-2 py-2 rounded-sm border transition-all duration-500 backdrop-blur-md ${
              isMenuOpen 
              ? 'bg-white/10 border-white/20 text-[#FFFFFF] hover:bg-white/20' 
              : 'bg-petrol-base/5 border-petrol-base/5 text-petrol-base hover:bg-petrol-base hover:text-white hover:border-petrol-base'
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
           <span className="text-[9px] font-mono uppercase tracking-widest hidden md:inline-block opacity-70 group-hover:opacity-100 transition-opacity">
              {isMenuOpen ? 'Fechar' : 'Menu'}
           </span>
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+          <div className={`w-8 h-8 rounded-sm flex items-center justify-center transition-colors ${
              isMenuOpen 
              ? 'bg-[#FFFFFF] text-petrol-base' 
              : 'bg-white/50 text-petrol-base group-hover:bg-white/20 group-hover:text-white'

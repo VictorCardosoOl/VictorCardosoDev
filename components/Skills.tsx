@@ -47,7 +47,7 @@ const Skills: React.FC = () => {
                   <Tilt strength={8} className="h-full">
                     <div 
                       className={clsx(
-                        "h-full glass-card p-10 lg:p-12 rounded-[2.5rem] border border-slate-200/60 transition-all duration-500 flex flex-col bg-white/40 relative overflow-hidden group",
+                        "h-full glass-card p-10 lg:p-12 rounded-sm border border-slate-200/60 transition-all duration-500 flex flex-col bg-white/40 relative overflow-hidden group",
                         "hover:-translate-y-2 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] hover:border-slate-300",
                         isLastItem && "md:px-16"
                       )}
@@ -55,7 +55,7 @@ const Skills: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/60 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ mixBlendMode: 'soft-light' }} />
 
                       <div className="mb-10 transform transition-transform duration-500 group-hover:translate-z-10 relative z-10" style={{ transformStyle: 'preserve-3d' }}>
-                        <div className="w-16 h-16 bg-white text-slate-900 rounded-2xl flex items-center justify-center shadow-sm mb-8 border border-slate-100 group-hover:scale-110 transition-transform duration-500">
+                        <div className="w-16 h-16 bg-white text-slate-900 rounded-sm flex items-center justify-center shadow-sm mb-8 border border-slate-100 group-hover:scale-110 transition-transform duration-500">
                           <Icon size={28} strokeWidth={1.5} />
                         </div>
                         

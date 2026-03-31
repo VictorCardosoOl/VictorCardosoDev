@@ -74,12 +74,12 @@ const Reviews: React.FC = () => {
                 <Reveal key={i} delay={i * 100} width="100%" className="h-full">
                     <motion.div 
                         whileHover={{ y: -5 }}
-                        className="bg-white p-8 rounded-2xl border border-petrol-base/5 shadow-sm h-full flex flex-col justify-between group hover:shadow-lg transition-all duration-300"
+                        className="bg-white p-8 rounded-sm border border-petrol-base/5 shadow-sm h-full flex flex-col justify-between group hover:shadow-lg transition-all duration-300"
                     >
                         <div>
                             <div className="flex justify-between items-start mb-6">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-petrol-base/10 text-petrol-base flex items-center justify-center font-bold text-sm">
+                                    <div className="w-10 h-10 rounded-sm bg-petrol-base/10 text-petrol-base flex items-center justify-center font-bold text-sm">
                                         {review.avatar}
                                     </div>
                                     <div>

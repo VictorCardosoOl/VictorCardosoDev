@@ -128,7 +128,7 @@ const Contact: React.FC = () => {
             }}
             onFocus={() => setFocusedField(id)}
             onBlur={() => setFocusedField(null)}
-            className={`w-full bg-transparent border-b-2 py-3 px-2 text-base placeholder-petrol-base/20 focus:outline-none transition-all duration-300 rounded-t-md ${
+            className={`w-full bg-transparent border-b-2 py-3 px-2 text-base placeholder-petrol-base/20 focus:outline-none transition-all duration-300 rounded-t-sm ${
               hasError 
                 ? 'border-red-600 bg-red-100 text-red-900 placeholder-red-300' 
                 : 'border-petrol-base/10 text-petrol-base hover:bg-white focus:border-petrol-base'
@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
         </div>
         
         {hasError && (
-          <div className="absolute -bottom-0 left-0 flex items-center gap-2 mt-1 animate-in fade-in slide-in-from-top-1 bg-red-100 px-2 py-1 rounded-br-md rounded-bl-md w-full">
+          <div className="absolute -bottom-0 left-0 flex items-center gap-2 mt-1 animate-in fade-in slide-in-from-top-1 bg-red-100 px-2 py-1 rounded-br-sm rounded-bl-sm w-full">
              <AlertTriangle size={12} className="text-red-600 fill-red-100" strokeWidth={2.5} /> 
              <span className="text-[10px] font-bold uppercase tracking-wide text-red-600">
                {errors[id]}
@@ -237,10 +237,10 @@ const Contact: React.FC = () => {
           {/* Right Column: Form */}
           <div className="lg:col-span-6">
             <Reveal delay={200} width="100%" variant="scale">
-              <div className="glass-panel p-6 md:p-10 rounded-[2rem] relative overflow-hidden bg-white/50 border border-white/20 min-h-[500px] flex flex-col justify-center">
+              <div className="glass-panel p-6 md:p-10 rounded-sm relative overflow-hidden bg-white/50 border border-white/20 min-h-[500px] flex flex-col justify-center">
                  {status === 'success' && (
                     <div className="absolute inset-0 bg-white z-20 flex flex-col items-center justify-center text-center animate-in fade-in duration-500 p-8">
-                       <div className="w-20 h-20 bg-green-50 text-green-700 rounded-full flex items-center justify-center mb-6 shadow-lg border border-green-100">
+                       <div className="w-20 h-20 bg-green-50 text-green-700 rounded-sm flex items-center justify-center mb-6 shadow-lg border border-green-100">
                          <Check size={40} />
                        </div>
                        <h3 className="text-3xl font-serif font-light text-petrol-base mb-3">Recebido!</h3>
@@ -249,7 +249,7 @@ const Contact: React.FC = () => {
                        </p>
                        <button 
                          onClick={() => setStatus('idle')} 
-                         className="px-6 py-3 bg-paper text-petrol-base rounded-full text-xs font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors"
+                         className="px-6 py-3 bg-paper text-petrol-base rounded-sm text-xs font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors"
                        >
                          Enviar outra
                        </button>
@@ -284,7 +284,7 @@ const Contact: React.FC = () => {
                           }}
                           onFocus={() => setFocusedField('message')}
                           onBlur={() => setFocusedField(null)}
-                          className={`w-full bg-transparent border-b-2 py-3 px-2 text-base placeholder-petrol-base/20 focus:outline-none transition-all duration-300 resize-none rounded-t-md ${
+                          className={`w-full bg-transparent border-b-2 py-3 px-2 text-base placeholder-petrol-base/20 focus:outline-none transition-all duration-300 resize-none rounded-t-sm ${
                              errors.message 
                              ? 'border-red-600 bg-red-100 text-red-900 placeholder-red-300' 
                              : 'border-petrol-base/10 text-petrol-base hover:bg-white focus:border-petrol-base'
@@ -299,7 +299,7 @@ const Contact: React.FC = () => {
                       </div>
                       
                       {errors.message && (
-                        <div className="absolute -bottom-0 left-0 flex items-center gap-2 mt-1 animate-in fade-in slide-in-from-top-1 bg-red-100 px-2 py-1 rounded-br-md rounded-bl-md w-full">
+                        <div className="absolute -bottom-0 left-0 flex items-center gap-2 mt-1 animate-in fade-in slide-in-from-top-1 bg-red-100 px-2 py-1 rounded-br-sm rounded-bl-sm w-full">
                            <AlertTriangle size={12} className="text-red-600 fill-red-100" strokeWidth={2.5} /> 
                            <span className="text-[10px] font-bold uppercase tracking-wide text-red-600">
                              {errors.message}
