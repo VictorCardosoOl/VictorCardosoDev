@@ -73,10 +73,10 @@ const Navbar: React.FC = () => {
     },
     scrolled: {
         y: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.02)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
-        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.01)'
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        backdropFilter: 'blur(0px)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0)',
+        boxShadow: 'none'
     },
     hidden: {
         y: "-100%",
