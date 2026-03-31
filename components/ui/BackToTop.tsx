@@ -11,8 +11,10 @@ const BackToTop: React.FC = () => {
 
   // Monitora o scroll para mostrar/esconder o botão
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Mostrar apenas após passar do Hero (aprox 800px)
-    if (latest > 800) {
+    // Mostrar apenas no Footer (final da página)
+    const totalHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
+    if (latest + windowHeight >= totalHeight - 150) {
       setIsVisible(true);
     } else {
       setIsVisible(false);

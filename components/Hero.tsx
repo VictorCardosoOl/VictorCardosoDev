@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-[25vw] md:text-[13vw] font-serif font-light leading-[0.75] tracking-tighter text-[#000000]"
         >
-          Trabalho
+          Portifólio
         </motion.h1>
 
         {/* Middle Text */}

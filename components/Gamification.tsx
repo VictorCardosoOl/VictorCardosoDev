@@ -11,6 +11,7 @@ const Gamification: React.FC = () => {
   } = useGamification();
 
   const [showManifest, setShowManifest] = useState(false);
+  const [manifestAvailable, setManifestAvailable] = useState(false);
   const [hasShownManifest, setHasShownManifest] = useState(false);
   const [userClosedManifest, setUserClosedManifest] = useState(false);
   
@@ -68,11 +69,11 @@ const Gamification: React.FC = () => {
              const { totalTime } = getSessionData();
              // Only show if session has been going on for a bit
              if (totalTime > 5) {
-                 setShowManifest(true);
-                 setHasShownManifest(true);
+                 setManifestAvailable(true);
              }
-        } else if (showManifest && isScrollingUp && (windowHeight + scrollY) < (totalHeight - 250)) {
+        } else if (isScrollingUp && (windowHeight + scrollY) < (totalHeight - 250)) {
              // Hide the manifest if the user scrolls up to see the pending sections
+             setManifestAvailable(false);
              setShowManifest(false);
         }
     };
@@ -111,6 +112,24 @@ const Gamification: React.FC = () => {
 
   return (
     <AnimatePresence>
+      {/* Botão Flutuante (quando disponível e não aberto) */}
+      {manifestAvailable && !showManifest && !userClosedManifest && (
+        <motion.div
+           initial={{ y: 50, opacity: 0 }}
+           animate={{ y: 0, opacity: 1 }}
+           exit={{ y: 50, opacity: 0 }}
+           className="fixed bottom-8 left-6 md:left-8 z-50 pointer-events-auto"
+        >
+          <button 
+             onClick={() => setShowManifest(true)}
+             className="flex items-center gap-3 bg-[#000000] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#111111] transition-transform hover:scale-105 border border-white/10"
+          >
+             <Target size={16} />
+             <span className="text-[10px] font-bold uppercase tracking-widest">Relatório da Sessão</span>
+          </button>
+        </motion.div>
+      )}
+
       {showManifest && (
         <motion.div
           initial={{ y: "100%" }}

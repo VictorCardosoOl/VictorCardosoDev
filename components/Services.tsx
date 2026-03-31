@@ -95,7 +95,7 @@ const Services: React.FC = () => {
 
                         {/* 04. Action Icon */}
                         <div className="md:w-2/12 flex justify-end items-center">
-                           <div className="w-10 h-10 rounded-sm border border-petrol-base/10 flex items-center justify-center transition-all duration-500 group-hover/item:bg-petrol-base group-hover/item:text-white group-hover/item:rotate-[-45deg] group-hover/item:scale-110 text-petrol-base/30">
+                           <div className="w-10 h-10 rounded-full border border-petrol-base/10 flex items-center justify-center transition-all duration-500 group-hover/item:bg-petrol-base group-hover/item:text-white group-hover/item:rotate-[-45deg] group-hover/item:scale-110 text-petrol-base/30">
                                <ArrowRight size={14} />
                            </div>
                         </div>
