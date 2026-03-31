@@ -178,9 +178,9 @@ const App: React.FC = () => {
               <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs font-mono text-[#000000]/30">Carregando módulos...</div>}>
                 <Projects />
                 <Services />
-                <Process />
                 {/* <Reviews /> */}
                 <About />    
+                <Process />
                 <Lab />
                 <FAQ />
                 {/* <Contact /> */}
