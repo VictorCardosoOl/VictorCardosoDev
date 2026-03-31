@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
 
       {/* Huge Text at the bottom */}
       <div className="relative w-full flex justify-center items-end overflow-hidden mt-auto pb-8 md:pb-12">
-        <h1 className="text-[28vw] leading-[0.8] font-serif font-normal text-black tracking-tight select-none">
+        <h1 className="text-[28vw] leading-[0.8] font-serif font-light text-black tracking-tight select-none">
           Victor
         </h1>
       </div>

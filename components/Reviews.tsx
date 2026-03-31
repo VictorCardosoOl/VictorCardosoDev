@@ -53,7 +53,7 @@ const Reviews: React.FC = () => {
                     <GoogleIcon />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-petrol-base/60">Avaliações Verificadas</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-serif text-petrol-base">O que dizem os parceiros</h2>
+                <h2 className="text-4xl md:text-5xl font-serif font-light text-petrol-base">O que dizem os parceiros</h2>
             </Reveal>
             
             <Reveal delay={100}>

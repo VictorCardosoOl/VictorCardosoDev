@@ -32,7 +32,7 @@ const Services: React.FC = () => {
         {/* Header Minimalista */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 pb-6 border-b border-petrol-base/10">
             <Reveal>
-              <h2 className="text-5xl md:text-7xl font-serif font-medium text-petrol-base tracking-tighter leading-[0.9]">
+              <h2 className="text-5xl md:text-7xl font-serif font-light text-petrol-base tracking-tighter leading-[0.9]">
                 Expertise
               </h2>
             </Reveal>
@@ -130,7 +130,7 @@ const Services: React.FC = () => {
         >
           <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 md:py-20">
               <div className="mb-12">
-                 <h3 className="text-3xl md:text-5xl font-serif font-medium text-petrol-base mb-6 leading-tight">
+                 <h3 className="text-3xl md:text-5xl font-serif font-light text-petrol-base mb-6 leading-tight">
                     {activeService?.title}
                  </h3>
                  <p className="text-lg md:text-xl text-petrol-ink font-light leading-relaxed border-l border-petrol-base/10 pl-6">
@@ -160,7 +160,7 @@ const Services: React.FC = () => {
               
               <div className="bg-petrol-base text-white p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
                  <div>
-                     <h4 className="text-xl font-serif">Precisa desta expertise?</h4>
+                     <h4 className="text-xl font-serif font-light">Precisa desta expertise?</h4>
                      <p className="text-white/60 text-sm font-light">Vamos aplicar esta tecnologia no seu próximo projeto.</p>
                  </div>
                  <a 

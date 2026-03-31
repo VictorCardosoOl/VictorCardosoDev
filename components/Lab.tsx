@@ -85,7 +85,7 @@ const Lab: React.FC = () => {
                         <Terminal size={14} className="text-petrol-electric" />
                         <span className="text-micro text-white/40">Arquivo.02 / R&D</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-serif font-medium tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tight">
                         Laboratório
                     </h2>
                     </div>
@@ -142,7 +142,7 @@ const Lab: React.FC = () => {
                                             <span className="text-[9px] font-bold uppercase tracking-widest text-petrol-electric mb-1 block opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
                                                 {exp.category}
                                             </span>
-                                            <h3 className="text-2xl font-serif text-white">
+                                            <h3 className="text-2xl font-serif font-light text-white">
                                                 {exp.title}
                                             </h3>
                                         </div>

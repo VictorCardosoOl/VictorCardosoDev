@@ -88,7 +88,7 @@ const FAQ = () => {
         <div className="lg:col-span-4 relative">
           <div ref={stickyRef} className="lg:sticky lg:top-32">
             <span className="text-xs font-bold tracking-widest uppercase mb-4 block text-[#000000]/50">Suporte</span>
-            <h2 className="font-serif text-5xl md:text-7xl mb-8 leading-[0.85] tracking-tight">
+            <h2 className="font-serif font-light text-5xl md:text-7xl mb-8 leading-[0.85] tracking-tight">
               Dúvidas <br/> <span className="italic opacity-50">Frequentes</span>
             </h2>
             <p className="text-lg opacity-80 max-w-sm mb-8">
@@ -117,7 +117,7 @@ const FAQ = () => {
                   onClick={() => toggleItem(idx)}
                   className="w-full py-8 md:py-10 flex justify-between items-center text-left group focus:outline-none"
                 >
-                  <h3 className={`text-2xl md:text-3xl font-serif transition-transform duration-500 ${openIndex === idx ? 'translate-x-4 text-[#000000]' : 'text-[#000000]/70 group-hover:text-[#000000]'}`}>
+                  <h3 className={`text-2xl md:text-3xl font-serif font-light transition-transform duration-500 ${openIndex === idx ? 'translate-x-4 text-[#000000]' : 'text-[#000000]/70 group-hover:text-[#000000]'}`}>
                     {item.question}
                   </h3>
                   <div className={`w-10 h-10 rounded-full border border-[#000000]/10 flex items-center justify-center shrink-0 ml-4 transition-all duration-500 ${openIndex === idx ? 'bg-[#000000] text-[#FFFFFF] rotate-45' : 'bg-transparent text-[#000000]'}`}>

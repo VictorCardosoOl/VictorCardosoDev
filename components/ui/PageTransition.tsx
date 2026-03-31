@@ -87,7 +87,7 @@ export const PageTransitionProvider: React.FC<{ children: React.ReactNode }> = (
                animate={{ opacity: 1, y: 0 }}
                exit={{ opacity: 0, y: -20 }}
                transition={{ delay: 0.2, duration: 0.4 }}
-               className="text-white font-serif text-3xl font-bold opacity-20"
+               className="text-white font-serif text-3xl font-medium opacity-20"
              >
                V.
              </motion.div>

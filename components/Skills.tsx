@@ -16,7 +16,7 @@ const Skills: React.FC = () => {
             <span className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3 block">Especialidades</span>
           </Reveal>
           <Reveal width="100%" variant="translate">
-            <h2 className="text-4xl md:text-6xl font-serif font-medium mb-6 text-slate-900 tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-serif font-light mb-6 text-slate-900 tracking-tight">
               Como posso agregar valor?
             </h2>
           </Reveal>
@@ -59,7 +59,7 @@ const Skills: React.FC = () => {
                           <Icon size={28} strokeWidth={1.5} />
                         </div>
                         
-                        <h3 className="text-2xl md:text-3xl font-serif font-medium mb-4 text-slate-900">
+                        <h3 className="text-2xl md:text-3xl font-serif font-light mb-4 text-slate-900">
                           {skill.title}
                         </h3>
                         

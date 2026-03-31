@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
           {/* Left Column */}
           <div className="lg:col-span-6 flex flex-col justify-center h-full">
             <Reveal width="100%" variant="translate">
-              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium text-petrol-base tracking-tight leading-[0.95] md:leading-[0.9] mb-6 md:mb-8">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-light text-petrol-base tracking-tight leading-[0.95] md:leading-[0.9] mb-6 md:mb-8">
                 Vamos criar <br /> <span className="text-petrol-base/30 italic">algo único.</span>
               </h2>
             </Reveal>
@@ -199,7 +199,7 @@ const Contact: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 py-6 md:py-8 border-t border-petrol-base/10 border-b border-petrol-base/10">
                   <div>
                     <span className="block text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-petrol-base/40 mb-2 md:mb-3">O Estúdio</span>
-                    <h4 className="text-base font-serif font-bold text-petrol-base mb-1">Estúdio Formosa</h4>
+                    <h4 className="text-base font-serif font-medium text-petrol-base mb-1">Estúdio Formosa</h4>
                     <p className="text-xs md:text-sm text-petrol-ink leading-relaxed font-light">
                       Vila Formosa, São Paulo<br />
                       Brasil
@@ -207,7 +207,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <span className="block text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-petrol-base/40 mb-2 md:mb-3">Escritório</span>
-                    <h4 className="text-base font-serif font-bold text-petrol-base mb-1">Escritório do Tatuapé</h4>
+                    <h4 className="text-base font-serif font-medium text-petrol-base mb-1">Escritório do Tatuapé</h4>
                     <p className="text-xs md:text-sm text-petrol-ink leading-relaxed font-light">
                       Tatuapé, São Paulo<br />
                       Brasil
@@ -243,7 +243,7 @@ const Contact: React.FC = () => {
                        <div className="w-20 h-20 bg-green-50 text-green-700 rounded-full flex items-center justify-center mb-6 shadow-lg border border-green-100">
                          <Check size={40} />
                        </div>
-                       <h3 className="text-3xl font-serif text-petrol-base mb-3">Recebido!</h3>
+                       <h3 className="text-3xl font-serif font-light text-petrol-base mb-3">Recebido!</h3>
                        <p className="text-petrol-ink text-base max-w-xs mx-auto mb-8">
                          Sua mensagem foi enviada para o meu sistema pessoal. Responderei em até 24h.
                        </p>

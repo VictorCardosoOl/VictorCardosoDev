@@ -67,7 +67,7 @@ const SidebarNav: React.FC = () => {
               isActive ? 'opacity-100' : 'opacity-40 hover:opacity-100'
             }`}
           >
-            <span className="font-sans font-semibold">{num}</span>
+            <span className="font-sans font-medium">{num}</span>
             <motion.div
               initial={false}
               animate={{

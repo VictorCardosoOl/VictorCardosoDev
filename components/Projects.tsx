@@ -58,7 +58,7 @@ const ProjectCard: React.FC<{
              </div>
              
              <div className="hidden lg:block mt-8 overflow-hidden">
-                <span className="text-[6rem] xl:text-[8rem] leading-[0.8] font-serif text-petrol-base/5 group-hover:text-petrol-base/10 transition-colors duration-700">
+                <span className="text-[6rem] xl:text-[8rem] leading-[0.8] font-serif font-light text-petrol-base/5 group-hover:text-petrol-base/10 transition-colors duration-700">
                     {(index + 1).toString().padStart(2, '0')}
                 </span>
              </div>
@@ -101,7 +101,7 @@ const ProjectCard: React.FC<{
                   <div className="max-w-2xl">
                       <Reveal>
                         <motion.h3 
-                            className="text-3xl md:text-5xl lg:text-6xl font-serif font-medium text-petrol-base mb-4 leading-tight group-hover:text-petrol-mid transition-colors"
+                            className="text-3xl md:text-5xl lg:text-6xl font-serif font-light text-petrol-base mb-4 leading-tight group-hover:text-petrol-mid transition-colors"
                         >
                             {project.title}
                         </motion.h3>

@@ -87,7 +87,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                   animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   exit={{ y: -40, opacity: 0, filter: "blur(5px)" }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="text-4xl md:text-6xl font-serif font-medium tracking-tight text-center"
+                  className="text-4xl md:text-6xl font-serif font-light tracking-tight text-center"
                 >
                   {words[textIndex]}
                 </motion.div>

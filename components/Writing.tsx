@@ -16,7 +16,7 @@ const Writing: React.FC = () => {
             <Reveal>
                 <div>
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-petrol-base/40 mb-4 block">Diário</span>
-                    <h2 className="text-5xl md:text-7xl font-serif font-medium text-petrol-base">Publicações</h2>
+                    <h2 className="text-5xl md:text-7xl font-serif font-light text-petrol-base">Publicações</h2>
                 </div>
             </Reveal>
             <Reveal delay={100}>
@@ -40,7 +40,7 @@ const Writing: React.FC = () => {
                         <span className="w-1 h-1 bg-petrol-base/20 rounded-full"></span>
                         <span className="text-[10px] font-bold uppercase tracking-widest text-petrol-base/50">{post.date}</span>
                     </div>
-                    <h3 className="text-2xl md:text-4xl font-serif font-medium text-petrol-base group-hover:italic transition-all">
+                    <h3 className="text-2xl md:text-4xl font-serif font-light text-petrol-base group-hover:italic transition-all">
                         {post.title}
                     </h3>
                  </div>
@@ -73,7 +73,7 @@ const Writing: React.FC = () => {
                    <span className="flex items-center gap-2"><Clock size={14}/> {selectedArticle.readTime}</span>
                 </div>
 
-                <div className="prose prose-slate prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-headings:font-medium prose-p:font-light prose-p:text-petrol-ink prose-a:text-petrol-base prose-a:no-underline hover:prose-a:underline">
+                <div className="prose prose-slate prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-headings:font-light prose-p:font-light prose-p:text-petrol-ink prose-a:text-petrol-base prose-a:no-underline hover:prose-a:underline">
                    <p className="lead text-2xl md:text-3xl font-serif text-petrol-base italic mb-10 leading-relaxed">
                      "Este é um parágrafo introdutório simulado para demonstrar a tipografia do modal de leitura. O conteúdo real do artigo seria carregado aqui."
                    </p>
@@ -103,7 +103,7 @@ const Writing: React.FC = () => {
                 <div className="mt-20 pt-10 border-t border-petrol-base/10 flex justify-between items-center">
                    <div>
                        <p className="text-xs font-bold uppercase tracking-widest text-petrol-base/40 mb-1">Escrito por</p>
-                       <p className="font-serif text-lg text-petrol-base">Victor Cardoso</p>
+                       <p className="font-serif font-medium text-lg text-petrol-base">Victor Cardoso</p>
                    </div>
                    <button className="text-xs font-bold uppercase tracking-widest text-petrol-base hover:text-petrol-mid transition-colors">
                       Compartilhar

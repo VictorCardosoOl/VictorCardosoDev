@@ -13,7 +13,7 @@ const Education: React.FC = () => {
         <Reveal width="100%">
             <div className="mb-16 text-center max-w-2xl mx-auto">
                 <span className="text-xs font-bold uppercase tracking-widest text-petrol-base/40 mb-3 block">Background</span>
-                <h2 className="text-4xl md:text-5xl font-serif font-medium text-petrol-base mb-6">
+                <h2 className="text-4xl md:text-5xl font-serif font-light text-petrol-base mb-6">
                 Formação & Certificações
                 </h2>
                 <p className="text-petrol-ink font-light text-lg">
@@ -40,7 +40,7 @@ const Education: React.FC = () => {
                                 </div>
                             </div>
                             
-                            <h3 className="text-2xl md:text-3xl font-serif font-medium text-petrol-base mb-3 group-hover:text-petrol-mid transition-colors">
+                            <h3 className="text-2xl md:text-3xl font-serif font-light text-petrol-base mb-3 group-hover:text-petrol-mid transition-colors">
                                 {edu.degree}
                             </h3>
                             <p className="text-sm font-bold uppercase tracking-widest text-petrol-base/40 mb-6">

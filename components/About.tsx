@@ -20,7 +20,7 @@ const About: React.FC = () => {
           {/* Right text block */}
           <div className="md:col-span-6 lg:col-span-5 flex flex-col justify-center">
             <Reveal>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#111] leading-[1.05] tracking-tighter mb-8 uppercase">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#111] leading-[1.05] tracking-tighter mb-8 uppercase">
                 EU SOU VICTOR<br/>
                 CARDOSO, E EU<br/>
                 <span className="text-[#999]">CONSTRUO</span><br/>
@@ -28,7 +28,7 @@ const About: React.FC = () => {
               </h2>
             </Reveal>
             <Reveal delay={100}>
-              <p className="text-sm md:text-base text-[#333] font-serif leading-relaxed max-w-sm">
+              <p className="text-sm md:text-base text-[#333] font-sans font-medium leading-relaxed max-w-sm">
                 Especialista em Engenharia de Software.<br/>
                 Transformo problemas complexos em<br/>
                 soluções escaláveis e arte em código.

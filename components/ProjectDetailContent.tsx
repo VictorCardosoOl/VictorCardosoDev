@@ -77,7 +77,7 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 lg:p-20 z-10">
             <Reveal>
                 <MotionH1 
-                    className="text-5xl md:text-7xl lg:text-9xl font-serif font-medium text-[#FFFFFF] tracking-tighter leading-[0.9] mb-8"
+                    className="text-5xl md:text-7xl lg:text-9xl font-serif font-light text-[#FFFFFF] tracking-tighter leading-[0.9] mb-8"
                 >
                   {project.title}
                 </MotionH1>
@@ -147,12 +147,12 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-32 border-t border-[#000000]/10 pt-16">
                        <Reveal>
                           <span className="text-xs font-mono text-[#999999] mb-4 block uppercase tracking-widest">01 / O Desafio</span>
-                          <h3 className="text-2xl font-serif font-medium text-[#000000] mb-6">{project.caseStudy.challenge}</h3>
+                          <h3 className="text-2xl font-serif font-light text-[#000000] mb-6">{project.caseStudy.challenge}</h3>
                        </Reveal>
                        
                        <Reveal delay={100}>
                           <span className="text-xs font-mono text-[#999999] mb-4 block uppercase tracking-widest">02 / A Solução (Code)</span>
-                          <h3 className="text-2xl font-serif font-medium text-[#000000] mb-6">{project.caseStudy.solution}</h3>
+                          <h3 className="text-2xl font-serif font-light text-[#000000] mb-6">{project.caseStudy.solution}</h3>
                        </Reveal>
                     </div>
 
@@ -163,7 +163,7 @@ export const ProjectDetailContent: React.FC<ProjectDetailContentProps> = ({ proj
                             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
                                 <div>
                                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-6 block">Impacto Técnico</span>
-                                    <h4 className="text-6xl md:text-9xl font-serif font-medium tracking-tighter leading-[0.8] mb-4">
+                                    <h4 className="text-6xl md:text-9xl font-serif font-light tracking-tighter leading-[0.8] mb-4">
                                         {project.caseStudy.result.split(' ').find(w => w.includes('%') || w.match(/\d/)) || "100%"}
                                     </h4>
                                     <p className="text-lg text-white/70 font-light max-w-sm">{project.caseStudy.result}</p>

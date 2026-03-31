@@ -66,7 +66,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                         Instrutor de TI & Supervisor
                      </span>
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-serif font-medium tracking-tight mb-4 leading-none">
+                  <h1 className="text-5xl md:text-7xl font-serif font-light tracking-tight mb-4 leading-none">
                      Victor Cardoso
                   </h1>
                </Reveal>
@@ -111,7 +111,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                                     <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#000000] border-2 border-[#FFFFFF] group-hover:scale-125 transition-transform"></div>
                                     
                                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                                        <h4 className="text-xl font-serif text-[#000000] font-medium">{job.role}</h4>
+                                        <h4 className="text-xl font-serif text-[#000000] font-light">{job.role}</h4>
                                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#999999]">{job.period}</span>
                                     </div>
                                     
@@ -144,7 +144,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                              <Reveal key={idx} delay={idx * 100} width="100%">
                                 <div className="bg-white p-6 rounded-sm border border-[#000000]/5">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#999999] mb-1 block">{edu.period}</span>
-                                    <h4 className="text-lg font-serif text-[#000000] mb-1">{edu.degree}</h4>
+                                    <h4 className="text-lg font-serif font-medium text-[#000000] mb-1">{edu.degree}</h4>
                                     <p className="text-xs font-bold uppercase tracking-widest text-[#000000]/50">{edu.institution}</p>
                                 </div>
                              </Reveal>
@@ -170,7 +170,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                               <div className="bg-white p-6 rounded-sm border border-[#000000]/5 shadow-sm hover:shadow-md transition-shadow">
                                   <div className="flex items-center gap-2 mb-4">
                                       <Terminal size={16} className="text-[#000000]"/>
-                                      <h4 className="font-serif text-lg text-[#000000]">Técnicas</h4>
+                                      <h4 className="font-serif font-medium text-lg text-[#000000]">Técnicas</h4>
                                   </div>
                                   <ul className="space-y-2">
                                       {HARD_SKILLS.technical.map((skill, i) => (
@@ -186,7 +186,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                               <div className="bg-white p-6 rounded-sm border border-[#000000]/5 shadow-sm hover:shadow-md transition-shadow">
                                   <div className="flex items-center gap-2 mb-4">
                                       <Cpu size={16} className="text-[#000000]"/>
-                                      <h4 className="font-serif text-lg text-[#000000]">Gestão</h4>
+                                      <h4 className="font-serif font-medium text-lg text-[#000000]">Gestão</h4>
                                   </div>
                                   <ul className="space-y-2">
                                       {HARD_SKILLS.management.map((skill, i) => (
