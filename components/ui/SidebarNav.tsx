@@ -49,7 +49,7 @@ const SidebarNav: React.FC = () => {
 
   return (
     <div 
-      className="fixed left-0 top-0 h-screen w-16 z-[9990] hidden md:flex flex-col justify-center"
+      className="fixed left-0 top-0 h-screen w-24 bg-transparent z-[9990] hidden md:flex flex-col justify-center"
       onMouseEnter={() => setIsSidebarHovered(true)}
       onMouseLeave={() => setIsSidebarHovered(false)}
     >

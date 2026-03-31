@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 
 const Hero: React.FC = () => {
   // Using the local image uploaded by the user
-  const portraitUrl = "/perfil.jpg";
+  const portraitUrl = "/profile.jpg";
 
   return (
     <section id="hero" className="w-full h-[100dvh] flex flex-col md:flex-row bg-white overflow-hidden">
