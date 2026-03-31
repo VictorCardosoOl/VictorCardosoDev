@@ -55,8 +55,6 @@ const Gamification: React.FC = () => {
 
   useEffect(() => {
     const handleScrollCheck = () => {
-        if (userClosedManifest) return;
-
         const windowHeight = window.innerHeight;
         const scrollY = Math.ceil(window.scrollY);
         const totalHeight = document.documentElement.scrollHeight;
@@ -80,7 +78,18 @@ const Gamification: React.FC = () => {
 
     window.addEventListener('scroll', handleScrollCheck);
     return () => window.removeEventListener('scroll', handleScrollCheck);
-  }, [showManifest, getSessionData, userClosedManifest]);
+  }, [showManifest, getSessionData]);
+
+  // Handle ESC tracking
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showManifest) {
+        setShowManifest(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showManifest]);
 
   // --- Local Timer for Manifest UI ---
   // This ensures the "Clock" ticks when the modal is open, without re-rendering the whole app globally.
@@ -112,37 +121,46 @@ const Gamification: React.FC = () => {
 
   return (
     <AnimatePresence>
-      {/* Botão Flutuante (quando disponível e não aberto) */}
-      {manifestAvailable && !showManifest && !userClosedManifest && (
+      {/* Botão Flutuante Minimalista */}
+      {manifestAvailable && !showManifest && (
         <motion.div
-           initial={{ y: 50, opacity: 0 }}
+           initial={{ y: 20, opacity: 0 }}
            animate={{ y: 0, opacity: 1 }}
-           exit={{ y: 50, opacity: 0 }}
-           className="fixed bottom-8 left-6 md:left-8 z-50 pointer-events-auto"
+           exit={{ y: 20, opacity: 0 }}
+           transition={{ duration: 0.3 }}
+           className="fixed bottom-6 left-6 md:left-8 z-50 pointer-events-auto"
         >
           <button 
              onClick={() => setShowManifest(true)}
-             className="flex items-center gap-3 bg-[#000000] text-white px-5 py-3 rounded-full shadow-2xl hover:bg-[#111111] transition-transform hover:scale-105 border border-white/10"
+             className="flex items-center gap-2 text-petrol-base/40 hover:text-petrol-base transition-colors px-2 py-1"
           >
-             <Target size={16} />
-             <span className="text-[10px] font-bold uppercase tracking-widest">Relatório da Sessão</span>
+             <Target size={14} />
+             <span className="text-[9px] font-bold uppercase tracking-widest">Relatório</span>
           </button>
         </motion.div>
       )}
 
       {showManifest && (
-        <motion.div
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", damping: 20, stiffness: 100 }}
-          className="fixed bottom-0 right-0 md:right-8 z-50 w-full md:w-[380px] pointer-events-none"
-        >
-          {/* Manifest Card */}
-          <div 
-            className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-t-xl md:rounded-t-xl border-t border-x border-petrol-base/10 shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] p-6 md:p-8 font-mono text-xs relative before:content-[''] before:absolute before:top-[-6px] before:left-0 before:w-full before:h-[6px] before:bg-[image:var(--sawtooth-url)] before:repeat-x"
-            style={{ '--sawtooth-url': `url('${sawtoothUrl}')` } as React.CSSProperties}
+        <>
+          {/* Fundo para clicar fora e fechar */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowManifest(false)}
+            className="fixed inset-0 z-[40] cursor-pointer bg-transparent"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 15 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-8 left-6 md:left-8 z-50 w-[calc(100%-48px)] md:w-[380px] pointer-events-none"
           >
+            {/* Manifest Card */}
+            <div 
+              className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-xl border border-petrol-base/10 shadow-2xl p-6 md:p-8 font-mono text-xs relative"
+            >
             
             {/* Header */}
             <div className="flex justify-between items-start mb-6 border-b border-petrol-base/10 pb-4 border-dashed">
@@ -153,7 +171,6 @@ const Gamification: React.FC = () => {
                 <button 
                     onClick={() => {
                         setShowManifest(false);
-                        setUserClosedManifest(true);
                     }}
                     className="w-6 h-6 flex items-center justify-center hover:bg-petrol-base/5 rounded-full transition-colors"
                 >
@@ -220,6 +237,7 @@ const Gamification: React.FC = () => {
 
           </div>
         </motion.div>
+        </>
       )}
     </AnimatePresence>
   );

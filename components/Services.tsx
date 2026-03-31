@@ -25,7 +25,7 @@ const Services: React.FC = () => {
   // Isso evita re-renders do React enquanto o mouse se move, eliminando o lag de scroll.
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-paper text-petrol-base relative z-10 overflow-hidden">
+    <section id="services" className="pt-24 md:pt-32 pb-12 md:pb-16 bg-paper text-petrol-base relative z-10 overflow-hidden">
       
       <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
@@ -107,18 +107,7 @@ const Services: React.FC = () => {
           })}
         </div>
 
-        {/* Footer / CTA */}
-        <div className="mt-16 text-center">
-            <Reveal variant="scale">
-                <a 
-                  href="#contact" 
-                  onClick={(e) => { e.preventDefault(); transitionTo('#contact'); }}
-                  className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-petrol-base hover:text-petrol-electric transition-colors border-b border-transparent hover:border-petrol-electric pb-1"
-                >
-                    Iniciar um Projeto <ArrowRight size={12} />
-                </a>
-            </Reveal>
-        </div>
+        {/* Footer / CTA Removido a pedido */}
 
         {/* Modal Logic */}
         <ContentModal

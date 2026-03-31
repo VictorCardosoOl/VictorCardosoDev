@@ -114,10 +114,13 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
 };
 
 const App: React.FC = () => {
-  // Inicialização do Loading
-  // NOTA: Removido verificação de sessionStorage para garantir que o preloader
-  // apareça sempre para fins de demonstração/desenvolvimento.
-  const [loading, setLoading] = useState(true);
+  // Inicialização do Loading com verificação de sessionStorage
+  const [loading, setLoading] = useState(() => {
+    if (typeof window !== 'undefined') {
+       return !sessionStorage.getItem('hasSeenIntro');
+    }
+    return true;
+  });
   const [isWhatsappHovered, setIsWhatsappHovered] = useState(false);
   const [showWhatsapp, setShowWhatsapp] = useState(false);
   const { scrollY } = useScroll();
@@ -133,7 +136,7 @@ const App: React.FC = () => {
 
   const handlePreloaderComplete = () => {
     setLoading(false);
-    // sessionStorage.setItem('hasSeenIntro', 'true'); // Descomentar em produção
+    sessionStorage.setItem('hasSeenIntro', 'true');
   };
 
   return (

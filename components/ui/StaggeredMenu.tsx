@@ -75,7 +75,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 animate={{ x: "0%" }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#111111] z-35 pointer-events-none"
+                className="absolute top-0 right-0 h-full w-full md:w-[480px] bg-[#111111] z-35 pointer-events-none"
              />
 
              {/* Content Panel */}
@@ -84,7 +84,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 animate={{ x: "0%" }}
                 exit={{ x: "100%" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
-                className="absolute top-0 right-0 h-full w-full md:w-[680px] bg-[#000000] flex flex-col z-40 shadow-2xl border-l border-white/5"
+                className="absolute top-0 right-0 h-full w-full md:w-[480px] bg-[#000000] flex flex-col z-40 shadow-2xl border-l border-white/5"
              >
                 {/* 
                     LAYOUT ARCHITECTURE:
@@ -149,9 +149,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                           </div>
 
                           <div className="text-right hidden md:block">
-                             <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-white/20">
-                                © {new Date().getFullYear()} Victor Cardoso <span className="mx-2">|</span> Design & Engenharia
-                             </span>
+                             {/* Footer copyright removido */}
                           </div>
                       </div>
                   </MotionDiv>

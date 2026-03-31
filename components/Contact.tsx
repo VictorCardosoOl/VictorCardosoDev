@@ -170,9 +170,9 @@ const Contact: React.FC = () => {
           {/* Left Column */}
           <div className="lg:col-span-6 flex flex-col justify-center h-full">
             <Reveal width="100%" variant="translate">
-              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-light text-petrol-base tracking-tight leading-[0.95] md:leading-[0.9] mb-6 md:mb-8">
+              {/* <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-light text-petrol-base tracking-tight leading-[0.95] md:leading-[0.9] mb-6 md:mb-8">
                 Vamos criar <br /> <span className="text-petrol-base/30 italic">algo único.</span>
-              </h2>
+              </h2> */}
             </Reveal>
 
             <div className="space-y-6 md:space-y-8">

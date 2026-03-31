@@ -1,20 +1,19 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Victor Cardoso - Design & Engenharia
 
-# Run and deploy your AI Studio app
+Bem-vindo ao repositório do meu portfólio.
+Este projeto foi desenvolvido com atenção máxima aos detalhes, focando em performance, micro-interações fluidas e uma estética "Editorial Brutalism".
 
-This contains everything you need to run your app locally.
+## Tecnologias
 
-View your app in AI Studio: https://ai.studio/apps/3c8eec2d-b10b-4965-ba3e-61035657174c
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
 
-## Run Locally
+## Execução Local
 
-**Prerequisites:**  Node.js
+Instale as dependências:
+`npm install`
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Execute o servidor local:
+`npm run dev`

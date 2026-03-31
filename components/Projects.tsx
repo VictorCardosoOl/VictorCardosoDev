@@ -14,7 +14,14 @@ const ProjectCard: React.FC<{
 }> = ({ project, index, onClick }) => {
   
   const containerRef = useRef(null);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
