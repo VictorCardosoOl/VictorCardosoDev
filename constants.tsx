@@ -34,24 +34,28 @@ export const SERVICES = [
 
 export const PROCESS_STEPS = [
   {
+    id: '01',
     title: 'Imersão',
-    description: 'Entendimento profundo das regras de negócio e dores operacionais.',
-    icon: Search
+    subtitle: 'COMPREENDENDO A RAIZ DO PROBLEMA ANTES DE PROPOR A SOLUÇÃO.',
+    description: 'Entendimento profundo das regras de negócio, mapeamento de dores operacionais e análise arquitetural do projeto. Nesta etapa formamos o escopo e focamos em alinhar a expectativa com a viabilidade técnica.'
   },
   {
+    id: '02',
     title: 'Estratégia',
-    description: 'Definição de KPIs, SLAs e arquitetura da solução.',
-    icon: BarChart
+    subtitle: 'NADA É DESENHADO SEM UM PROPÓSITO TÉCNICO E DE NEGÓCIO.',
+    description: 'Definição de KPIs, prazos, fluxos de uso e criação visual. Planejamos detalhadamente a arquitetura do ecossistema e ferramentas antes da implementação.'
   },
   {
-    title: 'Execução',
-    description: 'Desenvolvimento e parametrização com foco em fidelidade contratual.',
-    icon: Code
+    id: '03',
+    title: 'Engenharia',
+    subtitle: 'CONSTRUÇÃO SÓLIDA, ESCALÁVEL E COM CÓDIGO LIMPO.',
+    description: 'Desenvolvimento técnico com foco em performance, estabilidade e segurança. Utilizamos as melhores práticas do mercado e tecnologias inovadoras para construir ferramentas e plataformas performáticas.'
   },
   {
+    id: '04',
     title: 'Sustentação',
-    description: 'Treinamento, monitoramento de performance e suporte contínuo.',
-    icon: CheckCircle
+    subtitle: 'O LANÇAMENTO É APENAS O INÍCIO DO CICLO.',
+    description: 'Testes integrados, entrega guiada e documentação final. Após o lançamento, atuamos com treinamentos e suporte contínuo garantindo longevidade e escalabilidade corporativa.'
   }
 ];
 

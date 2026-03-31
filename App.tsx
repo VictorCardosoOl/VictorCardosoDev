@@ -25,6 +25,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/
 
 // Lazy Loaded Components
 const Services = lazy(() => import('./components/Services'));
+const Process = lazy(() => import('./components/Process'));
 const Projects = lazy(() => import('./components/Projects'));
 const Lab = lazy(() => import('./components/Lab'));
 const About = lazy(() => import('./components/About'));
@@ -177,6 +178,7 @@ const App: React.FC = () => {
               <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs font-mono text-[#000000]/30">Carregando módulos...</div>}>
                 <Projects />
                 <Services />
+                <Process />
                 {/* <Reviews /> */}
                 <About />    
                 <Lab />

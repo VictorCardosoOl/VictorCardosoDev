@@ -141,7 +141,7 @@ const Gamification: React.FC = () => {
       )}
 
       {showManifest && (
-        <>
+        <div key="manifest-wrapper">
           {/* Fundo para clicar fora e fechar */}
           <motion.div 
             initial={{ opacity: 0 }}
@@ -237,7 +237,7 @@ const Gamification: React.FC = () => {
 
           </div>
         </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

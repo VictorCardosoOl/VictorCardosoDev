@@ -86,7 +86,7 @@ const FAQ = () => {
         
         {/* COLUNA ESQUERDA (Sticky) */}
         <div className="lg:col-span-4 relative">
-          <div ref={stickyRef} className="lg:sticky lg:top-32">
+          <div ref={stickyRef} className="lg:sticky lg:top-[50vh] lg:-translate-y-1/2">
             <h2 className="font-serif font-light text-5xl md:text-7xl mb-8 leading-[0.85] tracking-tight">
               Dúvidas <br/> <span className="italic opacity-50">Frequentes</span>
             </h2>
