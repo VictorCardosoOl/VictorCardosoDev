@@ -5,7 +5,7 @@ import ContentModal from './ui/ContentModal';
 import { ProjectDetailContent } from './ProjectDetailContent';
 import { Reveal } from './ui/Reveal';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 
 const ProjectCard: React.FC<{ 
   project: typeof PROJECTS[0], 
@@ -91,7 +91,7 @@ const ProjectCard: React.FC<{
                  
                  <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300 pointer-events-none mix-blend-overlay" />
                  
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-sm bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-20">
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-20">
                     <ArrowUpRight className="text-white" size={32} />
                  </div>
               </motion.div>
@@ -116,7 +116,7 @@ const ProjectCard: React.FC<{
                   <div className="flex flex-wrap gap-2 md:justify-end">
                       {project.tags.slice(0, 3).map((tag, i) => (
                           <Reveal key={i} delay={200 + (i * 50)}>
-                            <span className="px-3 py-1 border border-petrol-base/10 rounded-sm text-[10px] font-mono uppercase tracking-widest text-petrol-base/60 bg-white">
+                            <span className="px-3 py-1 border border-petrol-base/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-petrol-base/60 bg-white">
                                 {tag}
                             </span>
                           </Reveal>
@@ -177,7 +177,7 @@ const Projects: React.FC = () => {
 
         <div className="mt-16 md:mt-24 text-center">
             <Reveal variant="scale">
-                <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 border border-petrol-base/10 hover:bg-petrol-base hover:text-white rounded-sm text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 group">
+                <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 border border-petrol-base/10 hover:bg-petrol-base hover:text-white rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 group">
                     Iniciar um projeto <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </a>
             </Reveal>

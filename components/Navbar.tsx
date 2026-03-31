@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NAV_LINKS, CONTACT_INFO } from '../constants';
 import { usePageTransition } from './ui/PageTransition';
 import StaggeredMenu from './ui/StaggeredMenu';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
@@ -66,23 +66,23 @@ const Navbar: React.FC = () => {
   const navVariants = {
     top: {
         y: 0,
-        backgroundColor: 'transparent',
-        backdropFilter: 'none',
-        borderBottom: 'none',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        backdropFilter: 'blur(0px)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0)',
         boxShadow: 'none'
     },
     scrolled: {
         y: 0,
-        backgroundColor: 'transparent',
-        backdropFilter: 'none',
-        borderBottom: 'none',
-        boxShadow: 'none'
+        backgroundColor: 'rgba(255, 255, 255, 0.02)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
+        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.01)'
     },
     hidden: {
         y: "-100%",
-        backgroundColor: 'transparent',
-        backdropFilter: 'none',
-        borderBottom: 'none',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        backdropFilter: 'blur(0px)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0)',
         boxShadow: 'none'
     }
   };
@@ -116,21 +116,21 @@ const Navbar: React.FC = () => {
         {/* Hamburger Trigger - Refined Pill Shape */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`relative z-[9999] group flex items-center gap-3 pl-5 pr-2 py-2 rounded-sm border transition-all duration-500 backdrop-blur-md ${
+          className={`relative z-[9999] group flex items-center gap-4 pl-6 pr-3 py-2.5 rounded-full border transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] backdrop-blur-xl ${
              isMenuOpen 
-             ? 'bg-white/10 border-white/20 text-[#FFFFFF] hover:bg-white/20' 
-             : 'bg-petrol-base/5 border-petrol-base/5 text-petrol-base hover:bg-petrol-base hover:text-white hover:border-petrol-base'
+             ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' 
+             : 'bg-black/5 border-black/5 text-black hover:bg-black hover:text-white hover:border-black'
           }`}
         >
-          <span className="text-[9px] font-mono uppercase tracking-widest hidden md:inline-block opacity-70 group-hover:opacity-100 transition-opacity">
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em] hidden md:inline-block opacity-60 group-hover:opacity-100 transition-opacity">
              {isMenuOpen ? 'Fechar' : 'Menu'}
           </span>
-          <div className={`w-8 h-8 rounded-sm flex items-center justify-center transition-colors ${
+          <div className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-500 ${
              isMenuOpen 
-             ? 'bg-[#FFFFFF] text-petrol-base' 
-             : 'bg-white/50 text-petrol-base group-hover:bg-white/20 group-hover:text-white'
+             ? 'bg-white text-black rotate-90' 
+             : 'bg-black/10 text-black group-hover:bg-white/20 group-hover:text-white'
           }`}>
-             {isMenuOpen ? <X size={14} /> : <Menu size={14} />}
+             {isMenuOpen ? <X size={16} /> : <Menu size={16} />}
           </div>
         </button>
       </motion.header>

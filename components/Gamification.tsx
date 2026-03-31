@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, Clock, Target, ArrowUpRight } from 'lucide-react';
 import { useGamification } from './GamificationContext';
 
@@ -121,7 +121,7 @@ const Gamification: React.FC = () => {
         >
           {/* Manifest Card */}
           <div 
-            className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-t-sm border-t border-x border-petrol-base/10 shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] p-6 md:p-8 font-mono text-xs relative before:content-[''] before:absolute before:top-[-6px] before:left-0 before:w-full before:h-[6px] before:bg-[image:var(--sawtooth-url)] before:repeat-x"
+            className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-t-xl md:rounded-t-xl border-t border-x border-petrol-base/10 shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] p-6 md:p-8 font-mono text-xs relative before:content-[''] before:absolute before:top-[-6px] before:left-0 before:w-full before:h-[6px] before:bg-[image:var(--sawtooth-url)] before:repeat-x"
             style={{ '--sawtooth-url': `url('${sawtoothUrl}')` } as React.CSSProperties}
           >
             
@@ -136,7 +136,7 @@ const Gamification: React.FC = () => {
                         setShowManifest(false);
                         setUserClosedManifest(true);
                     }}
-                    className="w-6 h-6 flex items-center justify-center hover:bg-petrol-base/5 rounded-sm transition-colors"
+                    className="w-6 h-6 flex items-center justify-center hover:bg-petrol-base/5 rounded-full transition-colors"
                 >
                     <X size={14} />
                 </button>
@@ -162,12 +162,12 @@ const Gamification: React.FC = () => {
 
             {/* "What you missed" section */}
             {missingQuests.length > 0 && (
-                <div className="bg-white p-4 rounded-sm border border-petrol-base/5 mb-6">
+                <div className="bg-white p-4 rounded-lg border border-petrol-base/5 mb-6">
                     <p className="text-[10px] uppercase tracking-wider text-petrol-base/40 mb-3">Você ainda não viu:</p>
                     <ul className="space-y-3">
                         {missingQuests.slice(0, 2).map(q => (
                             <li key={q.id}>
-                                <a href={q.link} className="flex justify-between items-center group hover:bg-petrol-base/5 p-1 rounded-sm transition-colors -mx-1">
+                                <a href={q.link} className="flex justify-between items-center group hover:bg-petrol-base/5 p-1 rounded transition-colors -mx-1">
                                     <span className="font-bold border-b border-petrol-base/20 group-hover:border-petrol-base transition-colors">{q.label}</span>
                                     <ArrowUpRight size={12} className="opacity-50 group-hover:opacity-100" />
                                 </a>

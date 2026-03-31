@@ -12,7 +12,7 @@ import { GamificationProvider } from './components/GamificationContext';
 import { PageTransitionProvider } from './components/ui/PageTransition';
 import { MessageCircle } from 'lucide-react';
 import Magnetic from './components/ui/Magnetic';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 
 /**
  * COMPONENTE: App (Root)
@@ -198,7 +198,7 @@ const App: React.FC = () => {
                     href="https://wa.me/5511999999999" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-14 h-14 bg-[#000000] text-white rounded-sm shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
+                    className="flex items-center justify-center w-14 h-14 bg-[#000000] text-white rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-110 border border-white/10"
                     aria-label="Contato via WhatsApp"
                   >
                     <MessageCircle size={24} />

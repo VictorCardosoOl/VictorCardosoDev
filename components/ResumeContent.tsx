@@ -2,7 +2,7 @@
 import React from 'react';
 import { Download, MapPin, ExternalLink, Globe, BookOpen, Camera, Award, Code, Briefcase, Terminal, Cpu, Database } from 'lucide-react';
 import { Reveal } from './ui/Reveal';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { EDUCATION, WORK_EXPERIENCE, CONTACT_INFO } from '../constants';
 
 const MotionImg = motion.img as any;
@@ -62,7 +62,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
             <div className="flex-1 pb-2">
                <Reveal>
                   <div className="flex items-center gap-3 mb-4">
-                     <span className="px-3 py-1 bg-white/10 border border-white/10 rounded-sm text-[10px] font-mono uppercase tracking-widest text-white/80">
+                     <span className="px-3 py-1 bg-white/10 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-white/80">
                         Instrutor de TI & Supervisor
                      </span>
                   </div>
@@ -213,7 +213,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                               {SOFT_SKILLS.map((skill, i) => (
                                   <span 
                                     key={i}
-                                    className="px-3 py-1.5 bg-white border border-[#000000]/10 text-[#000000] rounded-sm text-xs hover:bg-[#000000] hover:text-white transition-all duration-300 cursor-default"
+                                    className="px-3 py-1.5 bg-white border border-[#000000]/10 text-[#000000] rounded-md text-xs hover:bg-[#000000] hover:text-white transition-all duration-300 cursor-default"
                                   >
                                       {skill}
                                   </span>

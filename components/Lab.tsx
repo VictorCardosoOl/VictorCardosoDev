@@ -2,7 +2,7 @@
 import React from 'react';
 import { Play, Terminal } from 'lucide-react';
 import { Reveal } from './ui/Reveal';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 /**
  * COMPONENTE: Lab
@@ -73,7 +73,7 @@ const Lab: React.FC = () => {
       
       <Reveal width="100%" variant="translate">
         <div 
-          className="w-full bg-petrol-base text-paper py-24 relative overflow-hidden rounded-t-sm md:rounded-sm"
+          className="w-full bg-petrol-base text-paper py-24 relative overflow-hidden rounded-t-[2rem] md:rounded-[3rem]"
         >
             <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
                 
@@ -129,10 +129,10 @@ const Lab: React.FC = () => {
                                     <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
                                         {/* Top: ID & Icon */}
                                         <div className="flex justify-between items-start">
-                                            <span className="text-[10px] font-mono border border-white/20 px-1.5 py-0.5 rounded-sm text-white bg-black/20 backdrop-blur-sm">
+                                            <span className="text-[10px] font-mono border border-white/20 px-1.5 py-0.5 rounded text-white bg-black/20 backdrop-blur-sm">
                                                 EXP_0{exp.id}
                                             </span>
-                                            <div className="w-8 h-8 rounded-sm bg-white text-petrol-base flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                                            <div className="w-8 h-8 rounded-full bg-white text-petrol-base flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
                                                 <Play size={12} fill="currentColor" />
                                             </div>
                                         </div>

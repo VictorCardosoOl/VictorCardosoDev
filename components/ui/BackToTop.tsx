@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, useMotionValueEvent, useScroll, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import { useLenis } from '../ScrollContext';
 import Magnetic from './Magnetic';
@@ -40,7 +40,7 @@ const BackToTop: React.FC = () => {
           <Magnetic strength={0.3}>
             <button
               onClick={scrollToTop}
-              className="flex items-center justify-center w-12 h-12 rounded-sm border border-petrol-base/10 bg-paper/80 backdrop-blur-sm text-petrol-base hover:bg-petrol-base hover:text-white transition-all shadow-sm hover:shadow-lg group"
+              className="flex items-center justify-center w-12 h-12 rounded-full border border-petrol-base/10 bg-paper/80 backdrop-blur-sm text-petrol-base hover:bg-petrol-base hover:text-white transition-all shadow-sm hover:shadow-lg group"
               aria-label="Voltar ao topo"
             >
               <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform duration-300" />

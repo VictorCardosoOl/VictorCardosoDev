@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 
 const MotionDiv = motion.div as any;
 

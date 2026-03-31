@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence, PanInfo } from 'motion/react';
 import { X } from 'lucide-react';
 import { useLenis } from '../ScrollContext';
 import Lenis from 'lenis';
@@ -143,7 +143,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
             className={`
               fixed left-0 right-0 bottom-0 z-[9999] 
               w-full bg-[#FFFFFF] shadow-2xl overflow-hidden flex flex-col
-              ${isMobile ? 'h-[100dvh] rounded-none' : 'h-[98vh] rounded-t-sm max-w-[96vw] mx-auto'}
+              ${isMobile ? 'h-[100dvh] rounded-none' : 'h-[98vh] rounded-t-[2rem] max-w-[96vw] mx-auto'}
             `}
             style={{ willChange: "transform", transform: "translate3d(0,0,0)" }} 
           >
@@ -153,7 +153,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                 <Magnetic strength={0.3}>
                     <button 
                     onClick={onClose}
-                    className={`w-12 h-12 rounded-sm backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-lg group ${
+                    className={`w-12 h-12 rounded-full backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-lg group ${
                       theme === 'light' 
                         ? 'bg-[#000000] border border-[#000000] text-white hover:bg-[#111111] hover:border-[#111111]' 
                         : 'bg-white/10 border border-white/20 text-white hover:bg-white hover:text-[#000000]'
