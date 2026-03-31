@@ -159,7 +159,7 @@ const Services: React.FC = () => {
                       setSelectedService(null);
                       setTimeout(() => transitionTo('#contact'), 300);
                    }}
-                   className="px-6 py-3 bg-white text-petrol-base rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-paper transition-colors"
+                   className="px-6 py-3 bg-white text-petrol-base rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-paper transition-colors"
                  >
                    Conversar
                  </a>

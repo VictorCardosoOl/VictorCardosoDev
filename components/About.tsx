@@ -9,7 +9,7 @@ const About: React.FC = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <section id="about" className="min-h-screen bg-white py-24 md:py-32 flex flex-col justify-center relative z-10">
+    <section id="about" className="min-h-screen bg-white py-16 md:py-20 flex flex-col justify-center relative z-10">
       <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         
         {/* Top Section: Text */}

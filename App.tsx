@@ -139,6 +139,13 @@ const App: React.FC = () => {
     sessionStorage.setItem('hasSeenIntro', 'true');
   };
 
+  useEffect(() => {
+    console.log(
+      "%c Olá, recrutador/desenvolvedor! 👋 \n Se você está vendo isso, acho que deveríamos conversar. \n Mande um email para: victorcardcunha@gmail.com", 
+      "color: #00FF00; font-size: 16px; font-weight: bold; background: #000; padding: 10px; border-radius: 5px;"
+    );
+  }, []);
+
   return (
     <GamificationProvider>
       <ScrollProvider>

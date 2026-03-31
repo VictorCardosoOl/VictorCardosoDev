@@ -81,27 +81,18 @@ const FAQ = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-32 px-6 bg-[#FFFFFF] text-[#000000] relative z-10">
+    <section ref={containerRef} className="py-20 px-6 bg-[#FFFFFF] text-[#000000] relative z-10">
       <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
         
         {/* COLUNA ESQUERDA (Sticky) */}
         <div className="lg:col-span-4 relative">
           <div ref={stickyRef} className="lg:sticky lg:top-32">
-            <span className="text-xs font-bold tracking-widest uppercase mb-4 block text-[#000000]/50">Suporte</span>
             <h2 className="font-serif font-light text-5xl md:text-7xl mb-8 leading-[0.85] tracking-tight">
               Dúvidas <br/> <span className="italic opacity-50">Frequentes</span>
             </h2>
             <p className="text-lg opacity-80 max-w-sm mb-8">
               Encontre respostas rápidas para as perguntas mais comuns sobre nosso processo e serviços.
             </p>
-            <a 
-              href="https://wa.me/5511999999999" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-4 bg-[#000000] text-[#FFFFFF] rounded-sm font-mono text-xs uppercase tracking-widest hover:bg-[#222222] transition-colors"
-            >
-              Falar com Especialista
-            </a>
           </div>
         </div>
 
@@ -120,7 +111,7 @@ const FAQ = () => {
                   <h3 className={`text-2xl md:text-3xl font-serif font-light transition-transform duration-500 ${openIndex === idx ? 'translate-x-4 text-[#000000]' : 'text-[#000000]/70 group-hover:text-[#000000]'}`}>
                     {item.question}
                   </h3>
-                  <div className={`w-10 h-10 rounded-sm border border-[#000000]/10 flex items-center justify-center shrink-0 ml-4 transition-all duration-500 ${openIndex === idx ? 'bg-[#000000] text-[#FFFFFF] rotate-45' : 'bg-transparent text-[#000000]'}`}>
+                  <div className={`w-10 h-10 rounded-full border border-[#000000]/10 flex items-center justify-center shrink-0 ml-4 transition-all duration-500 ${openIndex === idx ? 'bg-[#000000] text-[#FFFFFF] rotate-45' : 'bg-transparent text-[#000000]'}`}>
                     <Plus size={20} />
                   </div>
                 </button>

@@ -132,10 +132,10 @@ const Gamification: React.FC = () => {
         >
           <button 
              onClick={() => setShowManifest(true)}
-             className="flex items-center gap-2 text-petrol-base/40 hover:text-petrol-base transition-colors px-2 py-1"
+             className="flex items-center justify-center w-14 h-14 bg-[#000000] text-white rounded-full shadow-2xl hover:scale-110 hover:bg-[#111111] transition-all border border-white/10"
+             title="Relatório da Sessão"
           >
-             <Target size={14} />
-             <span className="text-[9px] font-bold uppercase tracking-widest">Relatório</span>
+             <Target size={24} />
           </button>
         </motion.div>
       )}
@@ -159,7 +159,7 @@ const Gamification: React.FC = () => {
           >
             {/* Manifest Card */}
             <div 
-              className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-xl border border-petrol-base/10 shadow-2xl p-6 md:p-8 font-mono text-xs relative"
+              className="pointer-events-auto bg-[#FFFFFF] text-[#000000] rounded-[2rem] border border-petrol-base/10 shadow-2xl p-6 md:p-8 font-mono text-xs relative"
             >
             
             {/* Header */}

@@ -227,7 +227,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                     <a 
                         href="/assets/cv_victor_cardoso.pdf" 
                         download
-                        className="flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#000000] text-white rounded-sm hover:bg-[#111111] transition-all text-xs font-bold uppercase tracking-widest shadow-lg group"
+                        className="flex items-center justify-center gap-3 w-full px-8 py-4 bg-[#000000] text-white rounded-full hover:bg-[#111111] transition-all text-xs font-bold uppercase tracking-widest shadow-lg group"
                     >
                         <Download size={16} className="group-hover:animate-bounce" /> Baixar CV Completo
                     </a>

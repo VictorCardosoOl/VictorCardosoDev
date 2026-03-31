@@ -73,7 +73,7 @@ const Lab: React.FC = () => {
       
       <Reveal width="100%" variant="translate">
         <div 
-          className="w-full bg-petrol-base text-paper py-24 relative overflow-hidden rounded-t-[2rem] md:rounded-[3rem]"
+          className="w-full bg-petrol-base text-paper py-16 relative overflow-hidden rounded-t-[2rem] md:rounded-[3rem]"
         >
             <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
                 
