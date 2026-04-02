@@ -6,7 +6,6 @@ import GrainBackground from './components/GrainBackground';
 import Gamification from './components/Gamification';
 import ScrollProgress from './components/ui/ScrollProgress';
 import BackToTop from './components/ui/BackToTop';
-import SidebarNav from './components/ui/SidebarNav';
 import { ScrollProvider } from './components/ScrollContext';
 import { GamificationProvider } from './components/GamificationContext'; 
 import { PageTransitionProvider } from './components/ui/PageTransition';
@@ -163,7 +162,6 @@ const App: React.FC = () => {
             <ScrollProgress />
             <Gamification />
             <BackToTop />
-            <SidebarNav />
 
             {/* Navigation (Always Visible) */}
             <Navbar />

@@ -24,11 +24,18 @@ export const SERVICES = [
     tags: ['Análise', 'Arquitetura', 'Dados']
   },
   {
-    title: 'Treinamento & Suporte',
-    description: 'Capacitação de equipes e stakeholders. Criação de documentação técnica (KB) e gestão de conhecimento para garantir a sustentabilidade do software.',
+    title: 'Estratégia',
+    description: 'Alinhamento técnico e de negócio para escalar aplicações corporativas a nível enterprise com precisão.',
     icon: Users,
-    techStack: ['Onboarding', 'Documentação Técnica', 'Gestão de Crise', 'SLA Management'],
-    tags: ['Educação', 'Suporte N3', 'Liderança']
+    techStack: ['Arquitetura de Soluções', 'Business Intelligence', 'Governança TI'],
+    tags: ['Negócio', 'Arquitetura']
+  },
+  {
+    title: 'Integração',
+    description: 'Conexão de ecossistemas legados e novas tecnologias através de APIs resilientes e arquitetura de microserviços.',
+    icon: Monitor,
+    techStack: ['APIs RESTful', 'GraphQL', 'Webhooks', 'Mensageria', 'Kafka'],
+    tags: ['APIs', 'Microserviços']
   }
 ];
 

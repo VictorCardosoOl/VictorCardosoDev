@@ -167,7 +167,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
             <div 
               ref={modalContainerRef}
-              className="flex-grow h-full w-full overflow-y-auto relative bg-[#FFFFFF]"
+              className="flex-grow h-full w-full overflow-y-auto relative bg-[#FFFFFF] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               data-lenis-prevent 
             >
                <div ref={modalContentRef} className="will-change-transform">

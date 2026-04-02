@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Services: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0); // Abre o primeiro serviço por default
+  const [openIndex, setOpenIndex] = useState<number | null>(null); // Inicia retraído por default
   const containerRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -68,16 +68,13 @@ const Services: React.FC = () => {
              <div ref={leftRef}>
                {/* Título sem label superior */}
                <h2 className="text-3xl md:text-4xl font-sans tracking-tight mb-6 text-[#111]">
-                 Expertise
+                 Serviços
                </h2>
                
                {/* Parágrafo de Missão estético ao Print de Referência */}
                <p className="text-sm md:text-base text-[#999] leading-relaxed font-sans max-w-sm mb-12">
                  Desde a descoberta até a entrega de um sistema maduro, minha missão é ajudar lideranças técnicas a desenhar arquiteturas incríveis por meio de um código de primeira classe. Apesar da minha principal especialização ser Engenharia Front-end e UX dinâmico, uma ampla gama de habilidades backend fazem parte do tecido fundamental do meu trabalho.
                </p>
-
-               {/* Ponto Preto (Indicador Iconográfico flutuante isolado na esquerda como na imagem) */}
-               <div className="w-[6px] h-[6px] bg-[#111] rounded-full mx-auto md:mx-0 lg:ml-24 mt-16 md:mt-24"></div>
              </div>
            </div>
         </div>

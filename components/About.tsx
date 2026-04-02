@@ -39,8 +39,6 @@ const About: React.FC = () => {
 
         {/* Bottom Section: Images */}
         <div className="relative">
-          {/* The black dot from the template */}
-          <div className="absolute -left-6 md:-left-10 top-[25%] w-2 h-2 bg-black rounded-full hidden md:block"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
             {/* Image 1: Industrial/Abstract */}
