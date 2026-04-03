@@ -1,16 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { SERVICES } from '../constants';
-import { Plus, Minus } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Services: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null); // Inicia retraído por default
-  const containerRef = useRef<HTMLDivElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -18,38 +16,40 @@ const Services: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Animar a Esquerda
-      if (leftRef.current) {
-        gsap.fromTo(leftRef.current, 
-          { y: 60, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 80%",
-            }
-          }
-        );
-      }
-
-      // 2. Animar a Direita (Itens)
-      if (rightRef.current) {
-        const items = rightRef.current.querySelectorAll('.service-item');
-        gsap.fromTo(items,
+      // Animar heading
+      if (headingRef.current) {
+        gsap.fromTo(
+          headingRef.current,
           { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power2.out",
+            duration: 1,
+            ease: 'power3.out',
             scrollTrigger: {
-              trigger: rightRef.current,
-              start: "top 85%",
-            }
+              trigger: containerRef.current,
+              start: 'top 80%',
+            },
+          }
+        );
+      }
+
+      // Animar linhas do acordeão
+      const items = containerRef.current?.querySelectorAll('.svc-row');
+      if (items) {
+        gsap.fromTo(
+          items,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 75%',
+            },
           }
         );
       }
@@ -59,81 +59,128 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" ref={containerRef} className="py-16 md:py-24 px-6 bg-[#FFFFFF] text-[#111] relative z-10 border-t border-[#000000]/5">
-      <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        
-        {/* COLUNA ESQUERDA (Foco Narrativo/Sticky) */}
-        <div className="lg:col-span-4 relative h-full">
-           <div className="lg:sticky lg:top-32">
-             <div ref={leftRef}>
-               {/* Título sem label superior */}
-               <h2 className="text-3xl md:text-4xl font-sans tracking-tight mb-6 text-[#111]">
-                 Serviços
-               </h2>
-               
-               {/* Parágrafo de Missão estético ao Print de Referência */}
-               <p className="text-sm md:text-base text-[#999] leading-relaxed font-sans max-w-sm mb-12">
-                 Desde a descoberta até a entrega de um sistema maduro, minha missão é ajudar lideranças técnicas a desenhar arquiteturas incríveis por meio de um código de primeira classe. Apesar da minha principal especialização ser Engenharia Front-end e UX dinâmico, uma ampla gama de habilidades backend fazem parte do tecido fundamental do meu trabalho.
-               </p>
-             </div>
-           </div>
+    <section
+      id="services"
+      ref={containerRef}
+      className="w-full bg-white py-24 md:py-32 border-t border-black/8"
+    >
+      <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16">
+
+        {/* ── Cabeçalho ─────────────────────────────────────────── */}
+        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-20">
+          <div>
+            <p className="text-[11px] font-inter font-medium tracking-[0.25em] uppercase text-black/40 mb-3">
+              02 — Expertise
+            </p>
+            <h2
+              className="font-inter font-bold text-[#111] tracking-tighter uppercase leading-[0.88]"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 72px)' }}
+            >
+              O que<br />ofereço
+            </h2>
+          </div>
+          <p className="text-sm md:text-[15px] text-black/50 font-inter leading-relaxed max-w-sm md:text-right">
+            Da descoberta à entrega de um sistema maduro — arquiteturas incríveis por meio de código de primeira classe.
+          </p>
         </div>
 
-        {/* Espaço Negativo Funcional reduzido em pro do layout apertado */}
-        <div className="hidden lg:block lg:col-span-1"></div>
+        {/* ── Acordeão ──────────────────────────────────────────── */}
+        <div className="border-t border-black/10">
+          {SERVICES.map((service, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <div
+                key={idx}
+                className="svc-row border-b border-black/10"
+              >
+                {/* Linha clicável */}
+                <button
+                  onClick={() => toggleItem(idx)}
+                  aria-expanded={isOpen}
+                  className="w-full py-7 md:py-8 flex items-center gap-6 md:gap-10 text-left group focus:outline-none"
+                >
+                  {/* Índice */}
+                  <span className="font-inter text-[11px] tracking-widest text-black/30 w-6 shrink-0 select-none">
+                    {(idx + 1).toString().padStart(2, '0')}
+                  </span>
 
-        {/* COLUNA DIREITA (Acordeão) */}
-        <div className="lg:col-span-7">
-          <div ref={rightRef} className="border-t-[1px] border-[#111]/10">
-            {SERVICES.map((service, idx) => {
-              const isOpen = openIndex === idx;
-              return (
-                <div key={idx} className="service-item border-b-[1px] border-[#111]/10">
-                  <button 
-                    onClick={() => toggleItem(idx)}
-                    className="w-full py-6 md:py-8 flex justify-between items-center text-left group focus:outline-none"
+                  {/* Título */}
+                  <h3
+                    className={`flex-1 font-inter font-medium tracking-tight transition-all duration-300 ${
+                      isOpen ? 'text-[#111]' : 'text-[#111]/70 group-hover:text-[#111]'
+                    }`}
+                    style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}
                   >
-                    {/* Título - Mantido em sans-serif acompanhando o design do print */}
-                    <h3 className={`text-2xl md:text-[2.25rem] font-sans font-normal tracking-tight transition-transform duration-500 ease-out ${isOpen ? 'translate-x-2 text-[#111]' : 'text-[#111]/80 group-hover:text-[#111]'}`}>
-                      {service.title}
-                    </h3>
-                    
-                    {/* Indicadores Visuais Limpos (Plus/Minus sem Circle) */}
-                    <div className="shrink-0 ml-4 text-[#111] group-hover:scale-110 transition-transform duration-300">
-                      {isOpen ? <Minus size={22} strokeWidth={1} /> : <Plus size={22} strokeWidth={1} />}
-                    </div>
-                  </button>
-                  
-                  {/* Área de Resposta Expandível */}
-                  <div 
-                    className="overflow-hidden transition-all duration-500 ease-in-out"
-                    style={{ 
-                      maxHeight: isOpen ? '900px' : '0px',
-                      opacity: isOpen ? 1 : 0,
-                    }}
+                    {service.title}
+                  </h3>
+
+                  {/* Tags (visíveis apenas quando fechado, em tela grande) */}
+                  <div className={`hidden lg:flex gap-2 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
+                    {service.tags?.slice(0, 2).map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 rounded-full border border-black/12 text-[11px] font-inter font-medium text-black/40 tracking-wide"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Ícone +/– */}
+                  <span
+                    className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-black/15 text-black/50 group-hover:border-black/40 group-hover:text-black transition-all duration-300"
+                    aria-hidden
                   >
-                    <div className="pb-8 pt-2">
-                       {/* Descrição Principal (Escura e Destaque) */}
-                       <p className="text-sm md:text-[15px] text-[#111] max-w-2xl leading-relaxed font-sans mb-8 pr-4">
-                         {service.description}
-                       </p>
-                       
-                       {/* Lista Vertical de Sub-tópicos Simulando os links secundários ('Painel de Inspiração...') */}
-                       {service.techStack && service.techStack.length > 0 && (
-                          <ul className="space-y-4">
-                            {service.techStack.map((tech, i) => (
-                              <li key={i} className="text-[13px] md:text-sm text-[#999] font-sans tracking-wide">
-                                {tech}
-                              </li>
-                            ))}
-                          </ul>
-                       )}
-                    </div>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      className={`transition-transform duration-300 ${isOpen ? 'rotate-45' : 'rotate-0'}`}
+                    >
+                      <line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" strokeWidth="1.2" />
+                      <line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" strokeWidth="1.2" />
+                    </svg>
+                  </span>
+                </button>
+
+                {/* Painel expandível */}
+                <div
+                  className="overflow-hidden transition-all duration-500 ease-in-out"
+                  style={{
+                    maxHeight: isOpen ? '600px' : '0px',
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                >
+                  <div className="pl-0 md:pl-16 pb-10 pt-1 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                    {/* Descrição */}
+                    <p className="text-[15px] text-[#444] font-inter leading-relaxed">
+                      {service.description}
+                    </p>
+
+                    {/* Tech stack */}
+                    {service.techStack && service.techStack.length > 0 && (
+                      <div>
+                        <p className="text-[10px] font-inter font-semibold tracking-[0.2em] uppercase text-black/30 mb-4">
+                          Ferramentas & Tecnologias
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {service.techStack.map((tech, i) => (
+                            <span
+                              key={i}
+                              className="px-3 py-1.5 rounded-full bg-[#f4f4f4] text-[12px] font-inter font-medium text-[#555] tracking-wide"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
