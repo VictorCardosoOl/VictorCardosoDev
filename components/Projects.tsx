@@ -1,208 +1,209 @@
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { PROJECTS } from '../constants';
 import ContentModal from './ui/ContentModal';
 import { ProjectDetailContent } from './ProjectDetailContent';
-import { Reveal } from './ui/Reveal';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import clsx from 'clsx';
+import { useLenis } from './ScrollContext';
 
-const ProjectCard: React.FC<{ 
-  project: typeof PROJECTS[0], 
-  index: number,
-  onClick: () => void
-}> = ({ project, index, onClick }) => {
-  
-  const containerRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-  
-  React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize(); // Initial check
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.9", "start 0.2"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    damping: 20,
-    stiffness: 100,
-    mass: 0.5
-  });
-  
-  const clipPath = useTransform(
-    smoothProgress,
-    [0, 1],
-    ["inset(15% 10% 15% 10% round 4px)", "inset(0% 0% 0% 0% round 0px)"]
-  );
-
-  const scale = useTransform(smoothProgress, [0, 1], [0.95, 1.05]);
-  // Parallax reduced on mobile for better performance
-  const yParallax = useTransform(smoothProgress, [0, 1], isMobile ? ["0%", "0%"] : ["-30%", "30%"]);
-  const overlayOpacity = useTransform(smoothProgress, [0, 0.5], [0.5, 0]);
-
-  return (
-    <div 
-      ref={containerRef}
-      className="group w-full cursor-pointer relative py-12 md:py-24 border-t border-petrol-base/10 first:border-t-0"
-      onClick={onClick}
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          
-          {/* Coluna Metadados */}
-          <div className="lg:col-span-3 flex flex-row lg:flex-col justify-between items-baseline lg:sticky lg:top-32 transition-all duration-500 z-20">
-             <div className="flex items-baseline gap-4">
-                 <span className="text-sm font-mono text-petrol-base/40 group-hover:text-petrol-electric transition-colors">
-                     ( {project.year} )
-                 </span>
-                 <span className="text-sm font-mono uppercase tracking-widest text-petrol-base/60">
-                     {project.category}
-                 </span>
-             </div>
-             
-             <div className="hidden lg:block mt-8 overflow-hidden">
-                <span className="text-[6rem] xl:text-[8rem] leading-[0.8] font-serif font-light text-petrol-base/5 group-hover:text-petrol-base/10 transition-colors duration-700">
-                    {(index + 1).toString().padStart(2, '0')}
-                </span>
-             </div>
-          </div>
-
-          {/* Coluna Imagem & Conteúdo */}
-          <div className="lg:col-span-9">
-              {/* IMAGE WRAPPER */}
-              <motion.div 
-                 style={{ clipPath: isMobile ? undefined : clipPath }}
-                 className="relative aspect-[16/9] md:aspect-[21/9] bg-petrol-base/5 mb-8 md:mb-10 group-hover:shadow-2xl transition-shadow duration-700 overflow-hidden rounded-md md:rounded-none"
-              >
-                 <motion.div className="w-full h-full relative overflow-hidden">
-                     {/* IMAGE WITH PARALLAX */}
-                     <motion.img 
-                        src={project.image} 
-                        alt={project.title}
-                        style={{ 
-                            scale: 1.35, 
-                            y: yParallax 
-                        }} 
-                        className="w-full h-full object-cover transition-transform duration-700 will-change-transform"
-                     />
-                     
-                     <motion.div 
-                        style={{ opacity: overlayOpacity }}
-                        className="absolute inset-0 bg-[#000000] pointer-events-none"
-                     />
-                 </motion.div>
-                 
-                 <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300 pointer-events-none mix-blend-overlay" />
-                 
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-20">
-                    <ArrowUpRight className="text-white" size={32} />
-                 </div>
-              </motion.div>
-
-              {/* Text Info */}
-              <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-                  <div className="max-w-2xl">
-                      <Reveal>
-                        <motion.h3 
-                            className="text-3xl md:text-5xl lg:text-6xl font-serif font-light text-petrol-base mb-4 leading-tight group-hover:text-petrol-mid transition-colors"
-                        >
-                            {project.title}
-                        </motion.h3>
-                      </Reveal>
-                      <Reveal delay={100}>
-                        <p className="text-petrol-ink/70 font-light leading-relaxed text-base md:text-lg max-w-lg">
-                            {project.description}
-                        </p>
-                      </Reveal>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 md:justify-end">
-                      {project.tags.slice(0, 3).map((tag, i) => (
-                          <Reveal key={i} delay={200 + (i * 50)}>
-                            <span className="px-3 py-1 border border-petrol-base/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-petrol-base/60 bg-white">
-                                {tag}
-                            </span>
-                          </Reveal>
-                      ))}
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-  );
-};
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
-  const [activeProject, setActiveProject] = useState<typeof PROJECTS[0] | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleOpen = (project: typeof PROJECTS[0]) => {
-    setActiveProject(project);
-    setSelectedProject(project);
-  };
+  // Refs
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftRef    = useRef<HTMLDivElement>(null);
+  const rightRef   = useRef<HTMLDivElement>(null);
+  const imageRefs  = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleClose = () => {
-    setSelectedProject(null);
-  };
+  // Get Lenis instance from context
+  const lenis = useLenis();
+
+  // ── 1. LINK LENIS → GSAP ScrollTrigger (proxy) ──────────────
+  // Without this bridge, ScrollTrigger reads native window.scrollY
+  // which Lenis overrides — so pinning never fires correctly.
+  useEffect(() => {
+    if (!lenis) return;
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value?: number) {
+        if (value !== undefined) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      },
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      lenis.off('scroll', ScrollTrigger.update);
+      // @ts-ignore — reset proxy on cleanup
+      ScrollTrigger.scrollerProxy(document.documentElement, undefined);
+    };
+  }, [lenis]);
+
+  // ── 2. PIN LEFT COLUMN via ScrollTrigger ─────────────────────
+  // Runs after the Lenis proxy is established (lenis dep).
+  // Only active on ≥ lg viewports.
+  useLayoutEffect(() => {
+    if (!leftRef.current || !rightRef.current || !sectionRef.current) return;
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1024px)', () => {
+      const ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top top',
+          // Unpin when the last image bottom clears the viewport
+          end: () => `+=${rightRef.current!.offsetHeight - window.innerHeight}`,
+          pin: leftRef.current,
+          pinSpacing: false,  // right col stays in natural document flow
+          anticipatePin: 1,   // prevents flicker at pin entry
+        });
+      });
+      return () => ctx.revert();
+    });
+
+    return () => mm.revert();
+  }, [lenis]); // re-run once lenis proxy is ready
+
+  // ── 3. SCROLL-SPY: active project via IntersectionObserver ───
+  useEffect(() => {
+    const obs: IntersectionObserver[] = [];
+    imageRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      const o = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIndex(idx); },
+        { rootMargin: '-49% 0px -49% 0px', threshold: 0 }
+      );
+      o.observe(el);
+      obs.push(o);
+    });
+    return () => obs.forEach(o => o.disconnect());
+  }, []);
+
+  const handleOpen  = (p: typeof PROJECTS[0]) => setSelectedProject(p);
+  const handleClose = () => setSelectedProject(null);
 
   return (
-    <section id="projects" className="relative bg-paper py-24 md:py-32 z-10 overflow-hidden">
-      
-      {/* Decorative Lines */}
-      <div className="absolute top-0 left-6 md:left-24 xl:left-32 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none" />
-      <div className="absolute top-0 right-6 md:right-12 w-px h-full bg-petrol-base/[0.03] z-0 pointer-events-none hidden md:block" />
+    // ⚠️ NO overflow-hidden — would create a new scroll context and
+    //    destroy both the Lenis proxy and ScrollTrigger pin.
+    <section ref={sectionRef} id="projects" className="w-full bg-white relative">
 
-      <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-        
-        <div className="flex flex-col items-start mb-16 md:mb-24 pl-0 md:pl-16 lg:pl-24">
-           <Reveal>
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-petrol-base/40 mb-4 block">
-                 Arquivo Selecionado
-              </span>
-              {/* FLUID TYPE for Title */}
-              <h2 className="text-[clamp(3.5rem,10vw,9rem)] leading-[0.85] font-serif font-light text-petrol-base tracking-tighter mix-blend-darken">
-                 Obras <br/>
-                 <span className="italic text-petrol-base/20 ml-8 md:ml-32">Recentes</span>
-              </h2>
-           </Reveal>
+      {/* Outer flex row — rightRef wraps BOTH columns so ScrollTrigger
+          can measure the total scrollable height of the right column */}
+      <div ref={rightRef} className="w-full flex flex-col lg:flex-row">
+
+        {/* ── LEFT COLUMN (pinned by ScrollTrigger) ──────────── */}
+        <div
+          ref={leftRef}
+          className="hidden lg:flex lg:w-1/2 h-screen flex-col justify-between py-20 px-20 bg-white z-10"
+        >
+          {/* Massive section title */}
+          <div>
+            <h2
+              className="font-inter font-bold text-[#161719] tracking-tighter uppercase leading-[0.85]"
+              style={{ fontSize: 'clamp(3.5rem, 7vw, 110px)' }}
+            >
+              Obras<br />Selecionadas
+            </h2>
+          </div>
+
+          {/* Project index list — opacity driven by scroll-spy */}
+          <div className="flex flex-col gap-3">
+            {PROJECTS.map((project, idx) => {
+              const isActive = activeIndex === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => handleOpen(project)}
+                  className={clsx(
+                    'flex justify-between items-baseline cursor-pointer transition-opacity duration-300',
+                    isActive ? 'opacity-100' : 'opacity-25'
+                  )}
+                >
+                  <span className={clsx(
+                    'font-inter transition-all duration-300',
+                    isActive
+                      ? 'text-lg font-bold uppercase text-[#161719]'
+                      : 'text-lg font-normal text-[#161719]'
+                  )}>
+                    {(idx + 1).toString().padStart(2, '0')} {project.title}
+                  </span>
+                  <span className={clsx(
+                    'font-inter text-sm transition-all duration-300',
+                    isActive ? 'font-bold text-[#161719]' : 'font-normal text-[#161719]'
+                  )}>
+                    {project.year}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex flex-col">
+        {/* ── RIGHT COLUMN (scrolls naturally with the page) ──── */}
+        {/* Each slide is exactly 100vh, stacked vertically.
+            The section's total height = N × 100vh, which gives the
+            page enough room to scroll before the pin releases.      */}
+        <div className="w-full lg:w-1/2 flex flex-col">
           {PROJECTS.map((project, index) => (
-             <ProjectCard 
-                key={index}
-                project={project} 
-                index={index} 
-                onClick={() => handleOpen(project)}
-             />
-          ))}
-        </div>
+            <div
+              key={index}
+              ref={el => { imageRefs.current[index] = el; }}
+              className="relative w-full overflow-hidden cursor-pointer group"
+              style={{ height: '100vh' }}
+              onClick={() => handleOpen(project)}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
-        <div className="mt-16 md:mt-24 text-center">
-            <Reveal variant="scale">
-                <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 border border-petrol-base/10 hover:bg-petrol-base hover:text-white rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 group">
-                    Iniciar um projeto <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </a>
-            </Reveal>
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
+              {/* © watermark (center) */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span className="text-white font-inter font-light text-2xl md:text-4xl tracking-widest opacity-70">
+                  © {project.title.toLowerCase()}
+                </span>
+              </div>
+
+              {/* Mobile label — left col is hidden on mobile */}
+              <div className="absolute bottom-8 left-6 flex flex-col gap-1 lg:hidden">
+                <span className="text-white font-inter font-bold text-2xl tracking-tighter">
+                  {project.title}
+                </span>
+                <span className="text-white/60 font-inter text-sm uppercase tracking-widest">
+                  {project.year}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>
 
-      <ContentModal 
-        isOpen={!!selectedProject} 
+      {/* ── Detail Modal ─────────────────────────────────────── */}
+      <ContentModal
+        isOpen={!!selectedProject}
         onClose={handleClose}
-        title={activeProject?.title}
-        category={activeProject?.category}
+        title={selectedProject?.title}
+        category={selectedProject?.category}
       >
-        {activeProject && (
-            <ProjectDetailContent 
-                project={activeProject} 
-            />
-        )}
+        {selectedProject && <ProjectDetailContent project={selectedProject} />}
       </ContentModal>
     </section>
   );
