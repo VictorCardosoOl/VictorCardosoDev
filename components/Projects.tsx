@@ -107,13 +107,13 @@ const Projects: React.FC = () => {
         {/* ── LEFT COLUMN (pinned by ScrollTrigger) ──────────── */}
         <div
           ref={leftRef}
-          className="hidden lg:flex lg:w-1/2 h-screen flex-col justify-between py-20 px-20 bg-white z-10"
+          className="hidden lg:flex lg:w-1/2 h-screen flex-col justify-between py-20 pl-16 pr-12 bg-white z-10"
         >
           {/* Massive section title */}
-          <div>
+          <div className="overflow-hidden">
             <h2
               className="font-inter font-bold text-[#161719] tracking-tighter uppercase leading-[0.85]"
-              style={{ fontSize: 'clamp(3.5rem, 7vw, 110px)' }}
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 68px)' }}
             >
               Obras<br />Selecionadas
             </h2>
