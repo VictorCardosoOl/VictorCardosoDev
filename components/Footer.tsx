@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
     <footer
       ref={footerRef}
       id="site-footer"
-      className="relative bg-white text-black w-full flex flex-col overflow-hidden z-20 pt-16"
+      className="relative bg-white text-black w-full flex flex-col overflow-hidden z-20 pt-8"
     >
       {/* Grid superior */}
       <div

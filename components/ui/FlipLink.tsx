@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'motion/react';
 
@@ -16,21 +15,20 @@ interface FlipLinkProps {
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, className, isActive }) => {
+export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, className }) => {
   return (
     <MotionA
       initial="initial"
       whileHover="hovered"
       href={href}
       onClick={onClick}
-      className={`relative block overflow-hidden whitespace-nowrap uppercase ${className}`}
+      className={`relative inline-flex whitespace-nowrap uppercase ${className}`}
       style={{ lineHeight: 1 }}
     >
-      {/* Primary Text (Visible initially) */}
-      <div className="relative z-10">
-        {children.split("").map((l, i) => (
+      {children.split("").map((l, i) => (
+        <span key={i} className="relative inline-flex overflow-hidden">
+          {/* Primary Text (Sobe no hover) */}
           <MotionSpan
-            key={i}
             variants={{
               initial: { y: 0 },
               hovered: { y: "-100%" },
@@ -44,14 +42,9 @@ export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, cla
           >
             {l === " " ? "\u00A0" : l}
           </MotionSpan>
-        ))}
-      </div>
-      
-      {/* Secondary Text (Comes from bottom on hover) */}
-      <div className="absolute inset-0">
-        {children.split("").map((l, i) => (
+
+          {/* Secondary Text (Vem de baixo no hover) */}
           <MotionSpan
-            key={i}
             variants={{
               initial: { y: "100%" },
               hovered: { y: 0 },
@@ -61,12 +54,12 @@ export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, cla
               ease: "easeInOut",
               delay: STAGGER * i,
             }}
-            className="inline-block text-slate-900 font-bold"
+            className="absolute inset-0 inline-block font-bold"
           >
             {l === " " ? "\u00A0" : l}
           </MotionSpan>
-        ))}
-      </div>
+        </span>
+      ))}
     </MotionA>
   );
 };
