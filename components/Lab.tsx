@@ -69,7 +69,7 @@ const EXPERIMENTS: Experiment[] = [
 
 const Lab: React.FC = () => {
   return (
-    <section id="lab" className="py-24 md:py-32 relative z-20 overflow-hidden bg-white">
+    <section id="lab" className="py-4 md:py-8 relative z-20 overflow-hidden bg-white">
       
       <Reveal width="100%" variant="translate">
         <div 
@@ -77,7 +77,7 @@ const Lab: React.FC = () => {
         >
                 
                 {/* Header Style Minimalista */}
-                <div className="flex justify-between items-end border-b border-slate-200 pb-8 mb-16">
+                <div className="flex justify-between items-end border-b border-slate-200 pb-4 mb-8">
                 <Reveal>
                     <div className="flex flex-col"> 
                     <div className="flex items-center gap-2 mb-4">
