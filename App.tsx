@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import GrainBackground from './components/GrainBackground';
@@ -34,82 +33,140 @@ const Footer = lazy(() => import('./components/Footer'));
 const Reviews = lazy(() => import('./components/Reviews')); 
 
 /**
- * COMPONENTE: Preloader
- * ---------------------
- * Uma tela de introdução narrativa que mascara o carregamento inicial dos assets.
- * Usa um array de palavras para criar uma micro-narrativa técnica ("INICIALIZANDO", etc).
+ * COMPONENTE: Preloader (GSAP)
+ * ----------------------------
+ * Timeline GSAP que orquestra a entrada do logotipo, troca de palavras com
+ * efeito de blur/y, e uma saída cinematográfica em "cortina" — o painel
+ * é clipado de baixo para cima, revelando o hero atrás dele.
  */
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
-  const [textIndex, setTextIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const panelRef     = useRef<HTMLDivElement>(null);
+  const logoRef      = useRef<SVGSVGElement>(null);
+  const labelRef     = useRef<HTMLSpanElement>(null);
+  const wordRef      = useRef<HTMLDivElement>(null);
+
   const words = ["INICIALIZANDO", "ESTRATÉGIA", "DESIGN", "SISTEMA PRONTO"];
 
   useEffect(() => {
-    // Garante que o scroll esteja travado no topo durante o loading
     window.scrollTo(0, 0);
     document.body.style.overflow = 'hidden';
 
-    const interval = setInterval(() => {
-      setTextIndex((prev) => {
-        if (prev >= words.length - 1) {
-          clearInterval(interval);
-          setTimeout(() => {
-             document.body.style.overflow = ''; // Libera o scroll
-             onComplete();
-          }, 800); 
-          return prev;
+    // Importar GSAP de forma dinâmica para não bloquear o bundle inicial
+    import('gsap').then(({ gsap }) => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          document.body.style.overflow = '';
+          onComplete();
         }
-        return prev + 1;
       });
-    }, 600); 
+
+      // 1. Label de boot aparece rápido
+      tl.fromTo(labelRef.current,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      );
+
+      // 2. Logo path se desenha
+      const path = logoRef.current?.querySelector('path');
+      if (path) {
+        const length = (path as SVGPathElement).getTotalLength?.() ?? 200;
+        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        tl.to(path, {
+          strokeDashoffset: 0,
+          duration: 1.8,
+          ease: 'power2.inOut'
+        }, '<+0.2');
+      }
+
+      // 3. Palavras trocam com blur/y – stagger por word
+      const wordElem = wordRef.current;
+      if (wordElem) {
+        // Define a primeira palavra visível imediatamente
+        wordElem.textContent = words[0];
+        tl.fromTo(wordElem,
+          { opacity: 0, y: 30, filter: 'blur(8px)' },
+          { opacity: 1, y: 0,  filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' }
+        );
+
+        // Trocar palavras em sequência
+        words.slice(1).forEach((word) => {
+          tl.to(wordElem, {
+            opacity: 0, y: -20, filter: 'blur(6px)',
+            duration: 0.35, ease: 'power2.in'
+          }, '+=0.55')
+          .call(() => { wordElem.textContent = word; })
+          .fromTo(wordElem,
+            { opacity: 0, y: 20, filter: 'blur(6px)' },
+            { opacity: 1, y: 0,  filter: 'blur(0px)', duration: 0.4, ease: 'power3.out' }
+          );
+        });
+      }
+
+      // 4. Pausa breve antes da saída
+      tl.to({}, { duration: 0.6 });
+
+      // 5. Cortina: clipPath revela o hero de baixo para cima
+      tl.to(panelRef.current, {
+        clipPath: 'inset(0% 0% 100% 0%)',
+        duration: 1.1,
+        ease: 'power4.inOut'
+      });
+    });
 
     return () => {
-        clearInterval(interval);
-        document.body.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [onComplete]);
 
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ y: "-100%", transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[99999] bg-[#000000] flex items-center justify-center text-[#FFFFFF]"
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-[99999]"
     >
-      <div className="flex flex-col items-center relative z-10">
-         <span className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-6 animate-pulse">
+      <div
+        ref={panelRef}
+        className="absolute inset-0 bg-[#000000] flex items-center justify-center text-[#FFFFFF]"
+        style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+      >
+        <div className="flex flex-col items-center relative z-10">
+          <span
+            ref={labelRef}
+            className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-6"
+            style={{ opacity: 0 }}
+          >
             sys.boot_sequence
-         </span>
-         
-         <div className="h-20 flex items-center justify-center overflow-hidden">
-             <AnimatePresence mode="wait">
-                <motion.div
-                  key={textIndex}
-                  initial={{ y: 40, opacity: 0, filter: "blur(5px)" }}
-                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                  exit={{ y: -40, opacity: 0, filter: "blur(5px)" }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="text-4xl md:text-6xl font-serif font-light tracking-tight text-center"
-                >
-                  {words[textIndex]}
-                </motion.div>
-             </AnimatePresence>
-         </div>
+          </span>
 
-         <div className="mt-12 flex justify-center items-center">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <motion.path
-                d="M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z M5 20 L30 35 L55 20 M30 35 L30 55"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 2.4, ease: "easeInOut" }}
-              />
-            </svg>
-         </div>
+          {/* Palavra animada */}
+          <div className="h-20 flex items-center justify-center overflow-hidden mb-8">
+            <div
+              ref={wordRef}
+              className="text-4xl md:text-6xl font-serif font-light tracking-tight text-center"
+              style={{ opacity: 0 }}
+            />
+          </div>
+
+          {/* Logo SVG */}
+          <svg
+            ref={logoRef}
+            width="60"
+            height="60"
+            viewBox="0 0 60 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z M5 20 L30 35 L55 20 M30 35 L30 55"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -153,9 +210,7 @@ const App: React.FC = () => {
           <div className="flex flex-col min-h-screen relative overflow-x-hidden bg-[#FFFFFF] selection:bg-[#000000] selection:text-white">
             
             {/* Preloader Phase */}
-            <AnimatePresence mode="wait">
-              {loading && <Preloader onComplete={handlePreloaderComplete} />}
-            </AnimatePresence>
+            {loading && <Preloader onComplete={handlePreloaderComplete} />}
             
             {/* Global Visual Effects & Scroll Aware Tools */}
             <GrainBackground />
