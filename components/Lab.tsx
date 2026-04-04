@@ -69,7 +69,7 @@ const EXPERIMENTS: Experiment[] = [
 
 const Lab: React.FC = () => {
   return (
-    <section id="lab" className="py-4 md:py-8 relative z-20 overflow-hidden bg-white">
+    <section id="lab" className="pt-4 pb-0 md:pt-8 md:pb-0 relative z-20 overflow-hidden bg-white">
       
       <Reveal width="100%" variant="translate">
         <div 
