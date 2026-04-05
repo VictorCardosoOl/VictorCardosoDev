@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
         <a 
           href="#hero" 
           onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
-          className={`text-2xl font-clash font-semibold tracking-tight relative z-[9999] transition-colors duration-500 ${isMenuOpen ? 'text-[#FFFFFF]' : 'text-petrol-base'}`}
+          className={`text-xl font-clash font-semibold tracking-tight relative z-[9999] transition-colors duration-500 ${isMenuOpen ? 'text-[#FFFFFF]' : 'text-petrol-base'}`}
         >
             V<span className="text-petrol-electric">.</span>
         </a>

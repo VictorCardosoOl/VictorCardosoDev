@@ -107,7 +107,7 @@ const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                                    onClick={(e: any) => { e.preventDefault(); handleLinkClick(item.link); }}
                                    className={`block relative font-clash font-medium leading-[0.9] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] no-underline select-none group-hover:pl-8 md:group-hover:pl-12 ${activeSection === item.link.replace('#', '') ? 'text-white' : 'text-white/30 hover:text-white'}`}
                                    // Responsive Giant Fonts: Clamped to avoid cutoff on short screens
-                                   style={{ fontSize: 'clamp(3rem, 10vh, 7rem)' }}
+                                   style={{ fontSize: 'clamp(2rem, 6vh, 4.5rem)' }}
                                    initial={{ y: "100%", opacity: 0 }}
                                    animate={{ y: "0%", opacity: 1 }}
                                    transition={{ delay: 0.3 + (i * 0.08), duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
