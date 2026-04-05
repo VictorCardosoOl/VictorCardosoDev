@@ -23,30 +23,30 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/
 
 // Lazy Loaded Components
 const Services = lazy(() => import('./components/Services'));
-const Process = lazy(() => import('./components/Process'));
+const Process  = lazy(() => import('./components/Process'));
 const Projects = lazy(() => import('./components/Projects'));
-const Lab = lazy(() => import('./components/Lab'));
-const About = lazy(() => import('./components/About'));
-const FAQ = lazy(() => import('./components/FAQ'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
-const Reviews = lazy(() => import('./components/Reviews')); 
+const Lab      = lazy(() => import('./components/Lab'));
+const About    = lazy(() => import('./components/About'));
+const FAQ      = lazy(() => import('./components/FAQ'));
+const Contact  = lazy(() => import('./components/Contact'));
+const Footer   = lazy(() => import('./components/Footer'));
+const Reviews  = lazy(() => import('./components/Reviews'));
 
 /**
- * COMPONENTE: Preloader (GSAP)
- * ----------------------------
- * Timeline GSAP que orquestra a entrada do logotipo, troca de palavras com
- * efeito de blur/y, e uma saída cinematográfica em "cortina" — o painel
- * é clipado de baixo para cima, revelando o hero atrás dele.
+ * COMPONENTE: Preloader (GSAP) — v2
+ * ----------------------------------
+ * Timeline otimizada (~3s total).
+ * Design premium: iniciais "VC" em serif grande, barra de progresso,
+ * contador numérico e saída em cortina cinematográfica.
  */
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const panelRef     = useRef<HTMLDivElement>(null);
-  const logoRef      = useRef<SVGSVGElement>(null);
-  const labelRef     = useRef<HTMLSpanElement>(null);
-  const wordRef      = useRef<HTMLDivElement>(null);
-
-  const words = ["INICIALIZANDO", "ESTRATÉGIA", "DESIGN", "SISTEMA PRONTO"];
+  const panelRef       = useRef<HTMLDivElement>(null);
+  const initialsRef    = useRef<HTMLDivElement>(null);
+  const labelRef       = useRef<HTMLSpanElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const counterRef     = useRef<HTMLSpanElement>(null);
+  const lineTopRef     = useRef<HTMLDivElement>(null);
+  const lineBotRef     = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -61,55 +61,57 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
         }
       });
 
-      // 1. Label de boot aparece rápido
-      tl.fromTo(labelRef.current,
-        { opacity: 0, y: 8 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      // Objeto proxy para o contador numérico
+      const counter = { val: 0 };
+
+      // 1. Linhas decorativas crescem da esquerda para direita
+      tl.fromTo(
+        [lineTopRef.current, lineBotRef.current],
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.5, ease: 'power3.out', stagger: 0.08 }
       );
 
-      // 2. Logo path se desenha
-      const path = logoRef.current?.querySelector('path');
-      if (path) {
-        const length = (path as SVGPathElement).getTotalLength?.() ?? 200;
-        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-        tl.to(path, {
-          strokeDashoffset: 0,
-          duration: 1.8,
-          ease: 'power2.inOut'
-        }, '<+0.2');
-      }
+      // 2. Label superior aparece
+      tl.fromTo(
+        labelRef.current,
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+        '<+0.15'
+      );
 
-      // 3. Palavras trocam com blur/y – stagger por word
-      const wordElem = wordRef.current;
-      if (wordElem) {
-        // Define a primeira palavra visível imediatamente
-        wordElem.textContent = words[0];
-        tl.fromTo(wordElem,
-          { opacity: 0, y: 30, filter: 'blur(8px)' },
-          { opacity: 1, y: 0,  filter: 'blur(0px)', duration: 0.5, ease: 'power3.out' }
-        );
+      // 3. Iniciais "VC" revelam de baixo com blur
+      tl.fromTo(
+        initialsRef.current,
+        { opacity: 0, y: 40, filter: 'blur(12px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, ease: 'expo.out' },
+        '<+0.1'
+      );
 
-        // Trocar palavras em sequência
-        words.slice(1).forEach((word) => {
-          tl.to(wordElem, {
-            opacity: 0, y: -20, filter: 'blur(6px)',
-            duration: 0.35, ease: 'power2.in'
-          }, '+=0.55')
-          .call(() => { wordElem.textContent = word; })
-          .fromTo(wordElem,
-            { opacity: 0, y: 20, filter: 'blur(6px)' },
-            { opacity: 1, y: 0,  filter: 'blur(0px)', duration: 0.4, ease: 'power3.out' }
-          );
-        });
-      }
+      // 4. Barra de progresso + contador de 0 → 100 em paralelo
+      tl.fromTo(
+        progressBarRef.current,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 1.0, ease: 'power2.inOut' },
+        '<+0.3'
+      );
+      tl.to(counter, {
+        val: 100,
+        duration: 1.0,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          if (counterRef.current) {
+            counterRef.current.textContent = Math.round(counter.val).toString().padStart(3, '0');
+          }
+        }
+      }, '<');
 
-      // 4. Pausa breve antes da saída
-      tl.to({}, { duration: 0.6 });
+      // 5. Pausa mínima antes da saída
+      tl.to({}, { duration: 0.2 });
 
-      // 5. Cortina: clipPath revela o hero de baixo para cima
+      // 6. Cortina: sobe, revelando o hero atrás
       tl.to(panelRef.current, {
         clipPath: 'inset(0% 0% 100% 0%)',
-        duration: 1.1,
+        duration: 0.85,
         ease: 'power4.inOut'
       });
     });
@@ -120,51 +122,78 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   }, [onComplete]);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-[99999]"
-    >
+    <div className="fixed inset-0 z-[99999]">
       <div
         ref={panelRef}
-        className="absolute inset-0 bg-[#000000] flex items-center justify-center text-[#FFFFFF]"
-        style={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+        className="absolute inset-0 flex flex-col items-center justify-center"
+        style={{ clipPath: 'inset(0% 0% 0% 0%)', backgroundColor: '#080808' }}
       >
-        <div className="flex flex-col items-center relative z-10">
+        {/* Linha decorativa superior */}
+        <div
+          ref={lineTopRef}
+          className="absolute top-0 left-0 w-full h-[1px] origin-left"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+            transform: 'scaleX(0)'
+          }}
+        />
+
+        {/* Conteúdo central */}
+        <div className="relative flex flex-col items-center gap-6 select-none">
+          {/* Label superior */}
           <span
             ref={labelRef}
-            className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-6"
+            className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30"
             style={{ opacity: 0 }}
           >
-            sys.boot_sequence
+            Victor Cardoso — Portfolio
           </span>
 
-          {/* Palavra animada */}
-          <div className="h-20 flex items-center justify-center overflow-hidden mb-8">
-            <div
-              ref={wordRef}
-              className="text-4xl md:text-6xl font-serif font-light tracking-tight text-center"
-              style={{ opacity: 0 }}
-            />
+          {/* Iniciais grandes em serif */}
+          <div
+            ref={initialsRef}
+            className="font-serif font-light text-white leading-none"
+            style={{
+              fontSize: 'clamp(5rem, 18vw, 12rem)',
+              letterSpacing: '-0.04em',
+              opacity: 0,
+            }}
+          >
+            VC
           </div>
 
-          {/* Logo SVG */}
-          <svg
-            ref={logoRef}
-            width="60"
-            height="60"
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M30 5 L55 20 L55 40 L30 55 L5 40 L5 20 Z M5 20 L30 35 L55 20 M30 35 L30 55"
-              stroke="white"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {/* Barra de progresso e contador */}
+          <div className="flex flex-col items-center gap-3 w-48 md:w-64">
+            <div className="w-full h-[1px] bg-white/10 overflow-hidden">
+              <div
+                ref={progressBarRef}
+                className="h-full bg-white/70 origin-left"
+                style={{ transform: 'scaleX(0)' }}
+              />
+            </div>
+            <div className="w-full flex justify-between items-center">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-white/25">
+                Carregando
+              </span>
+              <span
+                ref={counterRef}
+                className="font-mono text-[10px] text-white/40 tabular-nums"
+              >
+                000
+              </span>
+            </div>
+          </div>
         </div>
+
+        {/* Linha decorativa inferior */}
+        <div
+          ref={lineBotRef}
+          className="absolute bottom-0 left-0 w-full h-[1px] origin-left"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+            transform: 'scaleX(0)'
+          }}
+        />
       </div>
     </div>
   );
@@ -183,7 +212,6 @@ const App: React.FC = () => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Esconder no hero (aprox. 500px, mesmo limiar da navbar original)
     if (latest > 500) {
       setShowWhatsapp(true);
     } else {
