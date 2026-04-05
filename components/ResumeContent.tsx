@@ -1,15 +1,9 @@
-
 import React from 'react';
-import { Download, MapPin, ExternalLink, Globe, BookOpen, Camera, Award, Code, Briefcase, Terminal, Cpu, Database } from 'lucide-react';
+import { Download, MapPin, ExternalLink, Globe, Award, Briefcase, Terminal, Cpu } from 'lucide-react';
 import { Reveal } from './ui/Reveal';
 import { motion } from 'motion/react';
 import { EDUCATION, WORK_EXPERIENCE, CONTACT_INFO } from '../constants';
 
-const MotionImg = motion.img as any;
-
-interface ResumeContentProps {}
-
-// --- HARD SKILLS DO CV ---
 const HARD_SKILLS = {
     technical: [
         "Análise de Sistemas",
@@ -39,24 +33,22 @@ const SOFT_SKILLS = [
     "Ensino & Mentoria"
 ];
 
-export const ResumeContent: React.FC<ResumeContentProps> = () => {
+export const ResumeContent: React.FC = () => {
   return (
     <div className="bg-[#FFFFFF] min-h-screen pb-24">
-      
-      {/* 1. Header Cinematic */}
       <div className="w-full bg-[#000000] text-[#FFFFFF] pt-32 pb-16 md:pt-40 md:pb-24 px-6 md:px-12 relative overflow-hidden">
-         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[100px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
          
          <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 items-end">
-            
-            {/* Foto */}
             <div className="w-32 h-40 md:w-56 md:h-72 flex-shrink-0 relative rounded-sm overflow-hidden border border-white/20 shadow-2xl">
-               <MotionImg 
+               <motion.img 
                  src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" 
                  alt="Victor Cardoso Profile"
                  className="w-full h-full object-cover grayscale"
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
                />
-               <div className="absolute inset-0 border-4 border-[#000000]/20"></div>
+               <div className="absolute inset-0 border-4 border-[#000000]/20" />
             </div>
 
             <div className="flex-1 pb-2">
@@ -80,7 +72,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                   <div className="flex flex-wrap gap-x-8 gap-y-3 text-xs font-mono text-white/50 uppercase tracking-widest border-t border-white/10 pt-6">
                      <span className="flex items-center gap-2"><MapPin size={12} /> {CONTACT_INFO.location}</span>
                      <span className="flex items-center gap-2"><Globe size={12} /> Português (Nativo)</span>
-                     <a href={CONTACT_INFO.socials[0].url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white hover:text-[#999999] transition-colors decoration-1 underline-offset-4">
+                     <a href={CONTACT_INFO.socials[0]?.url || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white hover:text-[#999999] transition-colors decoration-1 underline-offset-4">
                         <ExternalLink size={12} /> LinkedIn
                      </a>
                   </div>
@@ -91,11 +83,7 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 md:mt-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-              
-              {/* COLUNA ESQUERDA: Experiência Profissional (Linha do Tempo) */}
               <div className="lg:col-span-8 space-y-16">
-                  
-                  {/* EXPERIÊNCIA */}
                   <section>
                       <Reveal width="100%">
                         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#000000]/40 mb-10 border-b border-[#000000]/10 pb-4 flex items-center gap-2">
@@ -107,20 +95,16 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                           {WORK_EXPERIENCE.map((job, idx) => (
                              <Reveal key={idx} delay={idx * 50} width="100%">
                                 <div className="pl-8 relative group">
-                                    {/* Dot na linha do tempo */}
-                                    <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#000000] border-2 border-[#FFFFFF] group-hover:scale-125 transition-transform"></div>
-                                    
+                                    <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#000000] border-2 border-[#FFFFFF] group-hover:scale-125 transition-transform" />
                                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
                                         <h4 className="text-xl font-serif text-[#000000] font-light">{job.role}</h4>
                                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#999999]">{job.period}</span>
                                     </div>
-                                    
                                     <p className="text-xs font-bold uppercase tracking-widest text-[#000000]/50 mb-4">{job.company} • {job.location}</p>
-                                    
                                     <ul className="space-y-2">
                                         {job.description.map((desc, i) => (
                                             <li key={i} className="text-sm text-[#000000]/70 font-light leading-relaxed flex items-start gap-2">
-                                                <span className="mt-1.5 w-1 h-1 bg-[#000000]/30 rounded-full shrink-0"></span>
+                                                <span className="mt-1.5 w-1 h-1 bg-[#000000]/30 rounded-full shrink-0" />
                                                 {desc}
                                             </li>
                                         ))}
@@ -131,7 +115,6 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                       </div>
                   </section>
 
-                  {/* FORMAÇÃO */}
                   <section>
                       <Reveal width="100%">
                         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#000000]/40 mb-8 border-b border-[#000000]/10 pb-4 flex items-center gap-2">
@@ -151,13 +134,9 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                           ))}
                       </div>
                   </section>
-
               </div>
 
-              {/* COLUNA DIREITA: Skills & Downloads */}
               <div className="lg:col-span-4 space-y-12">
-                  
-                  {/* HARD SKILLS */}
                   <section>
                       <Reveal width="100%">
                         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#000000]/40 mb-6 border-b border-[#000000]/10 pb-4 flex items-center gap-2">
@@ -200,7 +179,6 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                       </div>
                   </section>
 
-                  {/* SOFT SKILLS */}
                   <section>
                       <Reveal width="100%">
                         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#000000]/40 mb-6 border-b border-[#000000]/10 pb-4">
@@ -222,7 +200,6 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                       </Reveal>
                   </section>
                   
-                  {/* DOWNLOAD BUTTON */}
                   <div className="pt-4 sticky top-8">
                     <a 
                         href="/assets/cv_victor_cardoso.pdf" 
@@ -235,7 +212,6 @@ export const ResumeContent: React.FC<ResumeContentProps> = () => {
                         Formato PDF • 3 Páginas
                     </p>
                   </div>
-
               </div>
           </div>
       </div>

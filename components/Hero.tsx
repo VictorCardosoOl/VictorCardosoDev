@@ -1,22 +1,13 @@
 import React from 'react';
 
 const Hero: React.FC = () => {
-  const portraitUrl = "/profile.jpg";
-
   return (
-    <section
-      id="hero"
-      className="w-full h-[100dvh] flex flex-col md:flex-row bg-white overflow-hidden"
-    >
-      {/* Left Pane */}
+    <section id="hero" className="w-full h-[100dvh] flex flex-col md:flex-row bg-white overflow-hidden">
       <div className="w-full md:w-1/2 h-[50vh] md:h-full relative flex flex-col justify-between p-6 md:p-12 lg:p-16">
-
-        {/* Top Title */}
         <h1 className="text-[13.5vw] md:text-[4.8vw] font-clash font-semibold leading-[0.82] tracking-[0.02em] text-[#000000] uppercase">
           Portfólio
         </h1>
 
-        {/* Metadata (center absolute) */}
         <div className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 flex justify-between items-start z-10">
           <p className="text-[10px] md:text-xs font-sans font-medium uppercase tracking-[0.2em] text-[#000000]/60">
             Victor Cardoso
@@ -26,19 +17,13 @@ const Hero: React.FC = () => {
           </p>
         </div>
 
-        {/* Bottom Title */}
         <h1 className="text-[15vw] md:text-[5.5vw] font-serif font-light leading-[0.82] tracking-normal text-[#000000] italic">
           Estúdio
         </h1>
       </div>
 
-      {/* Right Pane */}
       <div className="w-full md:w-1/2 h-[50vh] md:h-full relative">
-        <img
-          src={portraitUrl}
-          alt="Victor Cardoso"
-          className="w-full h-full object-cover grayscale"
-        />
+        <img src="/profile.jpg" alt="Victor Cardoso" className="w-full h-full object-cover grayscale" />
       </div>
     </section>
   );

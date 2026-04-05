@@ -1,9 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
-const MotionA = motion.a as any;
-const MotionSpan = motion.span as any;
-
 interface FlipLinkProps {
   children: string;
   href: string;
@@ -17,7 +14,7 @@ const STAGGER = 0.025;
 
 export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, className }) => {
   return (
-    <MotionA
+    <motion.a
       initial="initial"
       whileHover="hovered"
       href={href}
@@ -27,8 +24,7 @@ export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, cla
     >
       {children.split("").map((l, i) => (
         <span key={i} className="relative inline-flex overflow-hidden">
-          {/* Primary Text (Sobe no hover) */}
-          <MotionSpan
+          <motion.span
             variants={{
               initial: { y: 0 },
               hovered: { y: "-100%" },
@@ -41,10 +37,9 @@ export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, cla
             className="inline-block"
           >
             {l === " " ? "\u00A0" : l}
-          </MotionSpan>
+          </motion.span>
 
-          {/* Secondary Text (Vem de baixo no hover) */}
-          <MotionSpan
+          <motion.span
             variants={{
               initial: { y: "100%" },
               hovered: { y: 0 },
@@ -57,9 +52,9 @@ export const FlipLink: React.FC<FlipLinkProps> = ({ children, href, onClick, cla
             className="absolute inset-0 inline-block font-bold"
           >
             {l === " " ? "\u00A0" : l}
-          </MotionSpan>
+          </motion.span>
         </span>
       ))}
-    </MotionA>
+    </motion.a>
   );
 };
