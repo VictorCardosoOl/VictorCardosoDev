@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
       <div className="w-full md:w-1/2 h-[50vh] md:h-full relative flex flex-col justify-between p-6 md:p-12 lg:p-16">
 
         {/* Top Title */}
-        <h1 className="text-[25vw] md:text-[13vw] font-serif font-light leading-[0.75] tracking-tighter text-[#000000]">
+        <h1 className="text-[25vw] md:text-[13vw] font-clash font-semibold leading-[0.82] tracking-[-0.04em] text-[#000000] uppercase">
           Portfólio
         </h1>
 
@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Bottom Title */}
-        <h1 className="text-[25vw] md:text-[13vw] font-serif font-light leading-[0.75] tracking-tighter text-[#000000] italic">
+        <h1 className="text-[25vw] md:text-[13vw] font-serif font-light leading-[0.82] tracking-[-0.04em] text-[#000000] italic">
           Estúdio
         </h1>
       </div>

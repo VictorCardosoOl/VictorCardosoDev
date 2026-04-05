@@ -152,10 +152,10 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           {/* Iniciais grandes em serif */}
           <div
             ref={initialsRef}
-            className="font-serif font-light text-white leading-none"
+            className="font-clash font-semibold text-white leading-none"
             style={{
               fontSize: 'clamp(5rem, 18vw, 12rem)',
-              letterSpacing: '-0.04em',
+              letterSpacing: '-0.03em',
               opacity: 0,
             }}
           >

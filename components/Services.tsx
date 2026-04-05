@@ -149,7 +149,7 @@ const Services: React.FC = () => {
               02 — Expertise
             </p>
             <h2
-              className="font-inter font-bold text-[#111] tracking-tighter uppercase leading-[0.88]"
+              className="font-clash font-semibold text-[#111] tracking-tight uppercase leading-[0.88]"
               style={{ fontSize: 'clamp(2.5rem, 5vw, 72px)' }}
             >
               O que<br />ofereço
@@ -179,7 +179,7 @@ const Services: React.FC = () => {
                 {/* Título */}
                 <h3
                   ref={el => { titleRefs.current[idx] = el; }}
-                  className="flex-1 font-inter font-medium tracking-tight transition-colors duration-300 text-[#111]/70 group-hover:text-[#111]"
+                  className="flex-1 font-clash font-semibold tracking-tight transition-colors duration-300 text-[#111]/70 group-hover:text-[#111]"
                   style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}
                 >
                   {service.title}
