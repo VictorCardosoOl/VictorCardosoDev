@@ -84,9 +84,11 @@ const FAQ = () => {
     <section id="faq" ref={containerRef} className="pt-0 pb-8 md:pt-0 md:pb-12 px-6 bg-[#FFFFFF] text-[#111] relative z-10">
       <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        {/* COLUNA ESQUERDA (Metade Esquerda - Sticky Flow) */}
-        <div className="lg:col-span-5 flex flex-col justify-center items-center lg:items-start pt-12 lg:pt-0 h-full">
-          <div ref={leftRef} className="w-full max-w-lg">
+        {/* COLUNA ESQUERDA (Metade Esquerda - Alinhado ao topo) */}
+        <div className="lg:col-span-5 relative h-full">
+          {/* Posicionado levemente no topo para emparelhar com a aba direita */}
+          <div className="flex flex-col items-center lg:items-start pt-12 lg:pt-0">
+            <div ref={leftRef} className="w-full max-w-lg">
                
                {/* Label Suporte */}
                <div className="flex items-center gap-4 mb-6 justify-center lg:justify-start">
@@ -119,11 +121,11 @@ const FAQ = () => {
                  </a>
                </div>
             </div>
+          </div>
         </div>
 
         {/* COLUNA DIREITA (Lista - Metade Direita) */}
-        {/* Removido justify-center daqui para o Right Column subir e alinhar ao topo do Left Column */}
-        <div ref={listRef} className="lg:col-span-6 lg:col-start-7 flex flex-col mt-12 lg:mt-0 pt-0 lg:pt-0">
+        <div ref={listRef} className="lg:col-span-6 lg:col-start-7 flex flex-col mt-12 lg:mt-0 pt-0">
           <div className="border-t border-[#000000]/10">
             {FAQ_ITEMS.map((item, idx) => {
               const isOpen = openIndex === idx;
