@@ -12,7 +12,7 @@ const Process: React.FC = () => {
   if (!PROCESS_STEPS || PROCESS_STEPS.length === 0) return null;
 
   return (
-    <section id="process" className="py-12 md:py-16 bg-white text-[#111] relative overflow-hidden z-10 border-t border-[#000000]/5 min-h-[50vh] flex flex-col justify-center">
+    <section id="process" className="py-12 md:py-16 bg-white text-[#111] relative overflow-hidden z-10 min-h-[50vh] flex flex-col justify-center">
       <div className="max-w-[1920px] mx-auto px-6 lg:px-12 md:px-16">
         <div className="mb-12 md:mb-16 max-w-2xl">
            <Reveal>

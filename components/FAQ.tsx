@@ -81,7 +81,7 @@ const FAQ = () => {
   }, []);
 
   return (
-    <section id="faq" ref={containerRef} className="pt-0 pb-8 md:pt-0 md:pb-12 px-6 bg-[#FFFFFF] text-[#111] relative z-10 border-t border-[#000000]/5">
+    <section id="faq" ref={containerRef} className="pt-0 pb-8 md:pt-0 md:pb-12 px-6 bg-[#FFFFFF] text-[#111] relative z-10">
       <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
         {/* COLUNA ESQUERDA (Metade Esquerda - Sticky Flow) */}
