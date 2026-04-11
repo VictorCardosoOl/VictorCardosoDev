@@ -138,7 +138,7 @@ const Services: React.FC = () => {
     <section
       id="services"
       ref={containerRef}
-      className="w-full bg-white py-24 md:py-32 border-t border-black/8"
+      className="w-full bg-white pt-24 pb-12 md:pt-32 md:pb-16 border-t border-black/8"
     >
       <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16">
 

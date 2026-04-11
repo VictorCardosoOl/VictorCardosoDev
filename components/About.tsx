@@ -79,7 +79,7 @@ const About: React.FC = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="min-h-screen bg-white py-16 md:py-20 flex flex-col justify-center relative z-10"
+      className="bg-white pt-12 pb-16 md:pt-16 md:pb-20 flex flex-col justify-center relative z-10"
     >
       <div className="w-full max-w-[1920px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
 
