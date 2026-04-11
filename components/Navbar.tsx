@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NAV_LINKS, CONTACT_INFO } from '../constants';
 import { usePageTransition } from './ui/PageTransition';
 import StaggeredMenu from './ui/StaggeredMenu';
@@ -9,6 +9,7 @@ import { Menu, X } from 'lucide-react';
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   // Scroll States
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,6 +23,21 @@ const Navbar: React.FC = () => {
   // Hook do Framer Motion para ler a posição Y do scroll
   const { scrollY } = useScroll();
   const { transitionTo } = usePageTransition();
+
+  // Mouse hover event detection na parte superior da janela
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Se o mouse estiver nos primeiros 80px do topo da tela, mostra a navbar
+      if (e.clientY <= 80) {
+        setIsHovered(true);
+      } else {
+        setIsHovered(false);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Scroll Aware Logic
   // useMotionValueEvent reage a mudanças no valor do scroll em tempo real
@@ -90,6 +106,7 @@ const Navbar: React.FC = () => {
   // Determina a variante atual com base na prioridade dos estados
   const getCurrentVariant = () => {
     if (isMenuOpen) return "top"; // Menu aberto tem prioridade visual
+    if (isHovered) return "scrolled"; // Hover force-shows the navbar
     if (isHidden) return "hidden";
     if (isScrolled) return "scrolled";
     return "top";

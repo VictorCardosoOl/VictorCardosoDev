@@ -86,8 +86,8 @@ const FAQ = () => {
         
         {/* COLUNA ESQUERDA (Metade Esquerda - Sticky Flow) */}
         <div className="lg:col-span-5 relative h-full">
-          {/* Ancoragem 100vh: Cobre a tela usando flexbox para centralizar matematicamente no meio sem bugar Transforms */}
-          <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center items-center lg:items-start">
+          {/* Ancoragem Sticky para a esquerda */}
+          <div className="lg:sticky lg:top-32 flex flex-col items-center lg:items-start pt-12 lg:pt-0">
             <div ref={leftRef} className="w-full max-w-lg">
                {/* Label Padrão Removido */}
                
