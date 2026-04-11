@@ -85,10 +85,8 @@ const FAQ = () => {
       <div className="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
         {/* COLUNA ESQUERDA (Metade Esquerda - Sticky Flow) */}
-        <div className="lg:col-span-5 relative h-full">
-          {/* Ancoragem Sticky ao topo da seção em vez de centro */}
-          <div className="lg:sticky lg:top-24 flex flex-col items-center lg:items-start pt-12 lg:pt-0">
-            <div ref={leftRef} className="w-full max-w-lg">
+        <div className="lg:col-span-5 flex flex-col justify-center items-center lg:items-start pt-12 lg:pt-0 h-full">
+          <div ref={leftRef} className="w-full max-w-lg">
                
                {/* Label Suporte */}
                <div className="flex items-center gap-4 mb-6 justify-center lg:justify-start">
@@ -121,7 +119,6 @@ const FAQ = () => {
                  </a>
                </div>
             </div>
-          </div>
         </div>
 
         {/* COLUNA DIREITA (Lista - Metade Direita) */}
